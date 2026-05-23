@@ -27,6 +27,8 @@ class LahangaListActivity : AppCompatActivity() {
         mBinding = LahangaListActivityBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
+
+        Log.d(TAG, "onCreate: Fetching computer list")
         apiCallViewModel.getLahangaList()
         val computerRV = mBinding.computerRV
         computerRV.layoutManager = GridLayoutManager(this, 2)
