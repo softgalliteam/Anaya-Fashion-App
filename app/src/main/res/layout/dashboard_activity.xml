@@ -52,7 +52,7 @@
 
         <!-- Summer Collection -->
         <FrameLayout
-            android:id="@+id/lehenga"
+            android:id="@+id/lehengaFL"
             android:layout_width="match_parent"
             android:layout_height="240dp"
             android:layout_marginTop="-12dp">
@@ -105,7 +105,7 @@
 
         <!-- Winter Collection -->
         <FrameLayout
-            android:id="@+id/sherwani"
+            android:id="@+id/sherwaniFl"
             android:layout_width="match_parent"
             android:layout_height="240dp"
             android:layout_marginTop="-10dp">
