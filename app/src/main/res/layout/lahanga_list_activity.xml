@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:spanCount="2"
-        tools:listitem="@layout/computer_list_row_item" />
+        tools:listitem="@layout/lahanga_list_item" />
 
     <!--Progress Bar-->
     <LinearLayout

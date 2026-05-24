@@ -22,7 +22,7 @@ class LahangaRecyclerViewAdapter(
         // inflates the card_view_design view
         // that is used to hold list item
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.computer_list_row_item, parent, false)
+            .inflate(R.layout.lahanga_list_item, parent, false)
 
         return ViewHolder(view)
     }
