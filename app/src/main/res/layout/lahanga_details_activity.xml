@@ -16,13 +16,19 @@
         android:orientation="vertical"
         tools:ignore="MissingConstraints">
 
-        <ImageView
-            android:id="@+id/imageIv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/logo"
-            tools:ignore="ContentDescription" />
+        <com.denzcoskun.imageslider.ImageSlider
+            android:id="@+id/imageSlider"
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            app:iss_auto_cycle="false"
+            app:iss_corner_radius="5"
+            app:iss_delay="0"
+            app:iss_error_image="@android:color/darker_gray"
+            app:iss_period="500"
+            app:iss_placeholder="@android:color/darker_gray"
+            app:iss_selected_dot="@drawable/default_selected_dot"
+            app:iss_unselected_dot="@drawable/default_unselected_dot"
+            tools:ignore="MissingClass,MissingConstraints" />
 
         <TextView
             android:id="@+id/titleTv"

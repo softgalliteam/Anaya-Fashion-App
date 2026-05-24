@@ -68,4 +68,7 @@ dependencies {
     //Picasso for image loading
     implementation("com.squareup.picasso:picasso:2.71828")
 
+    // Slider View
+    implementation("com.github.denzcoskun:ImageSlideshow:0.1.0")
+
 }
