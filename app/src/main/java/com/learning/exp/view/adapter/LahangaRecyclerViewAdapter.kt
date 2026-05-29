@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.learning.exp.R
 import com.learning.exp.model.dataclasses.lahanga.LahangaResponseDataItem
@@ -34,6 +35,7 @@ class LahangaRecyclerViewAdapter(
         val lahanga = list[position]
 
         holder.compNameTextView?.text = lahanga.name
+        holder.priceTv.text = "₹2500"
         val imageView = holder.compIamge
         Picasso.get()
             .load(lahanga.imageUrl)
@@ -45,7 +47,27 @@ class LahangaRecyclerViewAdapter(
             onClickListener(lahanga.id)
         }
 
+//        for add to cat button
+
+        holder.cartBtn.setOnClickListener {
+            Toast.makeText(
+                holder.itemView.context,
+                "Added To Cart",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
+//        for favbtn
+        holder.favBtn.setOnClickListener {
+
+            holder.favBtn.setImageResource(
+                R.drawable.heart_outline
+            )
+
+        }
+
     }
+
 
     // return the number of the items in the list
     override fun getItemCount(): Int {
@@ -56,6 +78,13 @@ class LahangaRecyclerViewAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val compIamge = itemView.findViewById<ImageView>(R.id.imageIv)
         val compNameTextView = itemView.findViewById<TextView>(R.id.titleTv)
+
+        val priceTv =itemView.findViewById<TextView>(R.id.priceTv)
+
+        val cartBtn =  itemView.findViewById<com.google.android.material.button.MaterialButton>(R.id.cartBtn)
+
+        val favBtn =  itemView.findViewById<ImageView>(R.id.favBtn)
+
     }
 
     @SuppressLint("NotifyDataSetChanged")

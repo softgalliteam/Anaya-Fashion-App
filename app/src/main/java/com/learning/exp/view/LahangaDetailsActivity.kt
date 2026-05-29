@@ -38,12 +38,12 @@ class LahangaDetailsActivity : AppCompatActivity() {
                     // Show loading indicator
                     mBinding.loaderLl.visibility = VISIBLE
                     mBinding.errorTv.visibility = INVISIBLE
-                    mBinding.detailsLl.visibility = INVISIBLE
+                    mBinding.detailsLL.visibility = INVISIBLE
                 }
 
                 is DetailsApiCallState.Success -> {
 
-                    mBinding.detailsLl.visibility = VISIBLE
+                    mBinding.detailsLL.visibility = VISIBLE
                     mBinding.loaderLl.visibility = INVISIBLE
                     mBinding.errorTv.visibility = INVISIBLE
                     // Update UI with the list of computers
@@ -65,14 +65,14 @@ class LahangaDetailsActivity : AppCompatActivity() {
 
                 is DetailsApiCallState.Error -> {
                     mBinding.loaderLl.visibility = INVISIBLE
-                    mBinding.detailsLl.visibility = INVISIBLE
+                    mBinding.detailsLL.visibility = INVISIBLE
                     mBinding.errorTv.visibility = VISIBLE
                     mBinding.errorTv.text = state.message
                 }
 
                 else -> {
                     mBinding.loaderLl.visibility = INVISIBLE
-                    mBinding.detailsLl.visibility = INVISIBLE
+                    mBinding.detailsLL.visibility = INVISIBLE
                     mBinding.errorTv.visibility = VISIBLE
                     mBinding.errorTv.text = "Something went wrong"
                 }
@@ -86,26 +86,26 @@ class LahangaDetailsActivity : AppCompatActivity() {
 
         imageList.add(
             SlideModel(
-                "https://images.immediate.co.uk/production/volatile/sites/3/2019/04/Avengers-Endgame-Banner-2-de7cf60.jpg?quality=90&resize=620,413",
-                "Avengers Endgame"
+                imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
+                "lehanga"
             )
         )
         imageList.add(
             SlideModel(
-                "https://img.cinemablend.com/filter:scale/quill/3/7/0/0/8/e/37008e36e98cd75101cf1347396eac8534871a19.jpg?mw=600",
-                "Jumanji"
+                imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
+                "Premium Look"
             )
         )
         imageList.add(
             SlideModel(
-                "https://www.adgully.com/img/800/201711/spider-man-homecoming-banner.jpg",
-                "Spider Man"
+                imageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpl2oVGj-WU14UHxKPxkM2KAj3g6cB55uO3Q&s",
+                "Embroidered Lehanga"
             )
         )
         imageList.add(
             SlideModel(
-                "https://live.staticflickr.com/1980/29996141587_7886795726_b.jpg",
-                "Venom"
+                imageUrl = "https://www.papadontpreach.com/cdn/shop/files/Website-resized-kinjal-1.jpg?v=1750320811&width=823",
+                "Pink Premium Lehanga"
             )
         )
 
