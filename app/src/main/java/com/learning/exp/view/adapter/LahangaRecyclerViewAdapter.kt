@@ -61,7 +61,7 @@ class LahangaRecyclerViewAdapter(
         holder.favBtn.setOnClickListener {
 
             holder.favBtn.setImageResource(
-                R.drawable.heart_outline
+                R.drawable.logo
             )
 
         }
