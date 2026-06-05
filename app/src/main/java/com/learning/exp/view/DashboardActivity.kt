@@ -1,9 +1,7 @@
 package com.learning.exp.view
 
-import com.learning.exp.R
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.learning.exp.databinding.DashboardActivityBinding
 
@@ -32,5 +30,19 @@ class DashboardActivity : AppCompatActivity() {
         mBinding.bottomNav.homeBtn.setOnClickListener {
             startActivity(Intent(this, DashboardActivity::class.java))
         }
+
+        mBinding.bottomNav.cartBtn.setOnClickListener {
+
+            val intent = Intent(this, CartActivity::class.java)
+            startActivity(intent)
+
+        }
+
+        mBinding.bottomNav.cartBtn.setOnClickListener {
+            startActivity(Intent(this, CartActivity::class.java))
+        }
+
+
+
     }
 }

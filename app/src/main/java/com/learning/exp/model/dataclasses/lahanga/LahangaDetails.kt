@@ -5,5 +5,7 @@ data class LahangaDetails(
     var name: String = "",
     var description: String = "",
     var imageUrl: String = "",
-    var imageList: List<String> = emptyList()
+    var imageList: List<String> = emptyList(),
+    var price: Int = 0
 )
+

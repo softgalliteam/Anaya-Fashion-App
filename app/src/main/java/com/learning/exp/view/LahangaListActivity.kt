@@ -3,6 +3,7 @@ package com.learning.exp.view
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import androidx.activity.viewModels
@@ -24,8 +25,23 @@ class LahangaListActivity : AppCompatActivity() {
     private lateinit var mBinding: LahangaListActivityBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         mBinding = LahangaListActivityBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
+
+        mBinding.bottomNav.homeBtn.setOnClickListener {
+            startActivity(
+                Intent(this, DashboardActivity::class.java)
+            )
+        }
+
+        mBinding.bottomNav.cartBtn.setOnClickListener {
+            startActivity(Intent(this, CartActivity::class.java))
+        }
+
+
+
+
 
 
         Log.d(TAG, "onCreate: Fetching computer list")
