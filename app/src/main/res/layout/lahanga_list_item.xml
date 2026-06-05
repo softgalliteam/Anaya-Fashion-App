@@ -33,8 +33,9 @@
                 android:layout_margin="8dp"
                 android:background="@drawable/circle_white"
                 android:padding="6dp"
-                android:src="@drawable/heart_outline" />
+                android:src="@drawable/logo" />
         </FrameLayout>
+
 
         <TextView
             android:id="@+id/titleTv"
@@ -65,4 +66,7 @@
 
     </LinearLayout>
 
+
+
 </androidx.cardview.widget.CardView>
+

@@ -26,6 +26,14 @@
         <activity android:name=".view.DashboardActivity" />
         <activity android:name=".view.LahangaListActivity" />
         <activity android:name=".view.LahangaDetailsActivity" />
+        <activity android:name=".view.CartActivity" />
+
+
+
+
+
+
+
     </application>
 
 </manifest>

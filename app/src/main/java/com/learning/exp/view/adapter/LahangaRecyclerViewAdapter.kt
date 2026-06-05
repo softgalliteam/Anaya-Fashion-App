@@ -1,6 +1,7 @@
 package com.learning.exp.view.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,8 +16,8 @@ import com.squareup.picasso.Picasso
 class LahangaRecyclerViewAdapter(
     private val list: ArrayList<LahangaResponseDataItem>,
     private val onClickListener: (Int) -> Unit
-) :
-    RecyclerView.Adapter<LahangaRecyclerViewAdapter.ViewHolder>() {
+
+) : RecyclerView.Adapter<LahangaRecyclerViewAdapter.ViewHolder>() {
 
     // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -34,14 +35,17 @@ class LahangaRecyclerViewAdapter(
 
         val lahanga = list[position]
 
+        Log.d("IMG_CHECK", "Image URL = ${lahanga.imageUrl}")
         holder.compNameTextView?.text = lahanga.name
         holder.priceTv.text = "₹2500"
-        val imageView = holder.compIamge
+
+
         Picasso.get()
             .load(lahanga.imageUrl)
             .placeholder(R.drawable.loading_spinner)
             .error(R.drawable.transparent_logo)
-            .into(imageView)
+            .into(holder.compIamge)
+
 
         holder.itemView.setOnClickListener {
             onClickListener(lahanga.id)
@@ -52,20 +56,23 @@ class LahangaRecyclerViewAdapter(
         holder.cartBtn.setOnClickListener {
             Toast.makeText(
                 holder.itemView.context,
-                "Added To Cart",
+                "${lahanga.name}Added To Cart",
                 Toast.LENGTH_SHORT
             ).show()
         }
 
 //        for favbtn
         holder.favBtn.setOnClickListener {
-
-            holder.favBtn.setImageResource(
-                R.drawable.heart_outline
-            )
+            val isFav = holder.favBtn.tag as? Boolean ?: false
+            if (isFav) {
+                holder.favBtn.setImageResource(R.drawable.logo)
+                holder.favBtn.tag = false
+            } else {
+                holder.favBtn.setImageResource(R.drawable.logo) // change if you have filled heart icon
+                holder.favBtn.tag = true
+            }
 
         }
-
     }
 
 
@@ -85,6 +92,8 @@ class LahangaRecyclerViewAdapter(
 
         val favBtn =  itemView.findViewById<ImageView>(R.id.favBtn)
 
+
+
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -93,4 +102,6 @@ class LahangaRecyclerViewAdapter(
         list.addAll(newList)
         notifyDataSetChanged()
     }
+
+
 }

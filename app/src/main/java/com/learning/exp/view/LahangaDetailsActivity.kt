@@ -1,7 +1,9 @@
 package com.learning.exp.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import androidx.activity.viewModels
@@ -9,11 +11,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.google.android.material.snackbar.Snackbar
-import com.learning.exp.R
 import com.learning.exp.databinding.LahangaDetailsActivityBinding
+import com.learning.exp.model.CartRepository
+import com.learning.exp.model.dataclasses.lahanga.LahangaDetails
 import com.learning.exp.viewmodel.ApiCallViewModel
 import com.learning.exp.viewmodel.DetailsApiCallState
-import com.squareup.picasso.Picasso
 
 class LahangaDetailsActivity : AppCompatActivity() {
     companion object {
@@ -23,10 +25,41 @@ class LahangaDetailsActivity : AppCompatActivity() {
     val apiCallViewModel: ApiCallViewModel by viewModels() // 1st Way to initialize view model
 
     private lateinit var mBinding: LahangaDetailsActivityBinding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = LahangaDetailsActivityBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
+
+
+
+
+        mBinding.bottomNav.homeBtn.setOnClickListener {
+
+            val intent = Intent(
+                this,
+                DashboardActivity::class.java
+            )
+
+            startActivity(intent)
+        }
+
+        mBinding.bottomNav.cartBtn.setOnClickListener {
+
+            val intent = Intent(
+                this@LahangaDetailsActivity,
+                CartActivity::class.java
+            )
+
+            startActivity(intent)
+        }
+
+
+
+
+
+
 
         apiCallViewModel.getLahangaDetails(intent.getIntExtra("id", 0))
 
@@ -61,6 +94,13 @@ class LahangaDetailsActivity : AppCompatActivity() {
                          .error(R.drawable.transparent_logo)
                          .into(imageView)*/
 
+
+
+                    mBinding.titleTv.text = lahangaDetails.name
+                    mBinding.descriptionTv.text = lahangaDetails.description
+
+
+
                 }
 
                 is DetailsApiCallState.Error -> {
@@ -76,6 +116,7 @@ class LahangaDetailsActivity : AppCompatActivity() {
                     mBinding.errorTv.visibility = VISIBLE
                     mBinding.errorTv.text = "Something went wrong"
                 }
+
             }
         }
     }
