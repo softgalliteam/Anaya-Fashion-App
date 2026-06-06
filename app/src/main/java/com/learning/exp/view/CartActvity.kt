@@ -43,6 +43,10 @@ class CartActivity : AppCompatActivity() {
                 startActivity(Intent(this, DashboardActivity::class.java))
             }
 
+        binding.bottomNav.offerBtn.setOnClickListener {
+            startActivity(Intent(this, OffersActivity::class.java))
+        }
+
 
         val cartList = CartRepository.getCartItems()
 

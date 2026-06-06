@@ -37,12 +37,8 @@ class DashboardActivity : AppCompatActivity() {
             startActivity(intent)
 
         }
-
-        mBinding.bottomNav.cartBtn.setOnClickListener {
-            startActivity(Intent(this, CartActivity::class.java))
+        mBinding.bottomNav.offerBtn.setOnClickListener {
+            startActivity(Intent(this, OffersActivity::class.java))
         }
-
-
-
     }
 }
