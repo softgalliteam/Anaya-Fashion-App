@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -34,7 +35,9 @@
                 android:background="@drawable/circle_white"
                 android:padding="2dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/heart_outline" />
+                android:contentDescription="fav button"
+                android:src="@drawable/logo"
+                tools:ignore="HardcodedText" />
         </FrameLayout>
 
 
@@ -44,7 +47,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingTop="8dp"
-            android:text="Designer Red lehanga"
+            android:text="@string/designer_red_lehanga"
             android:textSize="12sp"
             android:textStyle="bold"/>
 

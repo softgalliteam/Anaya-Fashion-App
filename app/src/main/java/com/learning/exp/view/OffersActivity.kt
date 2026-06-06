@@ -14,17 +14,5 @@ class OffersActivity : AppCompatActivity() {
 
         binding = OffersActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        binding.bottomNav.homeBtn.setOnClickListener {
-            startActivity(Intent(this, DashboardActivity::class.java))
-        }
-
-        binding.bottomNav.cartBtn.setOnClickListener {
-            startActivity(Intent(this, CartActivity::class.java))
-        }
-
-        binding.bottomNav.offerBtn.setOnClickListener {
-            startActivity(Intent(this, OffersActivity::class.java))
-        }
     }
 }

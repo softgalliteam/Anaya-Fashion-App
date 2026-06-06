@@ -56,6 +56,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.8.8")
     implementation("androidx.security:security-crypto:1.1.0-alpha06")
 
+
     // Local DB Room
     implementation("androidx.room:room-runtime:2.6.1")
     kapt("androidx.room:room-compiler:2.6.1")

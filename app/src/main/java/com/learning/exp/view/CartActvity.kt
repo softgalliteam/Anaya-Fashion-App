@@ -5,12 +5,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.learning.exp.model.CartRepository
-
 import com.learning.exp.databinding.ItemCartBinding
+import com.learning.exp.model.CartRepository
 import com.learning.exp.model.dataclasses.lahanga.LahangaDetails
-import com.learning.exp.model.dataclasses.lahanga.LahangaResponseDataItem
 import com.learning.exp.view.adapter.LahangaRecyclerViewAdapter
 
 class CartActivity : AppCompatActivity() {
@@ -26,40 +23,18 @@ class CartActivity : AppCompatActivity() {
         binding.checkoutBtn.setOnClickListener {
             binding.cartCard.visibility = View.GONE
         }
-
-
-
-        binding.bottomNav.cartBtn.setOnClickListener {
-
-            val intent = Intent(
-                this@CartActivity,
-                CartActivity::class.java
-            )
-
-            startActivity(intent)
-        }
-
-            binding.bottomNav.homeBtn.setOnClickListener {
-                startActivity(Intent(this, DashboardActivity::class.java))
-            }
-
-        binding.bottomNav.offerBtn.setOnClickListener {
-            startActivity(Intent(this, OffersActivity::class.java))
-        }
-
-
         val cartList = CartRepository.getCartItems()
 
         binding.cartRecycler.layoutManager =
             LinearLayoutManager(this)
-                val adapter = LahangaRecyclerViewAdapter(
-                arrayListOf()
-            ){id ->
-                    startActivity(
-                        Intent(this, LahangaDetailsActivity ::class.java)
-                            .putExtra("id",id)
-                    )
-                }
+        val adapter = LahangaRecyclerViewAdapter(
+            arrayListOf()
+        ) { id ->
+            startActivity(
+                Intent(this, LahangaDetailsActivity::class.java)
+                    .putExtra("id", id)
+            )
+        }
         binding.cartRecycler.adapter = adapter
         calculateTotal(cartList)
     }

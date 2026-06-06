@@ -29,23 +29,6 @@ class LahangaListActivity : AppCompatActivity() {
         mBinding = LahangaListActivityBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
-        mBinding.bottomNav.homeBtn.setOnClickListener {
-            startActivity(
-                Intent(this, DashboardActivity::class.java)
-            )
-        }
-
-        mBinding.bottomNav.cartBtn.setOnClickListener {
-            startActivity(Intent(this, CartActivity::class.java))
-        }
-        mBinding.bottomNav.offerBtn.setOnClickListener {
-            startActivity(Intent(this, OffersActivity::class.java))
-        }
-
-
-
-
-
         Log.d(TAG, "onCreate: Fetching computer list")
         apiCallViewModel.getLahangaList()
         val computerRV = mBinding.computerRV
