@@ -1,5 +1,6 @@
 package com.learning.exp.model.dataprovider
 
+import com.learning.exp.R
 import com.learning.exp.model.dataclasses.lahanga.LahangaDetails
 import com.learning.exp.model.dataclasses.lahanga.LahangaResponseDataItem
 
@@ -116,7 +117,9 @@ object LahangaDataProvider {
                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpl2oVGj-WU14UHxKPxkM2KAj3g6cB55uO3Q&s",
                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXyeP2j4b0nlOl9HUDm-_N-eje_KH88-a1Lg&s",
                     "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg"
-                )
+                ),
+                sizes = listOf(32, 34, 36, 38, 40),
+                colors = listOf(R.color.red, R.color.black, R.color.purple),
             )
 
             2 -> LahangaDetails(
