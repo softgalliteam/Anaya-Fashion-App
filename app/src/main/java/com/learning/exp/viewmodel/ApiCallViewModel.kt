@@ -3,10 +3,15 @@ package com.learning.exp.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.learning.exp.model.ApiCalRepository
 import com.learning.exp.model.dataclasses.lahanga.LahangaDetails
 import com.learning.exp.model.dataclasses.lahanga.LahangaResponseDataItem
+import com.learning.exp.model.roomdb.CartDatabase
+import com.learning.exp.model.roomdb.DatabaseBuilder
+import com.learning.exp.model.roomdb.DatabaseHelper
+import com.learning.exp.model.roomdb.DatabaseHelperImpl
 import com.learning.exp.utils.Constants.TAG
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,17 +20,20 @@ import kotlinx.coroutines.launch
 sealed class ApiCallState {
     object Loading : ApiCallState()
     data class Success(val articles: ArrayList<LahangaResponseDataItem>) : ApiCallState()
+    data class SuccessWithMessage(val message: String) : ApiCallState()
     data class Error(val message: String) : ApiCallState()
 }
 
 sealed class DetailsApiCallState {
     object Loading : ApiCallState()
     data class Success(val articles: LahangaDetails) : ApiCallState()
+    data class SuccessWithMessage(val message: String) : ApiCallState()
     data class Error(val message: String) : ApiCallState()
 }
 
 
-class ApiCallViewModel : ViewModel() {
+class ApiCallViewModel(private val repository: ApiCalRepository) : ViewModel() {
+    private var productDetails: LahangaDetails? = null
     private val _screenState = MutableLiveData<ApiCallState>()
     val screenState: MutableLiveData<ApiCallState>
         get() = _screenState
@@ -34,8 +42,6 @@ class ApiCallViewModel : ViewModel() {
     val detailScreenState: MutableLiveData<ApiCallState?>
         get() = _detailScreenState
 
-
-    private val repository = ApiCalRepository()
     fun getLahangaList() {
         viewModelScope.launch(Dispatchers.IO) {
             _screenState.postValue(ApiCallState.Loading)
@@ -64,13 +70,13 @@ class ApiCallViewModel : ViewModel() {
             _detailScreenState.postValue(DetailsApiCallState.Loading)
             try {
                 // Use Local Room DB
-                val lahangaDetails = repository.getLahangaDetails(id)
+                productDetails = repository.getLahangaDetails(id)
 
-                Log.d(TAG, "Response from repository: $lahangaDetails")
-                if (lahangaDetails == null) {
+                Log.d(TAG, "Response from repository: $productDetails")
+                if (productDetails == null) {
                     _detailScreenState.postValue(DetailsApiCallState.Error("No data found for Lahanga with ID: $id"))
                 } else {
-                    _detailScreenState.postValue(DetailsApiCallState.Success(lahangaDetails))
+                    _detailScreenState.postValue(DetailsApiCallState.Success(productDetails!!))
                 }
             } catch (e: Exception) {
                 _detailScreenState.postValue(DetailsApiCallState.Error("Error fetching articles: ${e.message}"))
@@ -78,4 +84,30 @@ class ApiCallViewModel : ViewModel() {
         }
     }
 
+
+    fun addToCart() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                repository.addToCart(productDetails!!)
+                Log.d(TAG, "Item added to cart: $productDetails")
+                _detailScreenState.postValue(DetailsApiCallState.SuccessWithMessage("Item added to cart successfully"))
+            } catch (e: Exception) {
+                Log.e(TAG, "Error adding item to cart: ${e.message}")
+            }
+        }
+    }
+
+
+    class ApiCallViewModelFactory(
+        private val repository: ApiCalRepository
+    ) : ViewModelProvider.Factory {
+
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(ApiCallViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return ApiCallViewModel(repository) as T
+            }
+            throw IllegalArgumentException("Unknown ViewModel class")
+        }
+    }
 }

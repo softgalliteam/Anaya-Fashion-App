@@ -10,6 +10,10 @@ import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.google.android.material.snackbar.Snackbar
 import com.learning.exp.databinding.LahangaDetailsActivityBinding
+import com.learning.exp.model.ApiCalRepository
+import com.learning.exp.model.roomdb.DatabaseBuilder
+import com.learning.exp.model.roomdb.DatabaseHelper
+import com.learning.exp.model.roomdb.DatabaseHelperImpl
 import com.learning.exp.viewmodel.ApiCallViewModel
 import com.learning.exp.viewmodel.DetailsApiCallState
 
@@ -18,19 +22,28 @@ class LahangaDetailsActivity : AppCompatActivity() {
         const val TAG = "LahangaDetailsActivity"
     }
 
-    val apiCallViewModel: ApiCallViewModel by viewModels() // 1st Way to initialize view model
+
+    val cartDb by lazy { DatabaseBuilder.getCartDbInstance(this) }
+    val dbHelper: DatabaseHelper by lazy { DatabaseHelperImpl(cartDb) }
+    val repository by lazy { ApiCalRepository(dbHelper) }
+
+    val apiCallViewModel: ApiCallViewModel by viewModels {
+        ApiCallViewModel.ApiCallViewModelFactory(repository)
+    }
 
     private lateinit var mBinding: LahangaDetailsActivityBinding
-
+    private var productId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = LahangaDetailsActivityBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
-
-        apiCallViewModel.getLahangaDetails(intent.getIntExtra("id", 0))
+        productId = intent.getIntExtra("id", 0)
+        apiCallViewModel.getLahangaDetails(productId)
 
         handleSliderView()
+
+        handleButtonClicks()
 
         apiCallViewModel.detailScreenState.observe(this) { state ->
             when (state) {
@@ -39,6 +52,10 @@ class LahangaDetailsActivity : AppCompatActivity() {
                     mBinding.loaderLl.visibility = VISIBLE
                     mBinding.errorTv.visibility = INVISIBLE
                     mBinding.detailsLL.visibility = INVISIBLE
+                }
+
+                is DetailsApiCallState.SuccessWithMessage -> {
+                    Snackbar.make(mBinding.root, state.message, Snackbar.LENGTH_LONG).show()
                 }
 
                 is DetailsApiCallState.Success -> {
@@ -54,14 +71,6 @@ class LahangaDetailsActivity : AppCompatActivity() {
 
                     mBinding.titleTv.text = lahangaDetails.name
                     mBinding.descriptionTv.text = lahangaDetails.description
-                    /* val imageView = mBinding.imageIv
-                     Picasso.get()
-                         .load(lahangaDetails.imageUrl)
-                         .placeholder(R.drawable.loading_spinner)
-                         .error(R.drawable.transparent_logo)
-                         .into(imageView)*/
-
-
 
                     mBinding.titleTv.text = lahangaDetails.name
                     mBinding.descriptionTv.text = lahangaDetails.description
@@ -84,6 +93,12 @@ class LahangaDetailsActivity : AppCompatActivity() {
                 }
 
             }
+        }
+    }
+
+    private fun handleButtonClicks() {
+        mBinding.addToCartBtn.setOnClickListener {
+            apiCallViewModel.addToCart()
         }
     }
 

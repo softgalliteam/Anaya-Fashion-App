@@ -3,11 +3,13 @@ package com.learning.exp.model
 import com.learning.exp.model.dataclasses.lahanga.LahangaDetails
 import com.learning.exp.model.dataclasses.lahanga.LahangaResponseDataItem
 import com.learning.exp.model.dataprovider.LahangaDataProvider
+import com.learning.exp.model.roomdb.DatabaseBuilder
+import com.learning.exp.model.roomdb.DatabaseHelper
 import com.learning.exp.utils.Constants.BASE_URL_RETROFIT
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ApiCalRepository {
+class ApiCalRepository(private val cartDbHelper: DatabaseHelper) {
     suspend fun getComputerListFromRetrofit(): ArrayList<LahangaResponseDataItem> {
 
         // Retrofit to make network request
@@ -33,5 +35,10 @@ class ApiCalRepository {
         // Use Local Room DB Here
 
         return LahangaDataProvider.getLahangaDetailsById(id)
+    }
+
+    suspend fun addToCart(item: LahangaDetails) {
+        // Use Local Room DB Here to add item to cart
+        cartDbHelper.addToCart(item)
     }
 }

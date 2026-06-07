@@ -11,6 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.learning.exp.databinding.LahangaListActivityBinding
+import com.learning.exp.model.ApiCalRepository
+import com.learning.exp.model.roomdb.DatabaseBuilder
+import com.learning.exp.model.roomdb.DatabaseHelper
+import com.learning.exp.model.roomdb.DatabaseHelperImpl
 import com.learning.exp.view.adapter.LahangaRecyclerViewAdapter
 import com.learning.exp.viewmodel.ApiCallState
 import com.learning.exp.viewmodel.ApiCallViewModel
@@ -20,7 +24,13 @@ class LahangaListActivity : AppCompatActivity() {
         const val TAG = "ApiCallActivity"
     }
 
-    val apiCallViewModel: ApiCallViewModel by viewModels() // 1st Way to initialize view model
+    val cartDb by lazy { DatabaseBuilder.getCartDbInstance(this) }
+    val dbHelper: DatabaseHelper by lazy { DatabaseHelperImpl(cartDb) }
+    val repository by lazy { ApiCalRepository(dbHelper) }
+
+    val apiCallViewModel: ApiCallViewModel by viewModels {
+        ApiCallViewModel.ApiCallViewModelFactory(repository)
+    }
 
     private lateinit var mBinding: LahangaListActivityBinding
     override fun onCreate(savedInstanceState: Bundle?) {

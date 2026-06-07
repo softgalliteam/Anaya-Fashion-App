@@ -44,11 +44,11 @@ class DashboardActivity : AppCompatActivity() {
                     replaceFragment(CartListFragment())
                     true
                 }
-//
-//                R.id.profileMenu -> {
-//                    replaceFragment(ProfileFragment())
-//                    true
-//                }
+
+                R.id.profileMenu -> {
+                    replaceFragment(CartListFragment())
+                    true
+                }
 
                 else -> false
             }

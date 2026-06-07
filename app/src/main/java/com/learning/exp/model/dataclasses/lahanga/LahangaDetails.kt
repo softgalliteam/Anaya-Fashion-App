@@ -1,7 +1,11 @@
 package com.learning.exp.model.dataclasses.lahanga
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "lahanga_cart")
 data class LahangaDetails(
-    var id: Int = 0,
+    @PrimaryKey var id: Int = 0,
     var name: String = "",
     var description: String = "",
     var imageUrl: String = "",
