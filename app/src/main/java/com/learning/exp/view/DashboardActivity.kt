@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.learning.exp.R
 import com.learning.exp.databinding.DashboardActivityBinding
+import com.learning.exp.view.fragments.CartListFragment
 import com.learning.exp.view.fragments.HomeFragment
 import com.learning.exp.view.fragments.WishListFragment
 
@@ -40,14 +41,14 @@ class DashboardActivity : AppCompatActivity() {
                 }
 
                 R.id.cartMenu -> {
-                    replaceFragment(HomeFragment())
+                    replaceFragment(CartListFragment())
                     true
                 }
-
-                R.id.profileMenu -> {
-                    replaceFragment(HomeFragment())
-                    true
-                }
+//
+//                R.id.profileMenu -> {
+//                    replaceFragment(ProfileFragment())
+//                    true
+//                }
 
                 else -> false
             }
