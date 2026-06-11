@@ -4,10 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="260dp"
     android:layout_margin="8dp"
-    app:cardCornerRadius="18dp"
-    app:cardElevation="6dp">
+    app:cardCornerRadius="16dp"
+    app:cardElevation="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,61 +16,161 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="220dp">
+            android:layout_height="260dp">
 
             <ImageView
                 android:id="@+id/imageIv"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="140dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/logo"/>
+                android:src="@drawable/logo" />
 
+            <!-- Discount Badge -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/discount_bg"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp"
+                android:text="50% OFF"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
+            <!-- Wishlist -->
             <ImageView
                 android:id="@+id/favBtn"
-                android:layout_width="60dp"
-                android:layout_height="50dp"
-                android:layout_gravity="end"
-                android:layout_margin="8dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_gravity="top|end"
+                android:layout_margin="10dp"
                 android:background="@drawable/circle_white"
-                android:padding="2dp"
-                android:scaleType="fitCenter"
-                android:contentDescription="fav button"
-                android:src="@drawable/logo"
-                tools:ignore="HardcodedText" />
+                android:padding="10dp"
+                android:src="@drawable/heart_icon"
+                android:contentDescription="wishlist"/>
         </FrameLayout>
 
+        <!-- Rating -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
 
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:src="@drawable/star"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="4.8 (120)"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <!-- Product Name -->
         <TextView
             android:id="@+id/titleTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingTop="8dp"
-            android:text="@string/designer_red_lehanga"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="6dp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:text="Designer Bridal Lehanga"
+            android:textColor="@android:color/black"
             android:textSize="12sp"
             android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/priceTv"
-            android:layout_width="match_parent"
+        <!-- Price Row -->
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="₹2500"
-            android:textSize="17sp"
-            android:textStyle="bold"/>
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="₹4999"
+                android:textColor="#9E9E9E"
+                android:textSize="12sp"
+                />
+
+            <TextView
+                android:id="@+id/priceTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:text="₹2500"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:text="50% OFF"
+                android:textColor="#4CAF50"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <!-- Free Delivery -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="4dp"
+            android:text="Free Delivery"
+            android:textColor="#4CAF50"
+            android:textSize="12sp"/>
+
+        <!-- Color Variants -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:background="@drawable/red_circle"/>
+
+            <View
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/green_circle"/>
+
+            <View
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/blue_circle"/>
+        </LinearLayout>
+
+        <!-- Button -->
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/cartBtn"
+            android:id="@+id/btnViewDetails"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="35dp"
             android:layout_margin="10dp"
-            android:text="Add To Cart"
-            app:cornerRadius="12dp"/>
+            android:text="View Details"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:backgroundTint="@color/yellow"
+            app:cornerRadius="24dp"/>
 
     </LinearLayout>
 
-
-
 </androidx.cardview.widget.CardView>
-

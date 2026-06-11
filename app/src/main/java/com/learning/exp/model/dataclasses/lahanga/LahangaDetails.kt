@@ -2,6 +2,7 @@ package com.learning.exp.model.dataclasses.lahanga
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.Ignore
 
 @Entity(tableName = "lahanga_cart")
 data class LahangaDetails(
@@ -11,7 +12,11 @@ data class LahangaDetails(
     var imageUrl: String = "",
     var imageList: List<String> = emptyList(),
     var price: Int = 0,
-    var sizes: List<Int> = emptyList(),
-    var colors: List<Int> = emptyList()
-)
 
+    @Ignore
+    var sizes: List<Int> = emptyList(),
+
+    @Ignore
+    var colors: List<Int> = emptyList()
+
+)

@@ -1,5 +1,6 @@
 package com.learning.exp.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View.INVISIBLE
@@ -69,10 +70,10 @@ class LahangaDetailsActivity : AppCompatActivity() {
                     Log.d(TAG, "Received computer list: $lahangaDetails")
                     Snackbar.make(mBinding.root, "Success", Snackbar.LENGTH_LONG).show()
 
-                    mBinding.titleTv.text = lahangaDetails.name
+                    mBinding.priceTv.text = lahangaDetails.name
                     mBinding.descriptionTv.text = lahangaDetails.description
 
-                    mBinding.titleTv.text = lahangaDetails.name
+                    mBinding.priceTv.text = lahangaDetails.name
                     mBinding.descriptionTv.text = lahangaDetails.description
 
 
@@ -96,11 +97,24 @@ class LahangaDetailsActivity : AppCompatActivity() {
         }
     }
 
+
     private fun handleButtonClicks() {
-        mBinding.addToCartBtn.setOnClickListener {
+
+        mBinding.addCartBtn.setOnClickListener {
             apiCallViewModel.addToCart()
         }
+
+        mBinding.txtViewMore.setOnClickListener {
+            startActivity(
+                Intent(
+                    this@LahangaDetailsActivity,
+                    LahangaListActivity::class.java
+                )
+            )
+        }
     }
+
+//
 
     private fun handleSliderView() {
         val imageSlider = mBinding.imageSlider
@@ -109,25 +123,25 @@ class LahangaDetailsActivity : AppCompatActivity() {
         imageList.add(
             SlideModel(
                 imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
-                "lehanga"
+
             )
         )
         imageList.add(
             SlideModel(
                 imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
-                "Premium Look"
+
             )
         )
         imageList.add(
             SlideModel(
                 imageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpl2oVGj-WU14UHxKPxkM2KAj3g6cB55uO3Q&s",
-                "Embroidered Lehanga"
+
             )
         )
         imageList.add(
             SlideModel(
                 imageUrl = "https://www.papadontpreach.com/cdn/shop/files/Website-resized-kinjal-1.jpg?v=1750320811&width=823",
-                "Pink Premium Lehanga"
+
             )
         )
 

@@ -1,6 +1,7 @@
 package com.learning.exp.view.adapter
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.learning.exp.R
 import com.learning.exp.model.dataclasses.lahanga.LahangaResponseDataItem
+import com.learning.exp.view.LahangaDetailsActivity
 import com.squareup.picasso.Picasso
 
 class LahangaRecyclerViewAdapter(
@@ -47,31 +49,38 @@ class LahangaRecyclerViewAdapter(
             .into(holder.compIamge)
 
 
-        holder.itemView.setOnClickListener {
+        holder.compIamge.setOnClickListener {
             onClickListener(lahanga.id)
         }
 
-//        for add to cat button
-
-        holder.cartBtn.setOnClickListener {
-            Toast.makeText(
-                holder.itemView.context,
-                "${lahanga.name}Added To Cart",
-                Toast.LENGTH_SHORT
-            ).show()
+        holder.btnViewDetails.setOnClickListener {
+            onClickListener(lahanga.id)
         }
 
-//        for favbtn
+       //for add to cat button
+
+//        holder.cartBtn.setOnClickListener {
+//            Toast.makeText(
+//                holder.itemView.context,
+//                "${lahanga.name}Added To Cart",
+//                Toast.LENGTH_SHORT
+//            ).show()
+//        }
+
+
+        // for fav button
+
         holder.favBtn.setOnClickListener {
+
             val isFav = holder.favBtn.tag as? Boolean ?: false
+
             if (isFav) {
-                holder.favBtn.setImageResource(R.drawable.logo)
+                holder.favBtn.setImageResource(R.drawable.heart_icon)
                 holder.favBtn.tag = false
             } else {
-                holder.favBtn.setImageResource(R.drawable.logo) // change if you have filled heart icon
+                holder.favBtn.setImageResource(R.drawable.red_heart)
                 holder.favBtn.tag = true
             }
-
         }
     }
 
@@ -89,6 +98,9 @@ class LahangaRecyclerViewAdapter(
         val priceTv =itemView.findViewById<TextView>(R.id.priceTv)
 
         val cartBtn =  itemView.findViewById<com.google.android.material.button.MaterialButton>(R.id.cartBtn)
+
+        val btnViewDetails =
+            itemView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnViewDetails)
 
         val favBtn =  itemView.findViewById<ImageView>(R.id.favBtn)
 

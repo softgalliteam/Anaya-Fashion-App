@@ -3,6 +3,11 @@
   <component name="WizardSettings">
     <option name="children">
       <map>
+        <entry key="imageWizard">
+          <value>
+            <PersistentState />
+          </value>
+        </entry>
         <entry key="vectorWizard">
           <value>
             <PersistentState>
@@ -18,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/C:/SDK/icons/material/materialsymbolssharp/add_shopping_cart/sharp_add_shopping_cart_24.xml" />
+                                      <entry key="url" value="file:$USER_HOME$/Library/Android/sdk/icons/material/materialsymbolsoutlined/account_circle/outline_account_circle_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,8 +33,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="cart_icon" />
-                            <entry key="sourceFile" value="E:\Android Training\Anaya-Fashion" />
+                            <entry key="outputName" value="person_icon" />
+                            <entry key="sourceFile" value="$USER_HOME$/E:\Android Training\Anaya-Fashion" />
                           </map>
                         </option>
                       </PersistentState>

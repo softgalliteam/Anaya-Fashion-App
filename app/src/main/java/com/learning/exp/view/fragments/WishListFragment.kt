@@ -1,23 +1,33 @@
 package com.learning.exp.view.fragments
+import com.learning.exp.model.roomdb.CartDatabase
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.learning.exp.databinding.HomeFragmentBinding
-import com.learning.exp.databinding.WishListFragmentBinding
 
-class WishListFragment : Fragment() {
-    private var _binding: WishListFragmentBinding? = null
-    private val binding get() = _binding!!
+override fun onViewCreated(
+    view: View,
+    savedInstanceState: Bundle?
+) {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = WishListFragmentBinding.inflate(inflater, container, false)
-        return binding.root
+    super.onViewCreated(view, savedInstanceState)
+
+
+    val database = CartDatabase.getDatabase(requireContext())
+
+
+    binding.wishlistRecycler.layoutManager =
+        GridLayoutManager(requireContext(),2)
+
+
+    lifecycleScope.launch {
+
+
+        val wishlist =
+            database.wishlistDao().getWishlist()
+
+
+        binding.wishlistRecycler.adapter =
+            WishlistAdapter(wishlist)
+
+
     }
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+
 }
