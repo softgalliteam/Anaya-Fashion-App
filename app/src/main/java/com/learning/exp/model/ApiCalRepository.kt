@@ -41,4 +41,7 @@ class ApiCalRepository(private val cartDbHelper: DatabaseHelper) {
         // Use Local Room DB Here to add item to cart
         cartDbHelper.addToCart(item)
     }
+    suspend fun getCartList(): List<LahangaDetails> {
+        return cartDbHelper.getCartList()
+    }
 }

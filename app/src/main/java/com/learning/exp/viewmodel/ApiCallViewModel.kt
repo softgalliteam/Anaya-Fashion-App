@@ -97,17 +97,6 @@ class ApiCallViewModel(private val repository: ApiCalRepository) : ViewModel() {
         }
     }
 
-    fun getCartList() {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-              val cartList = repository.getLahangaListFromRoomDb()
-                Log.d(TAG, "Cart List Items: $cartList")
-            } catch (e: Exception) {
-                Log.e(TAG, "Error adding item to cart: ${e.message}")
-            }
-        }
-    }
-
     class ApiCallViewModelFactory(
         private val repository: ApiCalRepository
     ) : ViewModelProvider.Factory {

@@ -1,32 +1,29 @@
 package com.learning.exp.view.adapter
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.learning.exp.R
-import com.learning.exp.model.dataclasses.lahanga.LahangaResponseDataItem
-import com.learning.exp.view.LahangaDetailsActivity
+import com.learning.exp.model.dataclasses.lahanga.LahangaDetails
 import com.squareup.picasso.Picasso
 
-class LahangaRecyclerViewAdapter(
-    private val list: ArrayList<LahangaResponseDataItem>,
+class CartRecyclerViewAdapter(
+    private val list: ArrayList<LahangaDetails>,
     private val onClickListener: (Int) -> Unit
 
-) : RecyclerView.Adapter<LahangaRecyclerViewAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<CartRecyclerViewAdapter.ViewHolder>() {
 
     // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         // inflates the card_view_design view
         // that is used to hold list item
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.lahanga_list_item, parent, false)
+            .inflate(R.layout.cart_list_item, parent, false)
 
         return ViewHolder(view)
     }
@@ -52,25 +49,6 @@ class LahangaRecyclerViewAdapter(
         holder.compIamge.setOnClickListener {
             onClickListener(lahanga.id)
         }
-
-        holder.btnViewDetails.setOnClickListener {
-            onClickListener(lahanga.id)
-        }
-
-        // for fav button
-
-        holder.favBtn.setOnClickListener {
-
-            val isFav = holder.favBtn.tag as? Boolean ?: false
-
-            if (isFav) {
-                holder.favBtn.setImageResource(R.drawable.heart_icon)
-                holder.favBtn.tag = false
-            } else {
-                holder.favBtn.setImageResource(R.drawable.red_heart)
-                holder.favBtn.tag = true
-            }
-        }
     }
 
 
@@ -84,21 +62,11 @@ class LahangaRecyclerViewAdapter(
         val compIamge = itemView.findViewById<ImageView>(R.id.imageIv)
         val compNameTextView = itemView.findViewById<TextView>(R.id.titleTv)
 
-        val priceTv =itemView.findViewById<TextView>(R.id.priceTv)
-
-        val cartBtn =  itemView.findViewById<com.google.android.material.button.MaterialButton>(R.id.cartBtn)
-
-        val btnViewDetails =
-            itemView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnViewDetails)
-
-        val favBtn =  itemView.findViewById<ImageView>(R.id.favBtn)
-
-
-
+        val priceTv = itemView.findViewById<TextView>(R.id.priceTv)
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateData(newList: List<LahangaResponseDataItem>) {
+    fun updateData(newList: List<LahangaDetails>) {
         list.clear()
         list.addAll(newList)
         notifyDataSetChanged()
