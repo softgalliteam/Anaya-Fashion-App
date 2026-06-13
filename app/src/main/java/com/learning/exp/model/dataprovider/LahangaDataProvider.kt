@@ -6,6 +6,7 @@ import com.learning.exp.model.dataclasses.lahanga.LahangaResponseDataItem
 
 object LahangaDataProvider {
 
+
     fun getLahangaList() = arrayListOf(
         LahangaResponseDataItem(
             id = 1,
