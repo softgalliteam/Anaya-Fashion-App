@@ -12,6 +12,7 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.google.android.material.snackbar.Snackbar
 import com.learning.exp.databinding.LahangaDetailsActivityBinding
 import com.learning.exp.model.ApiCalRepository
+import com.learning.exp.model.dataclasses.lahanga.LahangaDetails
 import com.learning.exp.model.roomdb.DatabaseBuilder
 import com.learning.exp.model.roomdb.DatabaseHelper
 import com.learning.exp.model.roomdb.DatabaseHelperImpl
@@ -67,16 +68,7 @@ class LahangaDetailsActivity : AppCompatActivity() {
                     // Update UI with the list of computers
                     val lahangaDetails = state.articles
 
-                    Log.d(TAG, "Received computer list: $lahangaDetails")
-                    Snackbar.make(mBinding.root, "Success", Snackbar.LENGTH_LONG).show()
-
-                    mBinding.priceTv.text = lahangaDetails.name
-                    mBinding.descriptionTv.text = lahangaDetails.description
-
-                    mBinding.priceTv.text = lahangaDetails.name
-                    mBinding.descriptionTv.text = lahangaDetails.description
-
-
+                    updateUI(lahangaDetails)
                 }
 
                 is DetailsApiCallState.Error -> {
@@ -97,11 +89,27 @@ class LahangaDetailsActivity : AppCompatActivity() {
         }
     }
 
+    fun updateUI(lahangaDetails: LahangaDetails) {
+        mBinding.priceTv.text = lahangaDetails.price.toString()
+        mBinding.titleTv.text = lahangaDetails.name
+        mBinding.descriptionTv.text = lahangaDetails.description
+    }
+
 
     private fun handleButtonClicks() {
 
         mBinding.addCartBtn.setOnClickListener {
             apiCallViewModel.addToCart()
+        }
+
+        mBinding.buyNowBtn.setOnClickListener {
+            startActivity(
+                Intent(this@LahangaDetailsActivity, BuyActivity::class.java)
+                    .putExtra(
+                    "id",
+                    "$productId,"
+                )
+            )
         }
 
         mBinding.txtViewMore.setOnClickListener {
@@ -124,25 +132,25 @@ class LahangaDetailsActivity : AppCompatActivity() {
             SlideModel(
                 imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
 
-            )
+                )
         )
         imageList.add(
             SlideModel(
                 imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
 
-            )
+                )
         )
         imageList.add(
             SlideModel(
                 imageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpl2oVGj-WU14UHxKPxkM2KAj3g6cB55uO3Q&s",
 
-            )
+                )
         )
         imageList.add(
             SlideModel(
                 imageUrl = "https://www.papadontpreach.com/cdn/shop/files/Website-resized-kinjal-1.jpg?v=1750320811&width=823",
 
-            )
+                )
         )
 
         imageSlider.setImageList(imageList, ScaleTypes.FIT)

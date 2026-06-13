@@ -18,9 +18,11 @@ import com.learning.exp.R
 import com.learning.exp.databinding.FragmentCartListBinding
 import com.learning.exp.databinding.HomeFragmentBinding
 import com.learning.exp.model.ApiCalRepository
+import com.learning.exp.model.dataclasses.lahanga.LahangaDetails
 import com.learning.exp.model.roomdb.DatabaseBuilder
 import com.learning.exp.model.roomdb.DatabaseHelper
 import com.learning.exp.model.roomdb.DatabaseHelperImpl
+import com.learning.exp.view.BuyActivity
 import com.learning.exp.view.LahangaDetailsActivity
 import com.learning.exp.view.LahangaListActivity.Companion.TAG
 import com.learning.exp.view.adapter.CartRecyclerViewAdapter
@@ -42,6 +44,7 @@ class CartListFragment : Fragment() {
 
     private var _binding: FragmentCartListBinding? = null
     private val mBinding get() = _binding!!
+    private var cartList: List<LahangaDetails> = emptyList()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,6 +59,21 @@ class CartListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         apiCallViewModel.getCartList()
+
+
+        mBinding.buyNowBtn.setOnClickListener {
+            var productIds = ""
+            cartList.forEach {
+                productIds += "${it.id}," // "1,2,3,"
+            }
+            startActivity(
+                Intent(requireActivity(), BuyActivity::class.java)
+                    .putExtra(
+                        "id",
+                        productIds
+                    )
+            )
+        }
 
         val computerRV = mBinding.computerRV
         computerRV.layoutManager = LinearLayoutManager(requireActivity())
@@ -77,6 +95,7 @@ class CartListFragment : Fragment() {
                     // Show loading indicator
                     mBinding.loaderLl.visibility = VISIBLE
                     mBinding.errorTv.visibility = INVISIBLE
+                    mBinding.buyNowBtn.visibility = INVISIBLE
                     Snackbar.make(mBinding.root, "Loading...", Snackbar.LENGTH_LONG).show()
                 }
 
@@ -84,8 +103,9 @@ class CartListFragment : Fragment() {
 
                     mBinding.loaderLl.visibility = INVISIBLE
                     mBinding.errorTv.visibility = INVISIBLE
+                    mBinding.buyNowBtn.visibility = VISIBLE
                     // Update UI with the list of computers
-                    val cartList = state.cartList
+                    cartList = state.cartList
 
                     Log.d(TAG, "Received cart list: $cartList")
                     Snackbar.make(mBinding.root, "Success", Snackbar.LENGTH_LONG).show()
@@ -99,6 +119,7 @@ class CartListFragment : Fragment() {
                     val errorMessage = state.message
                     mBinding.errorTv.text = errorMessage
                     mBinding.loaderLl.visibility = INVISIBLE
+                    mBinding.buyNowBtn.visibility = INVISIBLE
                     mBinding.errorTv.visibility = VISIBLE
                     // For example, you can show a Toast or a Snackbar with the error message
                     Snackbar.make(mBinding.root, errorMessage, Snackbar.LENGTH_LONG).show()
@@ -109,6 +130,7 @@ class CartListFragment : Fragment() {
                     val errorMessage = "Something went wrong"
                     mBinding.errorTv.text = errorMessage
                     mBinding.loaderLl.visibility = INVISIBLE
+                    mBinding.buyNowBtn.visibility = INVISIBLE
                     mBinding.errorTv.visibility = VISIBLE
                     // For example, you can show a Toast or a Snackbar with the error message
                     Snackbar.make(mBinding.root, errorMessage, Snackbar.LENGTH_LONG).show()

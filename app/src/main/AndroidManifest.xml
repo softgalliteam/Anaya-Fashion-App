@@ -28,12 +28,7 @@
         <activity android:name=".view.LahangaDetailsActivity" />
         <activity android:name=".view.CartActivity" />
         <activity android:name=".view.OffersActivity" />
-
-
-
-
-
-
+        <activity android:name=".view.BuyActivity" />
 
     </application>
 
