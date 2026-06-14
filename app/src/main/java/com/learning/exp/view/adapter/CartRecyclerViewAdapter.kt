@@ -34,9 +34,17 @@ class CartRecyclerViewAdapter(
 
         val lahanga = list[position]
 
+        val actualPrice = 10000
+        val sellingPrice = lahanga.price
+        val discount = actualPrice - sellingPrice
+        //calculate discount percentage
+        val discountPercentage = (discount * 100) / actualPrice
+
         Log.d("IMG_CHECK", "Image URL = ${lahanga.imageUrl}")
         holder.compNameTextView?.text = lahanga.name
-        holder.priceTv.text = "₹2500"
+        holder.priceTv.text = "₹ $sellingPrice"
+        holder.actualPriceTv.text = "₹ $actualPrice"
+        holder.discountTv.text = "$discountPercentage% off"
 
 
         Picasso.get()
@@ -61,8 +69,9 @@ class CartRecyclerViewAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val compIamge = itemView.findViewById<ImageView>(R.id.imageIv)
         val compNameTextView = itemView.findViewById<TextView>(R.id.titleTv)
-
         val priceTv = itemView.findViewById<TextView>(R.id.priceTv)
+        val actualPriceTv = itemView.findViewById<TextView>(R.id.actualPriceTv)
+        val discountTv = itemView.findViewById<TextView>(R.id.discountTv)
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -71,6 +80,4 @@ class CartRecyclerViewAdapter(
         list.addAll(newList)
         notifyDataSetChanged()
     }
-
-
 }

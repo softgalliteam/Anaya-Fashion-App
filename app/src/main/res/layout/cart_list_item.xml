@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="260dp"
+    android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="16dp"
     app:cardElevation="8dp">
@@ -14,7 +14,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="260dp">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/imageIv"
@@ -36,40 +36,8 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
-            <!-- Wishlist -->
-            <ImageView
-                android:id="@+id/favBtn"
-                android:layout_width="44dp"
-                android:layout_height="44dp"
-                android:layout_gravity="top|end"
-                android:layout_margin="10dp"
-                android:background="@drawable/circle_white"
-                android:contentDescription="wishlist"
-                android:padding="10dp"
-                android:src="@drawable/heart_icon" />
         </FrameLayout>
 
-        <!-- Rating -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:src="@drawable/star" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:text="4.8 (120)"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-        </LinearLayout>
 
         <!-- Product Name -->
         <TextView
@@ -94,9 +62,10 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/actualPriceTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="₹4999"
+                android:text="₹10000"
                 android:textColor="#9E9E9E"
                 android:textSize="12sp" />
 
@@ -105,12 +74,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
-                android:text="₹2500"
+                android:text="₹5000"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/discountTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
@@ -118,6 +88,28 @@
                 android:textColor="#4CAF50"
                 android:textSize="12sp"
                 android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
+                android:src="@drawable/delete_cart_item" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_weight="1"
+                android:src="@drawable/wish_icon"
+                app:tint="@color/yellow" />
+
         </LinearLayout>
 
     </LinearLayout>
