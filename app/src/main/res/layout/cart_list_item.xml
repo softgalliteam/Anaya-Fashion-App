@@ -90,24 +90,30 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="0dp"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
+                android:text="Delete"
+                android:gravity="center"
                 android:layout_weight="1"
-                android:src="@drawable/delete_cart_item" />
+                android:drawableEnd="@drawable/delete_cart_item" />
 
-            <ImageView
-                android:layout_width="0dp"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
+                android:text="Wishlist"
+                android:gravity="center"
                 android:layout_weight="1"
-                android:src="@drawable/wish_icon"
+                android:drawablePadding="8dp"
+                android:drawableEnd="@drawable/heart_icon"
                 app:tint="@color/yellow" />
 
         </LinearLayout>
