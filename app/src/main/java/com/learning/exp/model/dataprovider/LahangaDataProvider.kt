@@ -360,4 +360,23 @@ object LahangaDataProvider {
 
         return list
     }
+
+
+    fun searchProduct(search: String): ArrayList<LahangaResponseDataItem> {
+        val searchList = arrayListOf<LahangaResponseDataItem>()
+        val list = getLahangaList()
+        list.forEach {
+            if (it.name.contains(search, ignoreCase = true)) {
+                searchList.add(it)
+            }
+        }
+        return searchList
+    }
+
+    fun searchProduct2(search: String): ArrayList<LahangaResponseDataItem> {
+        val list = getLahangaList().filter {
+            it.name.contains(search, ignoreCase = true)
+        } as ArrayList<LahangaResponseDataItem>
+        return list
+    }
 }

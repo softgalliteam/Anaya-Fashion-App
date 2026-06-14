@@ -19,4 +19,14 @@ interface CartDao {
     @Delete
     suspend fun deleteFromCart(cartItem: LahangaDetails)
 
+    //Wish list related operations
+    @Query("SELECT * FROM lahanga_cart")
+    suspend fun getWishList(): List<LahangaDetails>
+
+    @Insert(onConflict = REPLACE)
+    suspend fun addToWish(cartItem: LahangaDetails)
+
+    @Delete
+    suspend fun deleteFromWish(cartItem: LahangaDetails)
+
 }

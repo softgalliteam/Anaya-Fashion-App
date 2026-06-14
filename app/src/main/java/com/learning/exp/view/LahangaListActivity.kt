@@ -19,45 +19,30 @@ import com.learning.exp.view.adapter.LahangaRecyclerViewAdapter
 import com.learning.exp.viewmodel.ApiCallState
 import com.learning.exp.viewmodel.ApiCallViewModel
 
-class LahangaListActivity : AppCompatActivity(){
+class LahangaListActivity : AppCompatActivity() {
 
-    companion object{
-        const val TAG="LahangaListActivity"
+    companion object {
+        const val TAG = "LahangaListActivity"
     }
 
-    private lateinit var mBinding:LahangaListActivityBinding
+    private lateinit var mBinding: LahangaListActivityBinding
+    private val apiCallViewModel: ApiCallViewModel by viewModels()
 
-    private val cartDb by lazy{
-        DatabaseBuilder.getCartDbInstance(this)
-    }
-
-    private val dbHelper:DatabaseHelper by lazy{
-        DatabaseHelperImpl(cartDb)
-    }
-
-    private val repository by lazy{
-        ApiCalRepository(dbHelper)
-    }
-
-    private val apiCallViewModel:ApiCallViewModel by viewModels{
-        ApiCallViewModel.ApiCallViewModelFactory(repository)
-    }
-
-    override fun onCreate(savedInstanceState:Bundle?){
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mBinding=LahangaListActivityBinding.inflate(layoutInflater)
+        mBinding = LahangaListActivityBinding.inflate(layoutInflater)
 
         setContentView(mBinding.root)
 
 
-        val searchView=mBinding.searchView
+        val searchView = mBinding.searchView
 
-        searchView.isIconified=false
+        searchView.isIconified = false
 
-        searchView.queryHint="Search here..."
+        searchView.queryHint = "Search here..."
 
-        val searchText=searchView.findViewById<EditText>(
+        val searchText = searchView.findViewById<EditText>(
             androidx.appcompat.R.id.search_src_text
         )
 
@@ -65,40 +50,40 @@ class LahangaListActivity : AppCompatActivity(){
 
         searchText.setTextColor(Color.BLACK)
 
-        searchText.textSize=15f
+        searchText.textSize = 15f
 
 
         apiCallViewModel.getLahangaList()
 
 
-        val recyclerView=mBinding.computerRV
+        val recyclerView = mBinding.computerRV
 
-        recyclerView.layoutManager=GridLayoutManager(this,2)
+        recyclerView.layoutManager = GridLayoutManager(this, 2)
 
 
-        val adapter=LahangaRecyclerViewAdapter(arrayListOf()){
+        val adapter = LahangaRecyclerViewAdapter(arrayListOf()) {
 
             startActivity(
                 Intent(
                     this,
                     LahangaDetailsActivity::class.java
-                ).putExtra("id",it)
+                ).putExtra("id", it)
             )
 
         }
 
 
-        recyclerView.adapter=adapter
+        recyclerView.adapter = adapter
 
 
         searchView.setOnQueryTextListener(
-            object: SearchView.OnQueryTextListener{
+            object : SearchView.OnQueryTextListener {
 
-                override fun onQueryTextSubmit(query:String?):Boolean{
+                override fun onQueryTextSubmit(query: String?): Boolean {
                     return false
                 }
 
-                override fun onQueryTextChange(newText:String?):Boolean{
+                override fun onQueryTextChange(newText: String?): Boolean {
 
                     adapter.filterList(newText ?: "")
 
@@ -109,39 +94,39 @@ class LahangaListActivity : AppCompatActivity(){
         )
 
 
-        apiCallViewModel.screenState.observe(this){state->
+        apiCallViewModel.screenState.observe(this) { state ->
 
-            when(state){
+            when (state) {
 
-                is ApiCallState.Loading->{
+                is ApiCallState.Loading -> {
 
-                    mBinding.loaderLl.visibility=VISIBLE
-                    mBinding.errorTv.visibility=INVISIBLE
+                    mBinding.loaderLl.visibility = VISIBLE
+                    mBinding.errorTv.visibility = INVISIBLE
 
                 }
 
-                is ApiCallState.Success->{
+                is ApiCallState.Success -> {
 
-                    mBinding.loaderLl.visibility=INVISIBLE
-                    mBinding.errorTv.visibility=INVISIBLE
+                    mBinding.loaderLl.visibility = INVISIBLE
+                    mBinding.errorTv.visibility = INVISIBLE
 
                     adapter.updateData(state.articles)
 
                 }
 
-                is ApiCallState.Error->{
+                is ApiCallState.Error -> {
 
-                    mBinding.loaderLl.visibility=INVISIBLE
-                    mBinding.errorTv.visibility=VISIBLE
-                    mBinding.errorTv.text=state.message
+                    mBinding.loaderLl.visibility = INVISIBLE
+                    mBinding.errorTv.visibility = VISIBLE
+                    mBinding.errorTv.text = state.message
 
                 }
 
-                else->{
+                else -> {
 
-                    mBinding.loaderLl.visibility=INVISIBLE
-                    mBinding.errorTv.visibility=VISIBLE
-                    mBinding.errorTv.text="Something went wrong"
+                    mBinding.loaderLl.visibility = INVISIBLE
+                    mBinding.errorTv.visibility = VISIBLE
+                    mBinding.errorTv.text = "Something went wrong"
 
                 }
 

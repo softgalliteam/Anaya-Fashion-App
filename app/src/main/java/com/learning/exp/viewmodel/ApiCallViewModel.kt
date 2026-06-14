@@ -1,6 +1,8 @@
 package com.learning.exp.viewmodel
 
+import android.app.Application
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -32,7 +34,13 @@ sealed class DetailsApiCallState {
 }
 
 
-class ApiCallViewModel(private val repository: ApiCalRepository) : ViewModel() {
+class ApiCallViewModel(
+    private val application: Application
+) : AndroidViewModel(application) {
+    val cartRepository by lazy { ApiCalRepository("Cart", application) }
+    val wishRepository by lazy { ApiCalRepository("Wish", application) }
+
+
     private var productDetails: LahangaDetails? = null
     private val _screenState = MutableLiveData<ApiCallState>()
     val screenState: MutableLiveData<ApiCallState>
@@ -50,7 +58,7 @@ class ApiCallViewModel(private val repository: ApiCalRepository) : ViewModel() {
                 //val response = repository.getComputerListFromRetrofit()
 
                 // Use Local Room DB
-                val lahangaList = repository.getLahangaListFromRoomDb()
+                val lahangaList = cartRepository.getLahangaListFromRoomDb()
 
                 Log.d(TAG, "Response from repository: $lahangaList")
                 if (lahangaList.isEmpty()) {
@@ -70,7 +78,7 @@ class ApiCallViewModel(private val repository: ApiCalRepository) : ViewModel() {
             _detailScreenState.postValue(DetailsApiCallState.Loading)
             try {
                 // Use Local Room DB
-                productDetails = repository.getLahangaDetails(id)
+                productDetails = cartRepository.getLahangaDetails(id)
 
                 Log.d(TAG, "Response from repository: $productDetails")
                 if (productDetails == null) {
@@ -88,7 +96,7 @@ class ApiCallViewModel(private val repository: ApiCalRepository) : ViewModel() {
     fun addToCart() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                repository.addToCart(productDetails!!)
+                cartRepository.addToCart(productDetails!!)
                 Log.d(TAG, "Item added to cart: $productDetails")
                 _detailScreenState.postValue(DetailsApiCallState.SuccessWithMessage("Item added to cart successfully"))
             } catch (e: Exception) {
@@ -97,16 +105,15 @@ class ApiCallViewModel(private val repository: ApiCalRepository) : ViewModel() {
         }
     }
 
-    class ApiCallViewModelFactory(
-        private val repository: ApiCalRepository
-    ) : ViewModelProvider.Factory {
-
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(ApiCallViewModel::class.java)) {
-                @Suppress("UNCHECKED_CAST")
-                return ApiCallViewModel(repository) as T
+    fun addToWish() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                wishRepository.addToWish(productDetails!!)
+                Log.d(TAG, "Item added to wish list: $productDetails")
+                _detailScreenState.postValue(DetailsApiCallState.SuccessWithMessage("Item added to wish list successfully"))
+            } catch (e: Exception) {
+                Log.e(TAG, "Error adding item to wish list: ${e.message}")
             }
-            throw IllegalArgumentException("Unknown ViewModel class")
         }
     }
 }

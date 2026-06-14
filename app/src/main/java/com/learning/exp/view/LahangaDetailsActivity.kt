@@ -24,14 +24,7 @@ class LahangaDetailsActivity : AppCompatActivity() {
         const val TAG = "LahangaDetailsActivity"
     }
 
-
-    val cartDb by lazy { DatabaseBuilder.getCartDbInstance(this) }
-    val dbHelper: DatabaseHelper by lazy { DatabaseHelperImpl(cartDb) }
-    val repository by lazy { ApiCalRepository(dbHelper) }
-
-    val apiCallViewModel: ApiCallViewModel by viewModels {
-        ApiCallViewModel.ApiCallViewModelFactory(repository)
-    }
+    val apiCallViewModel: ApiCallViewModel by viewModels()
 
     private lateinit var mBinding: LahangaDetailsActivityBinding
     private var productId: Int = 0
@@ -100,6 +93,10 @@ class LahangaDetailsActivity : AppCompatActivity() {
 
         mBinding.addCartBtn.setOnClickListener {
             apiCallViewModel.addToCart()
+        }
+
+        mBinding.wishListBtn.setOnClickListener {
+            apiCallViewModel.addToWish()
         }
 
         mBinding.buyNowBtn.setOnClickListener {

@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.learning.exp.R
 import com.learning.exp.databinding.FragmentCartListBinding
+import com.learning.exp.databinding.FragmentWishListBinding
 import com.learning.exp.databinding.HomeFragmentBinding
 import com.learning.exp.model.ApiCalRepository
 import com.learning.exp.model.dataclasses.lahanga.LahangaDetails
@@ -27,37 +28,38 @@ import com.learning.exp.view.LahangaDetailsActivity
 import com.learning.exp.view.LahangaListActivity.Companion.TAG
 import com.learning.exp.view.adapter.CartRecyclerViewAdapter
 import com.learning.exp.view.adapter.LahangaRecyclerViewAdapter
+import com.learning.exp.view.adapter.WishRecyclerViewAdapter
 import com.learning.exp.viewmodel.ApiCallState
 import com.learning.exp.viewmodel.CartAndWishListViewModel
 import com.learning.exp.viewmodel.Status
 import kotlin.getValue
 
-class CartListFragment : Fragment() {
+class WishListFragment : Fragment() {
 
     val apiCallViewModel: CartAndWishListViewModel by viewModels()
 
-    private var _binding: FragmentCartListBinding? = null
+    private var _binding: FragmentWishListBinding? = null
     private val mBinding get() = _binding!!
-    private var cartList: List<LahangaDetails> = emptyList()
+    private var wishList: List<LahangaDetails> = emptyList()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentCartListBinding.inflate(inflater, container, false)
+        _binding = FragmentWishListBinding.inflate(inflater, container, false)
         return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        apiCallViewModel.getCartList()
+        apiCallViewModel.getWishList()
 
 
         mBinding.buyNowBtn.setOnClickListener {
             var productIds = ""
-            cartList.forEach {
+            wishList.forEach {
                 productIds += "${it.id}," // "1,2,3,"
             }
             startActivity(
@@ -69,10 +71,9 @@ class CartListFragment : Fragment() {
             )
         }
 
-        val computerRV = mBinding.computerRV
-        computerRV.layoutManager = LinearLayoutManager(requireActivity())
+        mBinding.wishListRV.layoutManager = LinearLayoutManager(requireActivity())
         // Set in recycler view adapter
-        val adapter = CartRecyclerViewAdapter(arrayListOf(), {
+        val adapter = WishRecyclerViewAdapter(arrayListOf(), {
             startActivity(
                 Intent(
                     requireActivity(),
@@ -81,9 +82,9 @@ class CartListFragment : Fragment() {
             )
         })
         // Setting the Adapter with the recyclerview
-        computerRV.adapter = adapter
+        mBinding.wishListRV.adapter = adapter
 
-        apiCallViewModel.cartState.observe(viewLifecycleOwner) { state ->
+        apiCallViewModel.wishState.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is Status.Loading -> {
                     // Show loading indicator
@@ -93,19 +94,19 @@ class CartListFragment : Fragment() {
                     Snackbar.make(mBinding.root, "Loading...", Snackbar.LENGTH_LONG).show()
                 }
 
-                is Status.Success -> {
+                is Status.WishSuccess -> {
 
                     mBinding.loaderLl.visibility = INVISIBLE
                     mBinding.errorTv.visibility = INVISIBLE
                     mBinding.buyNowBtn.visibility = VISIBLE
                     // Update UI with the list of computers
-                    cartList = state.cartList
+                    wishList = state.wishList
 
-                    Log.d(TAG, "Received cart list: $cartList")
+                    Log.d(TAG, "Received cart list: $wishList")
                     Snackbar.make(mBinding.root, "Success", Snackbar.LENGTH_LONG).show()
 
                     // For example, you can set the articles to a RecyclerView adapter here
-                    adapter.updateData(cartList)
+                    adapter.updateData(wishList)
                 }
 
                 is Status.Error -> {

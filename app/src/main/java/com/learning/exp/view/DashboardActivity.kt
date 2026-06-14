@@ -7,6 +7,7 @@ import com.learning.exp.R
 import com.learning.exp.databinding.DashboardActivityBinding
 import com.learning.exp.view.fragments.CartListFragment
 import com.learning.exp.view.fragments.HomeFragment
+import com.learning.exp.view.fragments.WishListFragment
 
 class DashboardActivity : AppCompatActivity() {
     companion object {
@@ -34,7 +35,7 @@ class DashboardActivity : AppCompatActivity() {
                 }
 
                 R.id.wishMenu -> {
-                    replaceFragment(CartListFragment())
+                    replaceFragment(WishListFragment())
                     true
                 }
 
