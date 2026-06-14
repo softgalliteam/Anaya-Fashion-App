@@ -11,87 +11,104 @@ object LahangaDataProvider {
         LahangaResponseDataItem(
             id = 1,
             name = "Purple Embroidered Lehenga 1",
-            imageUrl = "https://www.papadontpreach.com/cdn/shop/files/Website-resized-kinjal-1.jpg?v=1750320811&width=823"
+            imageUrl = "https://www.papadontpreach.com/cdn/shop/files/Website-resized-kinjal-1.jpg?v=1750320811&width=823",
+            price = 4000
         ),
         LahangaResponseDataItem(
             id = 2,
             name = "Purple Embroidered Lehenga 2",
-            imageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpl2oVGj-WU14UHxKPxkM2KAj3g6cB55uO3Q&s"
+            imageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpl2oVGj-WU14UHxKPxkM2KAj3g6cB55uO3Q&s",
+            price = 4000
         ),
         LahangaResponseDataItem(
             id = 3,
             name = "Purple Embroidered Lehenga 3",
-            imageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXyeP2j4b0nlOl9HUDm-_N-eje_KH88-a1Lg&s"
+            imageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXyeP2j4b0nlOl9HUDm-_N-eje_KH88-a1Lg&s",
+            price = 4000
         ),
         LahangaResponseDataItem(
             id = 5,
             name = "Purple Embroidered Lehenga 4",
-            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg"
+            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
+            price = 4000
         ),
         LahangaResponseDataItem(
             id = 6,
             name = "Purple Embroidered Lehenga 5",
-            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg"
+            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
+            price = 4000
         ),
         LahangaResponseDataItem(
             id = 7,
             name = "Purple Embroidered Lehenga 6",
-            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg"
+            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
+            price = 4000
         ),
         LahangaResponseDataItem(
             id = 8,
             name = "Purple Embroidered Lehenga 7",
-            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg"
+            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
+            price = 4000
         ),
         LahangaResponseDataItem(
             id = 9,
             name = "Purple Embroidered Lehenga 8",
-            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg"
+            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
+            price = 4000
         ),
         LahangaResponseDataItem(
             id = 10,
             name = "Purple Embroidered Lehenga 9",
-            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg"
+            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
+            price = 4000
         ),
         LahangaResponseDataItem(
             id = 11,
             name = "Purple Embroidered Lehenga 10",
-            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg"
+            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
+            price = 4000
         ),
         LahangaResponseDataItem(
             id = 12,
             name = "Purple Embroidered Lehenga",
-            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg"
+            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
+            price = 4000
         ),
         LahangaResponseDataItem(
             id = 13,
             name = "Purple Embroidered Lehenga",
-            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg"
+            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
+            price = 4000
         ),
         LahangaResponseDataItem(
             id = 14,
             name = "Purple Embroidered Lehenga",
-            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg"
+            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
+            price = 4000
         ),
         LahangaResponseDataItem(
             id = 15,
             name = "Purple Embroidered Lehenga",
-            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg"
+            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
+            price = 4000
         ),
         LahangaResponseDataItem(
             id = 16,
             name = "Purple Embroidered Lehenga",
-            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg"
+            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
+            price = 4000
         ),
         LahangaResponseDataItem(
             id = 17,
             name = "Purple Embroidered Lehenga",
-            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg"
+            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
+            price = 4000
         ),
         LahangaResponseDataItem(
             id = 18,
             name = "Purple Embroidered Lehenga",
-            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg"
+            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
+            price = 4000
         ),
 
 

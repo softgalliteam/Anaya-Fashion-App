@@ -7,5 +7,6 @@ import androidx.room.PrimaryKey
 data class LahangaResponseDataItem(
     @PrimaryKey val id: Int,
     val name: String,
-    val imageUrl: String
+    val imageUrl: String,
+    val price: Int
 )
