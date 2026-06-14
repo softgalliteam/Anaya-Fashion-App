@@ -116,4 +116,20 @@ class ApiCallViewModel(
             }
         }
     }
+
+    fun searchLahangaList(searchText: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _screenState.postValue(ApiCallState.Loading)
+            try {
+                val filteredList = cartRepository.searchLahangaList(searchText)
+                if (filteredList.isEmpty()) {
+                    _screenState.postValue(ApiCallState.Error("No results found for \"$searchText\""))
+                } else {
+                    _screenState.postValue(ApiCallState.Success(filteredList))
+                }
+            } catch (e: Exception) {
+                _screenState.postValue(ApiCallState.Error("Error searching articles: ${e.message}"))
+            }
+        }
+    }
 }

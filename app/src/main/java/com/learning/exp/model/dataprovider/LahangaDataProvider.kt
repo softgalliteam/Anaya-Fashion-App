@@ -10,7 +10,7 @@ object LahangaDataProvider {
     fun getLahangaList() = arrayListOf(
         LahangaResponseDataItem(
             id = 1,
-            name = "Purple Embroidered Lehenga 1",
+            name = "Purple Embroidered Lehanga 1",
             imageUrl = "https://www.papadontpreach.com/cdn/shop/files/Website-resized-kinjal-1.jpg?v=1750320811&width=823",
             price = 4000
         ),
@@ -70,37 +70,37 @@ object LahangaDataProvider {
         ),
         LahangaResponseDataItem(
             id = 12,
-            name = "Purple Embroidered Lehenga",
+            name = "Purple Embroidered Lehanga 11",
             imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
             price = 4000
         ),
         LahangaResponseDataItem(
             id = 13,
-            name = "Purple Embroidered Lehenga",
+            name = "Purple Embroidered Sherwani 12",
             imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
             price = 4000
         ),
         LahangaResponseDataItem(
             id = 14,
-            name = "Purple Embroidered Lehenga",
+            name = "Purple Embroidered Suite",
             imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
             price = 4000
         ),
         LahangaResponseDataItem(
             id = 15,
-            name = "Purple Embroidered Lehenga",
+            name = "Purple Embroidered Suite 1",
             imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
             price = 4000
         ),
         LahangaResponseDataItem(
             id = 16,
-            name = "Purple Embroidered Lehenga",
+            name = "Purple Embroidered Sherwani 13",
             imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
             price = 4000
         ),
         LahangaResponseDataItem(
             id = 17,
-            name = "Purple Embroidered Lehenga",
+            name = "Purple Embroidered Paint",
             imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
             price = 4000
         ),

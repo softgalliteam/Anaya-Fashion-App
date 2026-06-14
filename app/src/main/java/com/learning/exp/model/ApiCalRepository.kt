@@ -46,6 +46,12 @@ class ApiCalRepository(
         return LahangaDataProvider.getLahangaList()
     }
 
+    suspend fun searchLahangaList(searchText: String): ArrayList<LahangaResponseDataItem> {
+        // Use Local Room DB Here
+
+        return LahangaDataProvider.searchProduct(searchText)
+    }
+
     // Local DB Room
     suspend fun getLahangaDetails(id: Int): LahangaDetails? {
         // Use Local Room DB Here
