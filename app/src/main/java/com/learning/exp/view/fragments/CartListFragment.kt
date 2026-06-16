@@ -79,7 +79,12 @@ class CartListFragment : Fragment() {
                     LahangaDetailsActivity::class.java
                 ).putExtra("id", it)
             )
-        })
+        },
+            { item ->
+                // Yahan Room DB delete call aayegi
+                apiCallViewModel.deleteFromCart(item)
+            }
+        )
         // Setting the Adapter with the recyclerview
         computerRV.adapter = adapter
 

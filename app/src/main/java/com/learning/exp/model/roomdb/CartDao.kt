@@ -29,4 +29,5 @@ interface CartDao {
     @Delete
     suspend fun deleteFromWish(cartItem: LahangaDetails)
 
+
 }

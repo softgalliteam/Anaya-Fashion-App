@@ -37,6 +37,7 @@ class CartActivity : AppCompatActivity() {
         }
         binding.cartRecycler.adapter = adapter
         calculateTotal(cartList)
+
     }
 
     private fun calculateTotal(list: List<LahangaDetails>) {

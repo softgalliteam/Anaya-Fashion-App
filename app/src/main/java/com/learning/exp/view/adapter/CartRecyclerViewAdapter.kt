@@ -14,7 +14,8 @@ import com.squareup.picasso.Picasso
 
 class CartRecyclerViewAdapter(
     private val list: ArrayList<LahangaDetails>,
-    private val onClickListener: (Int) -> Unit
+    private val onClickListener: (Int) -> Unit,
+    private val onDeleteClick: (LahangaDetails) -> Unit
 
 ) : RecyclerView.Adapter<CartRecyclerViewAdapter.ViewHolder>() {
 
@@ -57,7 +58,27 @@ class CartRecyclerViewAdapter(
         holder.compIamge.setOnClickListener {
             onClickListener(lahanga.id)
         }
+
+        holder.delete.setOnClickListener {
+
+            val currentPosition = holder.adapterPosition
+
+            if (currentPosition != RecyclerView.NO_POSITION) {
+
+                val item = list[currentPosition]
+
+                onDeleteClick(item)
+
+                list.removeAt(currentPosition)
+                notifyItemRemoved(currentPosition)
+                notifyItemRangeChanged(currentPosition, list.size)
+            }
+        }
+
+
     }
+
+
 
 
     // return the number of the items in the list
@@ -72,6 +93,7 @@ class CartRecyclerViewAdapter(
         val priceTv = itemView.findViewById<TextView>(R.id.priceTv)
         val actualPriceTv = itemView.findViewById<TextView>(R.id.actualPriceTv)
         val discountTv = itemView.findViewById<TextView>(R.id.discountTv)
+        val delete = itemView.findViewById<TextView>(R.id.deleteTv)
     }
 
     @SuppressLint("NotifyDataSetChanged")

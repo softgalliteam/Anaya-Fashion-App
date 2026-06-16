@@ -10,4 +10,5 @@ class DatabaseHelperImpl(private val cartDatabase: CartDatabase) : DatabaseHelpe
     override suspend fun getWishList(): List<LahangaDetails> = cartDatabase.cartDao().getWishList()
     override suspend fun addToWish(cartItem: LahangaDetails) = cartDatabase.cartDao().addToWish(cartItem)
     override suspend fun deleteFromWish(cartItem: LahangaDetails) = cartDatabase.cartDao().deleteFromWish(cartItem)
+
 }

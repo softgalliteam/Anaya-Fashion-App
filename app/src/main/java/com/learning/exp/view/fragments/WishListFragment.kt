@@ -73,14 +73,19 @@ class WishListFragment : Fragment() {
 
         mBinding.wishListRV.layoutManager = LinearLayoutManager(requireActivity())
         // Set in recycler view adapter
-        val adapter = WishRecyclerViewAdapter(arrayListOf(), {
-            startActivity(
-                Intent(
-                    requireActivity(),
-                    LahangaDetailsActivity::class.java
-                ).putExtra("id", it)
-            )
-        })
+        val adapter = WishRecyclerViewAdapter(
+            arrayListOf(),
+            {
+                startActivity(
+                    Intent(
+                        requireActivity(),
+                        LahangaDetailsActivity::class.java
+                    ).putExtra("id", it)
+                )
+            }, { item ->
+                apiCallViewModel.deleteFromWish(item)
+            }
+        )
         // Setting the Adapter with the recyclerview
         mBinding.wishListRV.adapter = adapter
 

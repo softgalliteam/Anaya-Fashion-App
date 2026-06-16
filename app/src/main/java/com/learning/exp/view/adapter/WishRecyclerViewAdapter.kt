@@ -14,7 +14,8 @@ import com.squareup.picasso.Picasso
 
 class WishRecyclerViewAdapter(
     private val list: ArrayList<LahangaDetails>,
-    private val onClickListener: (Int) -> Unit
+    private val onClickListener: (Int) -> Unit,
+    private val onDeleteClick: (LahangaDetails) -> Unit
 
 ) : RecyclerView.Adapter<WishRecyclerViewAdapter.ViewHolder>() {
 
@@ -23,7 +24,7 @@ class WishRecyclerViewAdapter(
         // inflates the card_view_design view
         // that is used to hold list item
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_wish_list, parent, false)
+            .inflate(R.layout.cart_list_item, parent, false)
 
         return ViewHolder(view)
     }
@@ -57,6 +58,18 @@ class WishRecyclerViewAdapter(
         holder.compIamge.setOnClickListener {
             onClickListener(lahanga.id)
         }
+
+        holder.delete.setOnClickListener {
+
+            val currentPosition = holder.adapterPosition
+
+            if (currentPosition != RecyclerView.NO_POSITION) {
+                list.removeAt(currentPosition)
+                notifyItemRemoved(currentPosition)
+                notifyItemRangeChanged(currentPosition, list.size)
+            }
+        }
+
     }
 
 
@@ -67,11 +80,14 @@ class WishRecyclerViewAdapter(
 
     // Holds the views for adding it to image and text
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
         val compIamge = itemView.findViewById<ImageView>(R.id.imageIv)
         val compNameTextView = itemView.findViewById<TextView>(R.id.titleTv)
         val priceTv = itemView.findViewById<TextView>(R.id.priceTv)
         val actualPriceTv = itemView.findViewById<TextView>(R.id.actualPriceTv)
         val discountTv = itemView.findViewById<TextView>(R.id.discountTv)
+
+        val delete = itemView.findViewById<TextView>(R.id.deleteTv)
     }
 
     @SuppressLint("NotifyDataSetChanged")

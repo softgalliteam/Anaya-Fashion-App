@@ -73,4 +73,18 @@ class CartAndWishListViewModel(
             }
         }
     }
+
+    fun deleteFromCart(item: LahangaDetails) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteCartListItem(item)
+        }
+    }
+
+    fun deleteFromWish(item: LahangaDetails) {
+        viewModelScope.launch(Dispatchers.IO) {
+            wishRepository.deleteWishListItem(item)
+            getWishList()
+        }
+    }
+
 }
