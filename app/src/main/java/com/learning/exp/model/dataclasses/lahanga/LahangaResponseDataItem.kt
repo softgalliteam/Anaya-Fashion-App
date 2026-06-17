@@ -8,5 +8,9 @@ data class LahangaResponseDataItem(
     @PrimaryKey val id: Int,
     val name: String,
     val imageUrl: String,
-    val price: Int
+    val price: Int,
+//    val actualPrice:Int,
+    val discount: String = "",
+    val color: String = "",
+    val colors: List<Int>
 )

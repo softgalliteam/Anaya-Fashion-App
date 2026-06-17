@@ -34,7 +34,17 @@ class LahangaRecyclerViewAdapter(
     ) {
         val lahanga = list[position]
         holder.compNameTextView.text = lahanga.name
-        holder.priceTv.text = lahanga.price.toString()
+        holder.priceTv.text = "₹ ${lahanga.price}"
+        holder.discountTv.text = lahanga.discount
+
+//        val actualPrice = 10000
+//        val sellingPrice = lahanga.price
+//        val discount = actualPrice - sellingPrice
+//        //calculate discount percentage
+//        val discountPercentage = (discount * 100) / actualPrice
+//        holder.actualPriceTv.text = "₹ $actualPrice"
+//        holder.discountTv.text = "$discountPercentage% off"
+//
 
         Picasso.get()
             .load(lahanga.imageUrl)
@@ -52,11 +62,11 @@ class LahangaRecyclerViewAdapter(
             )
         }
 
-        holder.btnViewDetails.setOnClickListener {
-            onClickListener(
-                lahanga.id
-            )
-        }
+//        holder.btnViewDetails.setOnClickListener {
+//            onClickListener(
+//                lahanga.id
+//            )
+//        }
 
         holder.favBtn.setOnClickListener {
             val isFav = holder.favBtn.tag as? Boolean ?: false
@@ -91,10 +101,14 @@ class LahangaRecyclerViewAdapter(
             R.id.priceTv
         )
 
-        val btnViewDetails =
-            itemView.findViewById<com.google.android.material.button.MaterialButton>(
-                R.id.btnViewDetails
-            )
+        val discountTv = itemView.findViewById<TextView>(R.id.discountTv)
+
+
+
+//        val btnViewDetails =
+//            itemView.findViewById<com.google.android.material.button.MaterialButton>(
+//                R.id.btnViewDetails
+//            )
 
         val favBtn = itemView.findViewById<ImageView>(
             R.id.favBtn

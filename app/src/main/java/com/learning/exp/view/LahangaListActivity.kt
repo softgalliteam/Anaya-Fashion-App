@@ -16,6 +16,7 @@ import com.learning.exp.view.adapter.LahangaRecyclerViewAdapter
 import com.learning.exp.viewmodel.ApiCallState
 import com.learning.exp.viewmodel.ApiCallViewModel
 
+
 class LahangaListActivity : AppCompatActivity() {
 
     companion object {
@@ -31,9 +32,24 @@ class LahangaListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         mBinding = LahangaListActivityBinding.inflate(layoutInflater)
-
         setContentView(mBinding.root)
 
+
+//        mBinding.cartIcon.setOnClickListener {
+//
+//            startActivity(
+//                Intent(
+//                    this@LahangaListActivity,
+//                    CartActvity::class
+//                )
+//            )
+//
+//        }
+
+          // arrow clicklistener
+        mBinding.arrow.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
         searchView = mBinding.searchView
         handleSearchList()
 
@@ -100,6 +116,8 @@ class LahangaListActivity : AppCompatActivity() {
             }
         }
     }
+
+
 
     private fun handleSearchList() {
         // Set up the text change and submission listeners

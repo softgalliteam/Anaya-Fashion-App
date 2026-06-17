@@ -20,6 +20,7 @@ class CartActivity : AppCompatActivity() {
         binding = ItemCartBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         binding.checkoutBtn.setOnClickListener {
             binding.cartCard.visibility = View.GONE
         }

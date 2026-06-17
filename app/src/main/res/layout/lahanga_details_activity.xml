@@ -23,12 +23,13 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="350dp">
+                android:layout_height="400dp">
 
                 <com.denzcoskun.imageslider.ImageSlider
                     android:id="@+id/imageSlider"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
                     app:iss_auto_cycle="false" />
 
                 <ImageView
@@ -49,6 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:background="@color/white"
                 android:padding="16dp">
 
                 <!-- BRAND -->
@@ -58,7 +60,7 @@
                     android:layout_height="wrap_content"
                     android:text="ANAYA FASHION"
                     android:textColor="#6C4AB6"
-                    android:textSize="14sp"
+                    android:textSize="10sp"
                     android:textStyle="bold" />
 
                 <!-- PRODUCT NAME -->
@@ -67,10 +69,10 @@
                     android:id="@+id/titleTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="0dp"
                     android:text="Premium Designer Lehanga"
                     android:textColor="#111111"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <!-- RATING -->
@@ -78,11 +80,12 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:background="@color/white"
+                    android:layout_marginTop="1dp"
                     app:cardCornerRadius="12dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="8dp"
                         android:text="⭐ 4.8 | 125 Reviews"
@@ -96,10 +99,10 @@
                     android:id="@+id/priceTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="2dp"
                     android:text="₹2,500"
                     android:textColor="#6C4AB6"
-                    android:textSize="28sp"
+                    android:textSize="19sp"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -130,7 +133,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="1dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
 
@@ -142,6 +145,7 @@
                         android:layout_height="wrap_content"
                         android:text="Available Sizes"
                         android:textSize="16sp"
+                        android:textColor="@color/black"
                         android:textStyle="bold"
 
                         />
@@ -152,6 +156,7 @@
                         android:layout_marginStart="20dp"
                         android:background="@drawable/size_bg"
                         android:padding="8dp"
+                        android:textColor="@color/black"
                         android:text="32" />
 
                     <TextView
@@ -160,6 +165,7 @@
                         android:layout_marginStart="8dp"
                         android:background="@drawable/size_bg"
                         android:padding="8dp"
+                        android:textColor="@color/black"
                         android:text="34" />
 
                     <TextView
@@ -168,6 +174,7 @@
                         android:layout_marginStart="8dp"
                         android:background="@drawable/size_bg"
                         android:padding="8dp"
+                        android:textColor="@color/black"
                         android:text="36" />
 
                     <TextView
@@ -176,6 +183,7 @@
                         android:layout_marginStart="8dp"
                         android:background="@drawable/size_bg"
                         android:padding="8dp"
+                        android:textColor="@color/black"
                         android:text="38" />
 
                 </LinearLayout>
@@ -194,6 +202,7 @@
                         android:layout_height="wrap_content"
                         android:text="Available Colors"
                         android:textSize="16sp"
+                        android:textColor="@color/black"
                         android:textStyle="bold" />
 
                     <View
@@ -233,23 +242,27 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+                        android:background="@color/blue"
                         android:padding="16dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:text="🚚 Free Delivery" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
+                            android:textColor="@color/black"
                             android:text="↩ Easy Returns" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
+                            android:textColor="@color/black"
                             android:text="💳 Cash On Delivery Available" />
 
                     </LinearLayout>
@@ -261,29 +274,34 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="18dp"
                     android:text="Highlights"
                     android:textSize="18sp"
+                    android:textColor="@color/black"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:text="• Premium Fabric" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:text="• Embroidered Design" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:text="• Wedding Collection" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:text="• Lightweight Material" />
 
                 <!-- DETAILS -->
@@ -291,7 +309,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="18dp"
+                    android:textColor="@color/black"
                     android:text="Details"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -310,7 +329,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="18dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -318,6 +337,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textColor="@color/black"
                         android:text="Similar Products"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -349,12 +369,14 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:background="@color/white"
                             android:orientation="vertical">
 
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:adjustViewBounds="true"
+                                android:background="@color/white"
                                 android:scaleType="fitCenter"
                                 android:src="@drawable/image_first" />
 
@@ -362,13 +384,16 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="8dp"
+                                android:background="@color/white"
                                 android:text="Premium Lehanga"
+                                android:textColor="@color/black"
                                 android:textStyle="bold" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingStart="8dp"
+                                android:background="@color/white"
                                 android:paddingBottom="8dp"
                                 android:text="₹4,999"
                                 android:textColor="#6A5AE0" />
@@ -389,6 +414,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:background="@color/white"
                             android:orientation="vertical">
 
                             <ImageView
@@ -403,6 +429,7 @@
                                 android:layout_height="wrap_content"
                                 android:padding="8dp"
                                 android:text="Designer Lehanga"
+                                android:textColor="@color/black"
                                 android:textStyle="bold" />
 
                             <TextView

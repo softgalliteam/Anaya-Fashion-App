@@ -8,26 +8,16 @@ import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
-import com.learning.exp.R
 import com.learning.exp.databinding.FragmentCartListBinding
-import com.learning.exp.databinding.HomeFragmentBinding
-import com.learning.exp.model.ApiCalRepository
 import com.learning.exp.model.dataclasses.lahanga.LahangaDetails
-import com.learning.exp.model.roomdb.DatabaseBuilder
-import com.learning.exp.model.roomdb.DatabaseHelper
-import com.learning.exp.model.roomdb.DatabaseHelperImpl
 import com.learning.exp.view.BuyActivity
 import com.learning.exp.view.LahangaDetailsActivity
 import com.learning.exp.view.LahangaListActivity.Companion.TAG
 import com.learning.exp.view.adapter.CartRecyclerViewAdapter
-import com.learning.exp.view.adapter.LahangaRecyclerViewAdapter
-import com.learning.exp.viewmodel.ApiCallState
 import com.learning.exp.viewmodel.CartAndWishListViewModel
 import com.learning.exp.viewmodel.Status
 import kotlin.getValue
@@ -81,7 +71,6 @@ class CartListFragment : Fragment() {
             )
         },
             { item ->
-                // Yahan Room DB delete call aayegi
                 apiCallViewModel.deleteFromCart(item)
             }
         )

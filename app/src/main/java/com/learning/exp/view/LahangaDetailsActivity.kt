@@ -18,6 +18,7 @@ import com.learning.exp.model.roomdb.DatabaseHelper
 import com.learning.exp.model.roomdb.DatabaseHelperImpl
 import com.learning.exp.viewmodel.ApiCallViewModel
 import com.learning.exp.viewmodel.DetailsApiCallState
+import com.google.android.ads.mediationtestsuite.activities.HomeActivity
 
 class LahangaDetailsActivity : AppCompatActivity() {
     companion object {
@@ -94,6 +95,7 @@ class LahangaDetailsActivity : AppCompatActivity() {
         mBinding.addCartBtn.setOnClickListener {
             apiCallViewModel.addToCart()
         }
+
 
         mBinding.wishListBtn.setOnClickListener {
             apiCallViewModel.addToWish()
