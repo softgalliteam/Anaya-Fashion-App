@@ -1,5 +1,6 @@
 package com.learning.exp.model.roomdb
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -28,6 +29,8 @@ interface CartDao {
 
     @Delete
     suspend fun deleteFromWish(cartItem: LahangaDetails)
+
+
 
 
 }

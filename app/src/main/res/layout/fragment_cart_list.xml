@@ -11,8 +11,8 @@
     <!--List of data-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/computerRV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/buyNowBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

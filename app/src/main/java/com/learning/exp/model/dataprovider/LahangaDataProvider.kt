@@ -18,7 +18,7 @@ object LahangaDataProvider {
             id = 2,
             name = "Purple Embroidered Lehenga 2",
             imageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpl2oVGj-WU14UHxKPxkM2KAj3g6cB55uO3Q&s",
-            price = 4000
+            price = 8000
         ),
         LahangaResponseDataItem(
             id = 3,
@@ -143,7 +143,7 @@ object LahangaDataProvider {
                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXyeP2j4b0nlOl9HUDm-_N-eje_KH88-a1Lg&s",
                     "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg"
                 ),
-                price = 5000
+                price = 8000
             )
 
             3 -> LahangaDetails(

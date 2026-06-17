@@ -46,6 +46,7 @@ class CartRecyclerViewAdapter(
         holder.priceTv.text = "₹ $sellingPrice"
         holder.actualPriceTv.text = "₹ $actualPrice"
         holder.discountTv.text = "$discountPercentage% off"
+        holder.saveTv.text = "You save ₹ $discount"
 
 
         Picasso.get()
@@ -88,12 +89,14 @@ class CartRecyclerViewAdapter(
 
     // Holds the views for adding it to image and text
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
         val compIamge = itemView.findViewById<ImageView>(R.id.imageIv)
         val compNameTextView = itemView.findViewById<TextView>(R.id.titleTv)
         val priceTv = itemView.findViewById<TextView>(R.id.priceTv)
         val actualPriceTv = itemView.findViewById<TextView>(R.id.actualPriceTv)
         val discountTv = itemView.findViewById<TextView>(R.id.discountTv)
         val delete = itemView.findViewById<TextView>(R.id.deleteTv)
+        val saveTv = itemView.findViewById<TextView>(R.id.save)
     }
 
     @SuppressLint("NotifyDataSetChanged")

@@ -46,6 +46,8 @@ class WishRecyclerViewAdapter(
         holder.priceTv.text = "₹ $sellingPrice"
         holder.actualPriceTv.text = "₹ $actualPrice"
         holder.discountTv.text = "$discountPercentage% off"
+        holder.saveTv.text = "You save ₹ $discount"
+
 
 
         Picasso.get()
@@ -64,9 +66,13 @@ class WishRecyclerViewAdapter(
             val currentPosition = holder.adapterPosition
 
             if (currentPosition != RecyclerView.NO_POSITION) {
+
+                val item = list[currentPosition]
+
+                onDeleteClick(item) // Database se delete karega
+
                 list.removeAt(currentPosition)
                 notifyItemRemoved(currentPosition)
-                notifyItemRangeChanged(currentPosition, list.size)
             }
         }
 
@@ -86,14 +92,15 @@ class WishRecyclerViewAdapter(
         val priceTv = itemView.findViewById<TextView>(R.id.priceTv)
         val actualPriceTv = itemView.findViewById<TextView>(R.id.actualPriceTv)
         val discountTv = itemView.findViewById<TextView>(R.id.discountTv)
-
         val delete = itemView.findViewById<TextView>(R.id.deleteTv)
+        val saveTv = itemView.findViewById<TextView>(R.id.save)
+
     }
 
     @SuppressLint("NotifyDataSetChanged")
     fun updateData(newList: List<LahangaDetails>) {
         list.clear()
-        list.addAll(newList)
+        list.addAll(newList.reversed()) // latest item top par
         notifyDataSetChanged()
     }
 }

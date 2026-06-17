@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:background="@color/white"
         android:padding="10dp">
 
         <!-- Product Image -->
@@ -39,7 +40,7 @@
             <!-- Product Name -->
             <TextView
                 android:id="@+id/titleTv"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:maxLines="2"
@@ -89,11 +90,11 @@
 
             <!-- Save Amount -->
             <TextView
+                android:id="@+id/save"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:text="You save ₹5000"
-
                 android:textColor="#00A651"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -122,7 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:layout_marginStart="140dp"
+                android:layout_gravity="end"
                 android:orientation="horizontal">
 
                 <TextView
@@ -136,7 +137,8 @@
                     android:drawableStart="@drawable/delete2_cart_item"
                     android:drawablePadding="1dp"
                     android:gravity="center"
-                    android:text="Remove" />
+                    android:text="Remove"
+                    android:textColor="@color/black"/>
 
 
             </LinearLayout>
