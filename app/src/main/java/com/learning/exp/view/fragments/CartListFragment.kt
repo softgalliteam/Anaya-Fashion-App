@@ -16,18 +16,18 @@ import com.learning.exp.databinding.FragmentCartListBinding
 import com.learning.exp.model.dataclasses.lahanga.LahangaDetails
 import com.learning.exp.view.BuyActivity
 import com.learning.exp.view.LahangaDetailsActivity
-import com.learning.exp.view.LahangaListActivity.Companion.TAG
 import com.learning.exp.view.adapter.CartRecyclerViewAdapter
 import com.learning.exp.viewmodel.CartAndWishListViewModel
 import com.learning.exp.viewmodel.Status
-import kotlin.getValue
 
 class CartListFragment : Fragment() {
 
-    val apiCallViewModel: CartAndWishListViewModel by viewModels()
+    private val apiCallViewModel: CartAndWishListViewModel by viewModels()
 
     private var _binding: FragmentCartListBinding? = null
-    private val mBinding get() = _binding!!
+    private val binding get() = _binding!!
+
+    private lateinit var adapter: CartRecyclerViewAdapter
     private var cartList: List<LahangaDetails> = emptyList()
 
     override fun onCreateView(
@@ -36,94 +36,110 @@ class CartListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCartListBinding.inflate(inflater, container, false)
-        return mBinding.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupRecyclerView()
+        setupBuyButton()
+
         apiCallViewModel.getCartList()
 
+        observeCartState()
+    }
 
-        mBinding.buyNowBtn.setOnClickListener {
-            var productIds = ""
-            cartList.forEach {
-                productIds += "${it.id}," // "1,2,3,"
-            }
-            startActivity(
-                Intent(requireActivity(), BuyActivity::class.java)
-                    .putExtra(
-                        "id",
-                        productIds
-                    )
-            )
-        }
+    // ---------------- RecyclerView Setup ----------------
+    private fun setupRecyclerView() {
+        binding.computerRV.layoutManager =
+            LinearLayoutManager(requireActivity())
 
-        val computerRV = mBinding.computerRV
-        computerRV.layoutManager = LinearLayoutManager(requireActivity())
-        // Set in recycler view adapter
-        val adapter = CartRecyclerViewAdapter(arrayListOf(), {
-            startActivity(
-                Intent(
-                    requireActivity(),
-                    LahangaDetailsActivity::class.java
-                ).putExtra("id", it)
-            )
-        },
-            { item ->
+        adapter = CartRecyclerViewAdapter(
+            arrayListOf(),
+
+            onItemClick = { id ->
+                startActivity(
+                    Intent(requireActivity(), LahangaDetailsActivity::class.java)
+                        .putExtra("id", id)
+                )
+            },
+
+            onDeleteClick = { item ->
                 apiCallViewModel.deleteFromCart(item)
             }
         )
-        // Setting the Adapter with the recyclerview
-        computerRV.adapter = adapter
 
+        binding.computerRV.adapter = adapter
+    }
+
+    // ---------------- Buy Button ----------------
+    private fun setupBuyButton() {
+        binding.buyNowBtn.setOnClickListener {
+            var productIds = ""
+
+            cartList.forEach {
+                productIds += "${it.id},"
+            }
+
+            startActivity(
+                Intent(requireActivity(), BuyActivity::class.java)
+                    .putExtra("id", productIds)
+            )
+        }
+    }
+
+    // ---------------- API Observer ----------------
+    private fun observeCartState() {
         apiCallViewModel.cartState.observe(viewLifecycleOwner) { state ->
+
             when (state) {
+
                 is Status.Loading -> {
-                    // Show loading indicator
-                    mBinding.loaderLl.visibility = VISIBLE
-                    mBinding.errorTv.visibility = INVISIBLE
-                    mBinding.buyNowBtn.visibility = INVISIBLE
-                    Snackbar.make(mBinding.root, "Loading...", Snackbar.LENGTH_LONG).show()
+                    binding.loaderLl.visibility = VISIBLE
+                    binding.errorTv.visibility = INVISIBLE
+                    binding.buyNowBtn.visibility = INVISIBLE
+
+                    Snackbar.make(binding.root, "Loading...", Snackbar.LENGTH_SHORT).show()
                 }
 
                 is Status.Success -> {
+                    binding.loaderLl.visibility = INVISIBLE
+                    binding.errorTv.visibility = INVISIBLE
+                    binding.buyNowBtn.visibility = VISIBLE
 
-                    mBinding.loaderLl.visibility = INVISIBLE
-                    mBinding.errorTv.visibility = INVISIBLE
-                    mBinding.buyNowBtn.visibility = VISIBLE
-                    // Update UI with the list of computers
                     cartList = state.cartList
 
-                    Log.d(TAG, "Received cart list: $cartList")
-                    Snackbar.make(mBinding.root, "Success", Snackbar.LENGTH_LONG).show()
+                    Log.d("CART", "Cart List: $cartList")
 
-                    // For example, you can set the articles to a RecyclerView adapter here
                     adapter.updateData(cartList)
                 }
 
                 is Status.Error -> {
-                    // Show error message
-                    val errorMessage = state.message
-                    mBinding.errorTv.text = errorMessage
-                    mBinding.loaderLl.visibility = INVISIBLE
-                    mBinding.buyNowBtn.visibility = INVISIBLE
-                    mBinding.errorTv.visibility = VISIBLE
-                    // For example, you can show a Toast or a Snackbar with the error message
-                    Snackbar.make(mBinding.root, errorMessage, Snackbar.LENGTH_LONG).show()
+                    binding.loaderLl.visibility = INVISIBLE
+                    binding.buyNowBtn.visibility = INVISIBLE
+                    binding.errorTv.visibility = VISIBLE
+
+                    binding.errorTv.text = state.message
+
+                    Snackbar.make(binding.root, state.message, Snackbar.LENGTH_LONG).show()
                 }
 
                 else -> {
-                    // Show error message
-                    val errorMessage = "Something went wrong"
-                    mBinding.errorTv.text = errorMessage
-                    mBinding.loaderLl.visibility = INVISIBLE
-                    mBinding.buyNowBtn.visibility = INVISIBLE
-                    mBinding.errorTv.visibility = VISIBLE
-                    // For example, you can show a Toast or a Snackbar with the error message
-                    Snackbar.make(mBinding.root, errorMessage, Snackbar.LENGTH_LONG).show()
+                    binding.loaderLl.visibility = INVISIBLE
+                    binding.buyNowBtn.visibility = INVISIBLE
+                    binding.errorTv.visibility = VISIBLE
+
+                    binding.errorTv.text = "Something went wrong"
+
+                    Snackbar.make(binding.root, "Something went wrong", Snackbar.LENGTH_LONG).show()
                 }
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -11,7 +11,8 @@ import com.learning.exp.model.dataclasses.lahanga.WishlistEntity
 
 
 @Database(
-    entities = [WishlistEntity::class, LahangaDetails::class], version = 1
+    entities = [WishlistEntity::class, LahangaDetails::class],
+    version = 3
 )
 @TypeConverters(Converters::class)
 abstract class CartDatabase : RoomDatabase() {

@@ -1,7 +1,6 @@
 package com.learning.exp.view.adapter
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,74 +12,59 @@ import com.learning.exp.model.dataclasses.lahanga.LahangaDetails
 import com.squareup.picasso.Picasso
 
 class CartRecyclerViewAdapter(
-    private val list: ArrayList<LahangaDetails>,
-    private val onClickListener: (Int) -> Unit,
-    private val onDeleteClickListener: (LahangaDetails) -> Unit
-
+    private var list: ArrayList<LahangaDetails>,
+    private val onItemClick: (Int) -> Unit,
+    private val onDeleteClick: (LahangaDetails) -> Unit
 ) : RecyclerView.Adapter<CartRecyclerViewAdapter.ViewHolder>() {
 
-    // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        // inflates the card_view_design view
-        // that is used to hold list item
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.cart_list_item, parent, false)
-
         return ViewHolder(view)
     }
 
-    // binds the list items to a view
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val lahanga = list[position]
+        val item = list[position]
 
         val actualPrice = 10000
-        val sellingPrice = lahanga.price
+        val sellingPrice = item.price
         val discount = actualPrice - sellingPrice
-        //calculate discount percentage
         val discountPercentage = (discount * 100) / actualPrice
 
-        Log.d("IMG_CHECK", "Image URL = ${lahanga.imageUrl}")
-        holder.compNameTextView?.text = lahanga.name
+        holder.compNameTextView.text = item.name
         holder.priceTv.text = "₹ $sellingPrice"
         holder.actualPriceTv.text = "₹ $actualPrice"
         holder.discountTv.text = "$discountPercentage% off"
 
-
         Picasso.get()
-            .load(lahanga.imageUrl)
+            .load(item.imageUrl)
             .placeholder(R.drawable.loading_spinner)
             .error(R.drawable.transparent_logo)
-            .into(holder.compIamge)
+            .into(holder.compImage)
 
-
-        holder.compIamge.setOnClickListener {
-            onClickListener(lahanga.id)
+        // Item click (open details)
+        holder.compImage.setOnClickListener {
+            onItemClick(item.id)
         }
 
+        // Delete click (ONLY callback)
         holder.deleteTv.setOnClickListener {
-            onDeleteClickListener(lahanga)
+            onDeleteClick(item)
         }
     }
 
+    override fun getItemCount(): Int = list.size
 
-
-
-    // return the number of the items in the list
-    override fun getItemCount(): Int {
-        return list.size
-    }
-
-    // Holds the views for adding it to image and text
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val compIamge = itemView.findViewById<ImageView>(R.id.imageIv)
-        val compNameTextView = itemView.findViewById<TextView>(R.id.titleTv)
-        val priceTv = itemView.findViewById<TextView>(R.id.priceTv)
-        val actualPriceTv = itemView.findViewById<TextView>(R.id.actualPriceTv)
-        val discountTv = itemView.findViewById<TextView>(R.id.discountTv)
-        val deleteTv = itemView.findViewById<TextView>(R.id.deleteTv)
 
+        val compImage: ImageView = view.findViewById(R.id.imageIv)
+        val compNameTextView: TextView = view.findViewById(R.id.titleTv)
+        val priceTv: TextView = view.findViewById(R.id.priceTv)
+        val actualPriceTv: TextView = view.findViewById(R.id.actualPriceTv)
+        val discountTv: TextView = view.findViewById(R.id.discountTv)
+        val deleteTv: TextView = view.findViewById(R.id.deleteTv)
     }
 
     @SuppressLint("NotifyDataSetChanged")

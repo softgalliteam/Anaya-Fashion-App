@@ -19,7 +19,9 @@ object DatabaseBuilder {
             context.applicationContext,
             CartDatabase::class.java,
             "anaya_cart_db"
-        ).build()
+        )
+            .fallbackToDestructiveMigration()
+            .build()
 
 
     private var WISH_INSTANCE: CartDatabase? = null

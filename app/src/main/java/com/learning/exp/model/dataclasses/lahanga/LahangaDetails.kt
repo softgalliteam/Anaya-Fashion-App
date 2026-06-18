@@ -12,7 +12,7 @@ data class LahangaDetails(
     var imageUrl: String = "",
     var imageList: List<String> = emptyList(),
     var price: Int = 0,
-//    var actualPrice: Int = 0,
+    var actualPrice: Int = 0,
     var discount: Int = 0,
 
     @Ignore
