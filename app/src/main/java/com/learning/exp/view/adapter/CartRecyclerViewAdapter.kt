@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso
 class CartRecyclerViewAdapter(
     private var list: ArrayList<LahangaDetails>,
     private val onItemClick: (Int) -> Unit,
-    private val onDeleteClick: (LahangaDetails) -> Unit
+    private val onDeleteClickListener: (LahangaDetails) -> Unit
 ) : RecyclerView.Adapter<CartRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -44,14 +44,30 @@ class CartRecyclerViewAdapter(
             .error(R.drawable.transparent_logo)
             .into(holder.compImage)
 
-        // Item click (open details)
         holder.compImage.setOnClickListener {
             onItemClick(item.id)
         }
 
-        // Delete click (ONLY callback)
         holder.deleteTv.setOnClickListener {
-            onDeleteClick(item)
+
+            val adapterPosition = holder.bindingAdapterPosition
+
+            if (adapterPosition != RecyclerView.NO_POSITION) {
+
+                val deletedItem = list[adapterPosition]
+
+                // API callback
+                onDeleteClickListener(deletedItem)
+
+                // RecyclerView se turant remove
+                list.removeAt(adapterPosition)
+
+                notifyItemRemoved(adapterPosition)
+                notifyItemRangeChanged(
+                    adapterPosition,
+                    list.size
+                )
+            }
         }
     }
 

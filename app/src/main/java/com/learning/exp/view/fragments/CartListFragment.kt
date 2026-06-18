@@ -46,16 +46,16 @@ class CartListFragment : Fragment() {
         setupBuyButton()
 
         apiCallViewModel.getCartList()
-
         observeCartState()
     }
 
-    // ---------------- RecyclerView Setup ----------------
     private fun setupRecyclerView() {
+
         binding.computerRV.layoutManager =
-            LinearLayoutManager(requireActivity())
+            LinearLayoutManager(requireContext())
 
         adapter = CartRecyclerViewAdapter(
+
             arrayListOf(),
 
             onItemClick = { id ->
@@ -65,22 +65,30 @@ class CartListFragment : Fragment() {
                 )
             },
 
-            onDeleteClick = { item ->
+            onDeleteClickListener = { item ->
+
+                // Delete API Call
                 apiCallViewModel.deleteFromCart(item)
+
+                // Fresh Cart List Load
+                apiCallViewModel.getCartList()
+
+                Snackbar.make(
+                    binding.root,
+                    "Item removed from cart",
+                    Snackbar.LENGTH_SHORT
+                ).show()
             }
         )
 
         binding.computerRV.adapter = adapter
     }
 
-    // ---------------- Buy Button ----------------
     private fun setupBuyButton() {
-        binding.buyNowBtn.setOnClickListener {
-            var productIds = ""
 
-            cartList.forEach {
-                productIds += "${it.id},"
-            }
+        binding.buyNowBtn.setOnClickListener {
+
+            val productIds = cartList.joinToString(",") { it.id.toString() }
 
             startActivity(
                 Intent(requireActivity(), BuyActivity::class.java)
@@ -89,26 +97,33 @@ class CartListFragment : Fragment() {
         }
     }
 
-    // ---------------- API Observer ----------------
     private fun observeCartState() {
+
         apiCallViewModel.cartState.observe(viewLifecycleOwner) { state ->
 
             when (state) {
 
                 is Status.Loading -> {
+
                     binding.loaderLl.visibility = VISIBLE
                     binding.errorTv.visibility = INVISIBLE
-                    binding.buyNowBtn.visibility = INVISIBLE
 
-                    Snackbar.make(binding.root, "Loading...", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(
+                        binding.root,
+                        "Loading...",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                 }
 
                 is Status.Success -> {
+
                     binding.loaderLl.visibility = INVISIBLE
                     binding.errorTv.visibility = INVISIBLE
-                    binding.buyNowBtn.visibility = VISIBLE
 
                     cartList = state.cartList
+
+                    binding.buyNowBtn.visibility =
+                        if (cartList.isEmpty()) INVISIBLE else VISIBLE
 
                     Log.d("CART", "Cart List: $cartList")
 
@@ -116,23 +131,25 @@ class CartListFragment : Fragment() {
                 }
 
                 is Status.Error -> {
+
                     binding.loaderLl.visibility = INVISIBLE
                     binding.buyNowBtn.visibility = INVISIBLE
                     binding.errorTv.visibility = VISIBLE
-
                     binding.errorTv.text = state.message
 
-                    Snackbar.make(binding.root, state.message, Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(
+                        binding.root,
+                        state.message,
+                        Snackbar.LENGTH_LONG
+                    ).show()
                 }
 
                 else -> {
+
                     binding.loaderLl.visibility = INVISIBLE
                     binding.buyNowBtn.visibility = INVISIBLE
                     binding.errorTv.visibility = VISIBLE
-
                     binding.errorTv.text = "Something went wrong"
-
-                    Snackbar.make(binding.root, "Something went wrong", Snackbar.LENGTH_LONG).show()
                 }
             }
         }

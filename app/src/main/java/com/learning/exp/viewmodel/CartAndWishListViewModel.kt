@@ -9,7 +9,6 @@ import com.learning.exp.model.ApiCalRepository
 import com.learning.exp.model.dataclasses.lahanga.LahangaDetails
 import com.learning.exp.utils.Constants.TAG
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 sealed class Status {
@@ -20,13 +19,17 @@ sealed class Status {
     data class Error(val message: String) : Status()
 }
 
-
 class CartAndWishListViewModel(
-    private val application: Application
+    application: Application
 ) : AndroidViewModel(application) {
-    val repository by lazy { ApiCalRepository("Cart", application) }
-    val wishRepository by lazy { ApiCalRepository("Wish", application) }
 
+    private val repository by lazy {
+        ApiCalRepository("Cart", application)
+    }
+
+    private val wishRepository by lazy {
+        ApiCalRepository("Wish", application)
+    }
 
     private val _cartState = MutableLiveData<Status>()
     val cartState: MutableLiveData<Status>
@@ -38,53 +41,118 @@ class CartAndWishListViewModel(
 
     fun getCartList() {
         viewModelScope.launch(Dispatchers.IO) {
+
             _cartState.postValue(Status.Loading)
+
             try {
-                delay(2000) // Simulate loading delay
+
                 val cartList = repository.getCartList()
 
-                Log.d(TAG, "Response from repository: $cartList")
+                Log.d(TAG, "Cart List: $cartList")
+
                 if (cartList.isEmpty()) {
-                    _cartState.postValue(Status.Error("No data found in Room DB"))
+                    _cartState.postValue(
+                        Status.Error("Cart is empty")
+                    )
                 } else {
-                    _cartState.postValue(Status.Success(cartList))
+                    _cartState.postValue(
+                        Status.Success(cartList)
+                    )
                 }
+
             } catch (e: Exception) {
-                _cartState.postValue(Status.Error("Error fetching articles: ${e.message}"))
+
+                _cartState.postValue(
+                    Status.Error(e.message ?: "Something went wrong")
+                )
             }
         }
     }
 
     fun getWishList() {
         viewModelScope.launch(Dispatchers.IO) {
-            _wishState.postValue(Status.Loading)
-            try {
-                delay(2000) // Simulate loading delay
-                val cartList = wishRepository.getWishList()
 
-                Log.d(TAG, "Response from repository: $cartList")
-                if (cartList.isEmpty()) {
-                    _wishState.postValue(Status.Error("No data found in Room DB"))
+            _wishState.postValue(Status.Loading)
+
+            try {
+
+                val wishList = wishRepository.getWishList()
+
+                Log.d(TAG, "Wish List: $wishList")
+
+                if (wishList.isEmpty()) {
+                    _wishState.postValue(
+                        Status.Error("Wishlist is empty")
+                    )
                 } else {
-                    _wishState.postValue(Status.WishSuccess(cartList))
+                    _wishState.postValue(
+                        Status.WishSuccess(wishList)
+                    )
                 }
+
             } catch (e: Exception) {
-                _wishState.postValue(Status.Error("Error fetching articles: ${e.message}"))
+
+                _wishState.postValue(
+                    Status.Error(e.message ?: "Something went wrong")
+                )
             }
         }
     }
 
     fun deleteFromCart(item: LahangaDetails) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteCartListItem(item)
+
+            try {
+
+                repository.deleteCartListItem(item)
+
+                // Cart refresh after delete
+                val updatedList = repository.getCartList()
+
+                if (updatedList.isEmpty()) {
+                    _cartState.postValue(
+                        Status.Error("Cart no data found")
+                    )
+                } else {
+                    _cartState.postValue(
+                        Status.Success(updatedList)
+                    )
+                }
+
+            } catch (e: Exception) {
+
+                _cartState.postValue(
+                    Status.Error(e.message ?: "Delete failed")
+                )
+            }
         }
     }
 
     fun deleteFromWish(item: LahangaDetails) {
         viewModelScope.launch(Dispatchers.IO) {
-            wishRepository.deleteWishListItem(item)
-            getWishList()
+
+            try {
+
+                wishRepository.deleteWishListItem(item)
+
+                val updatedList = wishRepository.getWishList()
+
+                if (updatedList.isEmpty()) {
+                    _wishState.postValue(
+                        Status.Error("Wishlist data found ")
+                    )
+                } else {
+                    _wishState.postValue(
+                        Status.WishSuccess(updatedList)
+                    )
+                }
+
+            } catch (e: Exception) {
+
+                _wishState.postValue(
+                    Status.Error(e.message ?: "Delete failed")
+                )
+            }
         }
     }
-
 }

@@ -33,7 +33,7 @@ class CartActivity : AppCompatActivity() {
                         .putExtra("id", id)
                 )
             },
-            onDeleteClick = { item ->
+            onDeleteClickListener = { item ->
                 CartRepository.removeFromCart(item)
 
                 val updatedList = ArrayList(CartRepository.getCartItems())
