@@ -52,7 +52,7 @@ class CartAndWishListViewModel(
 
                 if (cartList.isEmpty()) {
                     _cartState.postValue(
-                        Status.Error("Cart is empty")
+                        Status.Error("Cart data no found")
                     )
                 } else {
                     _cartState.postValue(
@@ -82,7 +82,7 @@ class CartAndWishListViewModel(
 
                 if (wishList.isEmpty()) {
                     _wishState.postValue(
-                        Status.Error("Wishlist is empty")
+                        Status.Error("Wishlist data no found")
                     )
                 } else {
                     _wishState.postValue(
@@ -139,7 +139,7 @@ class CartAndWishListViewModel(
 
                 if (updatedList.isEmpty()) {
                     _wishState.postValue(
-                        Status.Error("Wishlist data found ")
+                        Status.Error("Wishlist data no found ")
                     )
                 } else {
                     _wishState.postValue(
