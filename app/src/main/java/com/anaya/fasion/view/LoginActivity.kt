@@ -2,6 +2,7 @@ package com.anaya.fasion.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.transition.Visibility
@@ -34,7 +35,9 @@ class LoginActivity : AppCompatActivity() {
 
         mBinding.sendOtpBtn.setOnClickListener {
             val phoneNumber = mBinding.phoneNumberEt.text.toString().trim()
-            sendOtp(phoneNumber)
+            sendOtp("+91 $phoneNumber")
+            // Hide keyboard after sending OTP
+             mBinding.phoneNumberEt.clearFocus()
         }
 
         mBinding.verifyOtpBtn.setOnClickListener {
@@ -54,6 +57,7 @@ class LoginActivity : AppCompatActivity() {
 
         // Triggered if there is an error (e.g., invalid phone format)
         override fun onVerificationFailed(e: FirebaseException) {
+            Log.d(TAG, "Verification Failed: ${e.message}")
             Toast.makeText(
                 this@LoginActivity,
                 "Verification Failed: ${e.message}",
@@ -69,7 +73,7 @@ class LoginActivity : AppCompatActivity() {
             // Save these tokens to verify the user-entered OTP later
             storedVerificationId = verificationId
             resendToken = token
-
+            Log.d(TAG, "OTP Sent Successfully")
             Toast.makeText(this@LoginActivity, "OTP Sent Successfully", Toast.LENGTH_SHORT).show()
             // TODO: Show your OTP input field here
         }
@@ -102,12 +106,14 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    Log.d(TAG, "Login Successful!")
                     // Login Success! Navigate to MainActivity
                     Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this, DashboardActivity::class.java))
                     finish()
                 } else {
                     // Login Failed
+                    Log.d(TAG, "Invalid OTP Code")
                     Toast.makeText(this, "Invalid OTP Code", Toast.LENGTH_SHORT).show()
                 }
             }
