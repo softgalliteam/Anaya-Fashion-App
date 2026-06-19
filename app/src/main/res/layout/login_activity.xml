@@ -26,132 +26,147 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_margin="24dp"
-
-        android:src="@drawable/logo"
+        android:src="@drawable/transparent_logo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="30dp"
-        android:src="@drawable/menu_icon"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/loginTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_50dp"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="250dp"
         android:text="@string/login"
         android:textColor="@color/black"
         android:textSize="32sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    // Add TextInputEditText for phone number input
 
-    <EditText
-        android:id="@+id/emailEt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_50dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="70dp"
-        android:drawableStart="@drawable/email_icon"
-        android:drawablePadding="10dp"
-        android:hint="@string/email"
-        android:textColor="@color/yellow"
-        android:textSize="20sp"
-        android:textColorHint="@color/yellow"
-        app:layout_constraintTop_toBottomOf="@+id/loginTv" />
-
-    <EditText
-        android:id="@+id/passwordEt"
-        android:layout_width="match_parent"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/phoneTil"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_50dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="70dp"
-        android:drawableStart="@drawable/password_icon"
-        android:drawableEnd="@drawable/password_eye_close"
-        android:drawablePadding="10dp"
-        android:textColorHint="@color/yellow"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:textColor="@color/yellow"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@+id/emailEt" />
+        android:layout_marginEnd="@dimen/margin_50dp"
+        android:outlineAmbientShadowColor="@color/yellow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginTv">
 
-    <!-- Remember Me -->
-    <CheckBox
-        android:id="@+id/remember"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/remember_me"
-        android:textColor="@color/black"
-        app:layout_constraintLeft_toLeftOf="@+id/passwordEt"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEt" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phoneNumberEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
+            android:hint="@string/enter_phone_number"
+            android:inputType="phone"
+            android:maxLength="10"
+            android:textColor="@color/yellow"
+            android:textColorHint="@color/yellow"
+            android:textSize="20sp" />
 
-    <!-- Space + Push Forgot Password to Right -->
-    <TextView
-        android:id="@+id/forgot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_16dp"
-        android:text="@string/forgot_password"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/remember"
-        app:layout_constraintEnd_toEndOf="@+id/passwordEt"
-        app:layout_constraintTop_toTopOf="@+id/remember" />
+    </com.google.android.material.textfield.TextInputLayout>
 
+    <!--Send OTP-->
     <Button
-        android:id="@+id/loginBtn"
+        android:id="@+id/sendOtpBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16dp"
         android:backgroundTint="@color/yellow"
-        android:text="@string/login"
+        android:text="@string/send_otp"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/forgot"
-        app:layout_constraintStart_toStartOf="@id/remember"
-        app:layout_constraintTop_toBottomOf="@+id/remember" />
+        app:layout_constraintEnd_toEndOf="@id/phoneTil"
+        app:layout_constraintStart_toStartOf="@id/phoneTil"
+        app:layout_constraintTop_toBottomOf="@+id/phoneTil" />
 
-    <LinearLayout
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/verifyOtpTil"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="@dimen/margin_16dp"
-        android:orientation="horizontal"
-        app:layout_constraintLeft_toLeftOf="@+id/loginBtn"
-        app:layout_constraintRight_toRightOf="@+id/loginBtn"
-        app:layout_constraintStart_toStartOf="@+id/loginBtn"
-        app:layout_constraintEnd_toEndOf="@+id/loginBtn"
-        app:layout_constraintTop_toBottomOf="@id/loginBtn">
+        android:layout_marginTop="16dp"
+        android:outlineAmbientShadowColor="@color/yellow"
+        app:layout_constraintEnd_toEndOf="@id/sendOtpBtn"
+        app:layout_constraintStart_toStartOf="@id/sendOtpBtn"
+        app:layout_constraintTop_toBottomOf="@+id/sendOtpBtn">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/verifyOtpEt"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="0dp"
-            android:text="Don't have an account?"
-            android:textColor="@color/black"
-            android:textSize="15dp"
-            tools:ignore="HardcodedText,SpUsage" />
-
-        <TextView
-            android:id="@+id/signup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_16dp"
-            android:text="Sign Up"
+            android:drawablePadding="10dp"
+            android:hint="@string/enter_otp"
+            android:inputType="phone"
+            android:maxLength="6"
             android:textColor="@color/yellow"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            tools:ignore="HardcodedText" />
-    </LinearLayout>
+            android:textColorHint="@color/yellow"
+            android:textSize="20sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/verifyOtpBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:backgroundTint="@color/yellow"
+        android:text="@string/verify_otp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/verifyOtpTil"
+        app:layout_constraintStart_toStartOf="@id/verifyOtpTil"
+        app:layout_constraintTop_toBottomOf="@+id/verifyOtpTil" />
+
+    <!-- <EditText
+         android:id="@+id/emailEt"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginStart="@dimen/margin_50dp"
+         android:layout_marginTop="50dp"
+         android:layout_marginEnd="70dp"
+         android:drawableStart="@drawable/email_icon"
+         android:drawablePadding="10dp"
+         android:hint="@string/email"
+         android:textColor="@color/yellow"
+         android:textSize="20sp"
+         android:textColorHint="@color/yellow"
+         app:layout_constraintTop_toBottomOf="@+id/loginTv" />
+
+     <EditText
+         android:id="@+id/passwordEt"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginStart="@dimen/margin_50dp"
+         android:layout_marginTop="16dp"
+         android:layout_marginEnd="70dp"
+         android:drawableStart="@drawable/password_icon"
+         android:drawableEnd="@drawable/password_eye_close"
+         android:drawablePadding="10dp"
+         android:textColorHint="@color/yellow"
+         android:hint="@string/password"
+         android:inputType="textPassword"
+         android:textColor="@color/yellow"
+         android:textSize="20sp"
+         app:layout_constraintTop_toBottomOf="@+id/emailEt" />
+
+     <Button
+         android:id="@+id/loginBtn"
+         android:layout_width="0dp"
+         android:layout_height="wrap_content"
+         android:backgroundTint="@color/yellow"
+         android:text="@string/login"
+         android:textColor="@color/black"
+         android:textSize="20sp"
+         android:textStyle="bold"
+         app:layout_constraintEnd_toEndOf="@id/forgot"
+         app:layout_constraintStart_toStartOf="@id/remember"
+         app:layout_constraintTop_toBottomOf="@+id/remember" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

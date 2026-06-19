@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1030712514687",
+    "project_id": "anaya-fashion",
+    "storage_bucket": "anaya-fashion.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1030712514687:android:978a656c8c165d4759074a",
+        "android_client_info": {
+          "package_name": "com.anaya.fashion"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsIajz-gnyp4GTymPkhNVIhRFi4xsUQUI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

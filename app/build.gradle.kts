@@ -2,14 +2,15 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("com.google.gms.google-services")
 }
 
 android {
-    namespace = "com.learning.exp"
+    namespace = "com.anaya.fashion"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.learning.exp"
+        applicationId = "com.anaya.fashion"
         minSdk = 26
         targetSdk = 35
         versionCode = 1
@@ -31,8 +32,12 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
+    // Use the compilerOptions DSL required by newer Kotlin Gradle plugin
+    kotlin {
+        compilerOptions {
+            // set JVM target to 1.8 using the JvmTarget enum
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_1_8)
+        }
     }
     buildFeatures {
         viewBinding = true
@@ -59,10 +64,10 @@ dependencies {
     implementation("androidx.security:security-crypto:1.1.0-alpha06")
 
 
-    // Local DB Room
-    implementation("androidx.room:room-runtime:2.7.2")
-    kapt("androidx.room:room-compiler:2.7.2")
-    implementation("androidx.room:room-ktx:2.7.2")
+    // Local DB Room (bump to a newer Room that supports newer Kotlin metadata)
+    implementation("androidx.room:room-runtime:2.8.2")
+    kapt("androidx.room:room-compiler:2.8.2")
+    implementation("androidx.room:room-ktx:2.8.2")
 
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
@@ -82,4 +87,10 @@ dependencies {
     kapt("com.github.bumptech.glide:compiler:4.16.0")
     implementation("androidx.recyclerview:recyclerview:1.4.0")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
+
+    //Firebase Dependency
+    implementation(platform("com.google.firebase:firebase-bom:34.15.0"))
+    implementation("com.google.firebase:firebase-analytics")
+    // Add Firebase Authentication. noinspection LoginCredentials
+    implementation("com.google.firebase:firebase-auth")
 }
