@@ -2,196 +2,141 @@ package com.anaya.fasion.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.CountDownTimer
-import android.view.View
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.transition.Visibility
 import com.anaya.fashion.databinding.LoginActivityBinding
+import com.anaya.fasion.utils.SessionManager
 import com.google.firebase.FirebaseException
-import com.google.firebase.auth.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuth.getInstance
+import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.auth.PhoneAuthOptions
+import com.google.firebase.auth.PhoneAuthProvider
 import java.util.concurrent.TimeUnit
 
 class LoginActivity : AppCompatActivity() {
+    companion object {
+        const val TAG = "LoginActivity"
+    }
 
-    private lateinit var binding: LoginActivityBinding
     private lateinit var auth: FirebaseAuth
-
-    private var verificationId: String? = null
+    private var storedVerificationId: String? = null
     private var resendToken: PhoneAuthProvider.ForceResendingToken? = null
 
-    private var timer: CountDownTimer? = null
-
+    private lateinit var mBinding: LoginActivityBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mBinding = LoginActivityBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
 
-        binding = LoginActivityBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        // Initialize Firebase Auth
+        auth = getInstance()
 
-        auth = FirebaseAuth.getInstance()
+        mBinding.sendOtpBtn.setOnClickListener {
+            val phoneNumber = mBinding.phoneNumberEt.text.toString().trim()
+            sendOtp("+91 $phoneNumber")
+            // Hide keyboard after sending OTP
+             mBinding.phoneNumberEt.clearFocus()
+        }
 
-        showPhoneSection()
-        setupClickListeners()
+        mBinding.verifyOtpBtn.setOnClickListener {
+
+
+
+
+            val otpVerified = true
+            if(otpVerified){
+
+                val session = SessionManager(this)
+
+                session.saveLogin()
+
+
+                startActivity(
+                    Intent(
+                        this,
+                        DashboardActivity::class.java
+                    )
+                )
+
+                finish()
+
+            }
+
+        }
     }
 
-    private fun setupClickListeners() {
 
-        binding.sendOtpBtn.setOnClickListener {
-            sendOtpClicked()
+    private val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+        // Triggered if the device is instantly verified (rare but happens)
+        override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+            signInWithPhoneAuthCredential(credential)
         }
 
-        binding.verifyOtpBtn.setOnClickListener {
-            verifyOtpClicked()
+        // Triggered if there is an error (e.g., invalid phone format)
+        override fun onVerificationFailed(e: FirebaseException) {
+            Log.d(TAG, "Verification Failed: ${e.message}")
+            Toast.makeText(
+                this@LoginActivity,
+                "Verification Failed: ${e.message}",
+                Toast.LENGTH_LONG
+            ).show()
         }
 
-        binding.resendOtpBtn.setOnClickListener {
-            val phone = binding.phoneNumberEt.text.toString().trim()
-            sendOtp("+91$phone")
+        // Triggered when the SMS OTP code is successfully sent to the phone
+        override fun onCodeSent(
+            verificationId: String,
+            token: PhoneAuthProvider.ForceResendingToken
+        ) {
+            // Save these tokens to verify the user-entered OTP later
+            storedVerificationId = verificationId
+            resendToken = token
+            Log.d(TAG, "OTP Sent Successfully")
+            Toast.makeText(this@LoginActivity, "OTP Sent Successfully", Toast.LENGTH_SHORT).show()
+            // TODO: Show your OTP input field here
         }
     }
 
-    // ================= SEND OTP =================
-    private fun sendOtpClicked() {
 
-        val phone = binding.phoneNumberEt.text.toString().trim()
-
-        if (phone.isEmpty()) {
-            binding.phoneNumberEt.error = "Enter Phone Number"
-            return
-        }
-
-        if (phone.length != 10) {
-            binding.phoneNumberEt.error = "Enter Valid Phone Number"
-            return
-        }
-
-        showOtpSection()
-        sendOtp("+91$phone")
-    }
-
-    private fun sendOtp(phone: String) {
-
+    fun sendOtp(phoneNumber: String) {
         val options = PhoneAuthOptions.newBuilder(auth)
-            .setPhoneNumber(phone)
-            .setTimeout(60L, TimeUnit.SECONDS)
-            .setActivity(this)
-            .setCallbacks(callbacks)
+            .setPhoneNumber(phoneNumber)       // Phone number to verify
+            .setTimeout(60L, TimeUnit.SECONDS) // Timeout duration
+            .setActivity(this)                 // Activity loop for callbacks
+            .setCallbacks(callbacks)           // Your callback instance
             .build()
 
         PhoneAuthProvider.verifyPhoneNumber(options)
     }
 
-    // ================= VERIFY OTP =================
-    private fun verifyOtpClicked() {
-
-        val otp = binding.verifyOtpEt.text.toString().trim()
-
-        when {
-            otp.isEmpty() -> binding.verifyOtpEt.error = "Enter OTP"
-            otp.length != 6 -> binding.verifyOtpEt.error = "Enter Valid OTP"
-            else -> verifyOtp(otp)
+    // Step 7A: Create the credential using the received SMS code
+    fun verifyOtp(otpCode: String) {
+        if (storedVerificationId != null) {
+            val credential = PhoneAuthProvider.getCredential(storedVerificationId!!, otpCode)
+            signInWithPhoneAuthCredential(credential)
+        } else {
+            Toast.makeText(this, "Session expired. Resend OTP.", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun verifyOtp(otp: String) {
-
-        val id = verificationId ?: run {
-            showToast("OTP not received")
-            return
-        }
-
-        val credential = PhoneAuthProvider.getCredential(id, otp)
-        signIn(credential)
-    }
-
-    // ================= FIREBASE CALLBACK =================
-    private val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-
-        override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-            signIn(credential)
-        }
-
-        override fun onVerificationFailed(e: FirebaseException) {
-            showToast(e.message ?: "Verification Failed")
-        }
-
-        override fun onCodeSent(
-            verificationId: String,
-            token: PhoneAuthProvider.ForceResendingToken
-        ) {
-            this@LoginActivity.verificationId = verificationId
-            resendToken = token
-
-            showToast("OTP Sent")
-
-            startTimer()   // 🔥 TIMER START HERE
-        }
-    }
-
-    // ================= LOGIN =================
-    private fun signIn(credential: PhoneAuthCredential) {
-
+    // Step 7B: Authenticate the user into Firebase
+    private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
         auth.signInWithCredential(credential)
-            .addOnCompleteListener {
-
-                if (it.isSuccessful) {
-                    showToast("Login Success")
-
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    Log.d(TAG, "Login Successful!")
+                    // Login Success! Navigate to MainActivity
+                    Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this, DashboardActivity::class.java))
                     finish()
                 } else {
-                    showToast("Invalid OTP")
+                    // Login Failed
+                    Log.d(TAG, "Invalid OTP Code")
+                    Toast.makeText(this, "Invalid OTP Code", Toast.LENGTH_SHORT).show()
                 }
             }
-    }
-
-    // ================= UI CONTROL =================
-    private fun showPhoneSection() {
-
-        binding.phoneTil.visibility = View.VISIBLE
-        binding.sendOtpBtn.visibility = View.VISIBLE
-
-        binding.verifyOtpTil.visibility = View.GONE
-        binding.verifyOtpBtn.visibility = View.GONE
-        binding.timerTv.visibility = View.GONE
-        binding.resendOtpBtn.visibility = View.GONE
-    }
-
-    private fun showOtpSection() {
-
-        binding.phoneTil.visibility = View.VISIBLE
-        binding.sendOtpBtn.visibility = View.VISIBLE
-
-        binding.verifyOtpTil.visibility = View.VISIBLE
-        binding.verifyOtpBtn.visibility = View.VISIBLE
-
-        binding.timerTv.visibility = View.VISIBLE
-        binding.resendOtpBtn.visibility = View.GONE
-
-        startTimer() // 🔥 IMPORTANT FIX (UI open hote hi timer start)
-    }
-
-    // ================= TIMER =================
-    private fun startTimer() {
-
-        timer?.cancel()
-
-        binding.resendOtpBtn.visibility = View.GONE
-
-        timer = object : CountDownTimer(60000, 1000) {
-
-            override fun onTick(millisUntilFinished: Long) {
-                val sec = millisUntilFinished / 1000
-                binding.timerTv.text = "Resend in $sec sec"
-            }
-
-            override fun onFinish() {
-                binding.timerTv.text = "You can resend OTP"
-                binding.resendOtpBtn.visibility = View.VISIBLE
-            }
-        }.start()
-    }
-
-    private fun showToast(msg: String) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 }

@@ -18,16 +18,21 @@
             android:value="ca-app-pub-3940256099942544~3347511713" />
 
         <activity
-            android:name="com.anaya.fasion.view.LoginActivity"
+            android:name="com.anaya.fasion.view.SplashActivity"
             android:exported="true">
+
             <intent-filter>
+
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
+
         </activity>
 
         <activity android:name="com.anaya.fasion.view.DashboardActivity" />
+        <activity android:name="com.anaya.fasion.view.LoginActivity" />
         <activity android:name="com.anaya.fasion.view.LahangaListActivity" />
         <activity android:name="com.anaya.fasion.view.LahangaDetailsActivity" />
         <activity android:name="com.anaya.fasion.view.CartActivity" />
