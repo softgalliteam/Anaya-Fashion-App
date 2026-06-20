@@ -33,6 +33,8 @@ class LahangaListActivity : AppCompatActivity() {
         setContentView(mBinding.root)
 
 
+
+
 //        mBinding.cartIcon.setOnClickListener {
 //
 //            startActivity(

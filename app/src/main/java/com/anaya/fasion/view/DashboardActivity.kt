@@ -9,6 +9,7 @@ import com.anaya.fasion.view.fragments.CartListFragment
 import com.anaya.fasion.view.fragments.HomeFragment
 import com.anaya.fasion.view.fragments.WishListFragment
 
+
 class DashboardActivity : AppCompatActivity() {
     companion object {
         const val TAG = "DashboardActivity"
@@ -53,6 +54,8 @@ class DashboardActivity : AppCompatActivity() {
             }
         }
     }
+
+
 
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()

@@ -28,7 +28,7 @@
          <!--search view-->
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="45dp"
             android:layout_weight="1"
             android:layout_marginTop="10dp"

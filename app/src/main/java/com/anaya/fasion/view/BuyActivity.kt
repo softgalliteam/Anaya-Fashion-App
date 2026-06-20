@@ -6,10 +6,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.anaya.fashion.databinding.BuyActivityBinding
+import com.anaya.fashion.view.BaseActivity
 import com.anaya.fasion.model.dataprovider.LahangaDataProvider
 import com.anaya.fasion.view.adapter.BuyRecyclerViewAdapter
 
-class BuyActivity : AppCompatActivity() {
+class BuyActivity :  BaseActivity() {
 
     private lateinit var mBinding: BuyActivityBinding
 
@@ -18,6 +19,8 @@ class BuyActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = BuyActivityBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
+
+        setupToolbar("Buy Now")
 
         // Get Intent Data
         val productId = intent.getStringExtra("id") ?: "0"

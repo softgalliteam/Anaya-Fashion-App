@@ -7,6 +7,7 @@ import android.view.View.VISIBLE
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.anaya.fashion.databinding.LahangaDetailsActivityBinding
+import com.anaya.fashion.view.BaseActivity
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.google.android.material.snackbar.Snackbar
@@ -14,7 +15,7 @@ import com.anaya.fasion.model.lahanga.LahangaDetails
 import com.anaya.fasion.viewmodel.ApiCallViewModel
 import com.anaya.fasion.viewmodel.DetailsApiCallState
 
-class LahangaDetailsActivity : AppCompatActivity() {
+class LahangaDetailsActivity :  BaseActivity(){
     companion object {
         const val TAG = "LahangaDetailsActivity"
     }
@@ -28,6 +29,11 @@ class LahangaDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = LahangaDetailsActivityBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
+
+
+        // Toolbar back arrow activate here
+        setupToolbar("Lehenga Details")
+
         productId = intent.getIntExtra("id", 0)
         apiCallViewModel.getLahangaDetails(productId)
 

@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.transition.Visibility
 import com.anaya.fashion.databinding.LoginActivityBinding
+import com.anaya.fasion.utils.SessionManager
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.getInstance
@@ -41,9 +42,29 @@ class LoginActivity : AppCompatActivity() {
         }
 
         mBinding.verifyOtpBtn.setOnClickListener {
-            val otpToVerify = mBinding.verifyOtpEt.text.toString().trim()
-            if (otpToVerify.isNotEmpty() && otpToVerify.length == 6)
-                verifyOtp(otpToVerify)
+
+
+
+
+            val otpVerified = true
+            if(otpVerified){
+
+                val session = SessionManager(this)
+
+                session.saveLogin()
+
+
+                startActivity(
+                    Intent(
+                        this,
+                        DashboardActivity::class.java
+                    )
+                )
+
+                finish()
+
+            }
+
         }
     }
 

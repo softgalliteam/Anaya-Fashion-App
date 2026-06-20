@@ -6,11 +6,12 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.anaya.fashion.databinding.ItemCartBinding
+import com.anaya.fashion.view.BaseActivity
 import com.anaya.fasion.model.CartRepository
 import com.anaya.fasion.model.lahanga.LahangaDetails
 import com.anaya.fasion.view.adapter.CartRecyclerViewAdapter
 
-class CartActivity : AppCompatActivity() {
+class CartActivity : BaseActivity(){
 
     private lateinit var binding: ItemCartBinding
     private lateinit var adapter: CartRecyclerViewAdapter
@@ -20,6 +21,8 @@ class CartActivity : AppCompatActivity() {
 
         binding = ItemCartBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setupToolbar("Cart")
 
         val cartList = ArrayList(CartRepository.getCartItems())
 
