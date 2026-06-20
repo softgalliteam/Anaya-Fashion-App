@@ -7,18 +7,59 @@
     android:background="@color/white"
     android:fitsSystemWindows="true">
 
-
-
-    <androidx.appcompat.widget.Toolbar
+    <TextView
         android:id="@+id/commonToolbar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="@color/white"
         android:elevation="4dp"
-        app:navigationIcon="@drawable/arrow_back"
-        app:title="Cart"
-        app:titleTextColor="@android:color/black"
-        />
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/margin_16dp"
+        android:paddingEnd="@dimen/margin_16dp"
+        android:text="@string/my_cart"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/addressLl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:layout_marginEnd="@dimen/margin_16dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/changeAddressBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/commonToolbar">
+
+        <TextView
+            android:id="@+id/deliverToTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Deliver To: NA" />
+
+        <TextView
+            android:id="@+id/addressTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="NA" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/changeAddressBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/change"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/addressLl"
+        app:layout_constraintTop_toTopOf="@id/addressLl" />
 
     <!--List of data-->
     <androidx.recyclerview.widget.RecyclerView
@@ -28,7 +69,7 @@
         app:layout_constraintBottom_toTopOf="@+id/buyNowBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/commonToolbar"
+        app:layout_constraintTop_toBottomOf="@id/changeAddressBtn"
         app:spanCount="2"
         tools:listitem="@layout/lahanga_list_item" />
 

@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name="com.anaya.fashion.AnayaApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -18,7 +19,7 @@
             android:value="ca-app-pub-3940256099942544~3347511713" />
 
         <activity
-            android:name="com.anaya.fasion.view.SplashActivity"
+            android:name="com.anaya.fashion.view.SplashActivity"
             android:exported="true">
 
             <intent-filter>
@@ -31,13 +32,13 @@
 
         </activity>
 
-        <activity android:name="com.anaya.fasion.view.DashboardActivity" />
-        <activity android:name="com.anaya.fasion.view.LoginActivity" />
-        <activity android:name="com.anaya.fasion.view.LahangaListActivity" />
-        <activity android:name="com.anaya.fasion.view.LahangaDetailsActivity" />
-        <activity android:name="com.anaya.fasion.view.CartActivity" />
-        <activity android:name="com.anaya.fasion.view.OffersActivity" />
-        <activity android:name="com.anaya.fasion.view.BuyActivity" />
+        <activity android:name="com.anaya.fashion.view.DashboardActivity" />
+        <activity android:name="com.anaya.fashion.view.LoginActivity" />
+        <activity android:name="com.anaya.fashion.view.LahangaListActivity" />
+        <activity android:name="com.anaya.fashion.view.LahangaDetailsActivity" />
+        <activity android:name="com.anaya.fashion.view.CartActivity" />
+        <activity android:name="com.anaya.fashion.view.OffersActivity" />
+        <activity android:name="com.anaya.fashion.view.BuyActivity" />
 
     </application>
 

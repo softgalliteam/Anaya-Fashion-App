@@ -4,50 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:id="@+id/searchLayout"
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:background="#DCEBFF"
-        android:padding="10dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:padding="10dp"
         app:layout_constraintTop_toTopOf="parent">
 
-         <!--Back Arrow-->
+        <!--Back Arrow-->
         <ImageView
-           android:id="@+id/arrow"
+            android:id="@+id/arrow"
             android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/arrow_back"
-            android:padding="8dp" />
+            android:padding="8dp"
+            android:src="@drawable/arrow_back" />
 
-         <!--search view-->
+        <!--search view-->
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_weight="1"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/search_bgg"
-            android:queryHint="search lehanga...."
-            android:iconifiedByDefault="false"/>
-
-          <!--cart icon-->
-
-            <ImageView
-                android:id="@+id/cartIcon"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginTop="10dp"
-                android:padding="5dp"
-                android:layout_marginStart="12dp"
-                android:src="@drawable/cart_icon"/>
-
+            android:iconifiedByDefault="false"
+            android:queryHint="Search Lehanga...." />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -55,11 +43,11 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="6dp"
-        app:layout_constraintTop_toBottomOf="@id/searchLayout"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/lahanga_list_item"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchLayout"
+        tools:listitem="@layout/lahanga_list_item" />
 
     <LinearLayout
         android:id="@+id/loaderLl"
@@ -76,7 +64,7 @@
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:foregroundTint="@color/yellow"/>
+            android:foregroundTint="@color/yellow" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -85,7 +73,7 @@
             android:text="@string/loading"
             android:textColor="@color/yellow"
             android:textSize="16sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -101,6 +89,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
