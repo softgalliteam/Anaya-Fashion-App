@@ -29,4 +29,8 @@ object SessionManager {
             .clear()
             .apply()
     }
+
+    fun isLoggedIn(): Boolean {
+        return preferences.getBoolean("isLoggedIn", false)
+    }
 }
