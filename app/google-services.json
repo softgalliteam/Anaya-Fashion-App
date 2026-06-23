@@ -12,7 +12,20 @@
           "package_name": "com.anaya.fashion"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1030712514687-n88mvrjdpgrhlq1o8h3f8cp3vc8muhap.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anaya.fashion",
+            "certificate_hash": "a03df0b758c139837164324effa47abfc52302ff"
+          }
+        },
+        {
+          "client_id": "1030712514687-ug2dapkq8e5gimmgghm1bhdakfc7shdd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCsIajz-gnyp4GTymPkhNVIhRFi4xsUQUI"
@@ -20,11 +33,15 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1030712514687-ug2dapkq8e5gimmgghm1bhdakfc7shdd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
   ],
   "configuration_version": "1"
 }
-

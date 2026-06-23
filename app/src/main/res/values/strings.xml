@@ -50,5 +50,6 @@
     <string name="address">Address</string>
     <string name="edit_address">Edit Address</string>
     <string name="update">Update</string>
+    <string name="default_web_client_id">1030712514687-ug2dapkq8e5gimmgghm1bhdakfc7shdd.apps.googleusercontent.com</string>
 
 </resources>

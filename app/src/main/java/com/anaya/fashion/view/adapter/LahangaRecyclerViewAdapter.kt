@@ -31,19 +31,21 @@ class LahangaRecyclerViewAdapter(
     override fun onBindViewHolder(
         holder: ViewHolder, position: Int
     ) {
-        val lahanga = list[position]
-        holder.compNameTextView.text = lahanga.name
-        holder.priceTv.text = "₹ ${lahanga.price}"
-        holder.discountTv.text = lahanga.discount
 
-//        val actualPrice = 10000
-//        val sellingPrice = lahanga.price
-//        val discount = actualPrice - sellingPrice
-//        //calculate discount percentage
-//        val discountPercentage = (discount * 100) / actualPrice
-//        holder.actualPriceTv.text = "₹ $actualPrice"
-//        holder.discountTv.text = "$discountPercentage% off"
-//
+
+        val lahanga = list[position]
+
+        val actualPrice = lahanga.actualPrice
+        val sellingPrice = lahanga.sellingPrice
+        val discountPercentage =
+            calculateDiscountPercentage(actualPrice.toDouble(), sellingPrice.toDouble())
+
+        holder.compNameTextView.text = lahanga.name
+        holder.actualPriceTv.text = "₹${lahanga.actualPrice}"
+        holder.priceTv.text = " ₹${lahanga.sellingPrice}"
+        holder.discountTv.text = "$discountPercentage% off"
+        holder.badgeTv.text =
+            if (lahanga.isBestSeller) "BEST SELLER" else "$discountPercentage% off"
 
         Picasso.get()
             .load(lahanga.imageUrl)
@@ -61,12 +63,6 @@ class LahangaRecyclerViewAdapter(
             )
         }
 
-//        holder.btnViewDetails.setOnClickListener {
-//            onClickListener(
-//                lahanga.id
-//            )
-//        }
-
         holder.favBtn.setOnClickListener {
             val isFav = holder.favBtn.tag as? Boolean ?: false
             if (isFav) {
@@ -83,6 +79,15 @@ class LahangaRecyclerViewAdapter(
         }
     }
 
+    fun calculateDiscountPercentage(actualPrice: Double, sellingPrice: Double): Int {
+        if (actualPrice <= 0 || sellingPrice >= actualPrice) {
+            return 0
+        }
+        val discount = ((actualPrice - sellingPrice) / actualPrice) * 100
+
+        return discount.toInt()
+    }
+
     override fun getItemCount(): Int {
         return list.size
     }
@@ -96,17 +101,11 @@ class LahangaRecyclerViewAdapter(
             R.id.titleTv
         )
 
-        val priceTv = itemView.findViewById<TextView>(
-            R.id.priceTv
-        )
+        val priceTv = itemView.findViewById<TextView>(R.id.priceTv)
+        val actualPriceTv = itemView.findViewById<TextView>(R.id.actualPriceTv)
 
+        val badgeTv = itemView.findViewById<TextView>(R.id.badgeTv)
         val discountTv = itemView.findViewById<TextView>(R.id.discountTv)
-
-
-//        val btnViewDetails =
-//            itemView.findViewById<com.google.android.material.button.MaterialButton>(
-//                R.id.btnViewDetails
-//            )
 
         val favBtn = itemView.findViewById<ImageView>(
             R.id.favBtn

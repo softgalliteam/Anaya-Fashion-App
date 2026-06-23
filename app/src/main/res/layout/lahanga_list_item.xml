@@ -24,12 +24,10 @@
                 android:background="@color/white"
                 android:scaleType="centerCrop"
                 app:cardCornerRadius="10dp" />
-            <!--                android:src="@drawable/logo"-->
-
 
             <!-- Discount Badge -->
             <TextView
-                android:id="@+id/discountTv"
+                android:id="@+id/badgeTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -55,31 +53,15 @@
         </FrameLayout>
 
         <!-- Rating -->
-        <LinearLayout
+        <RatingBar
+            style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:src="@drawable/star" />
-
-            <ImageView
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:src="@drawable/star" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:text="4.8 (120)"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+            android:layout_marginHorizontal="10dp"
+            android:numStars="5"
+            android:rating="4.6"
+            android:stepSize=".5"
+            android:theme="@style/RatingBar" />
 
         <!-- Product Name -->
         <TextView
@@ -122,7 +104,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/price_discount"
+                android:id="@+id/discountTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"

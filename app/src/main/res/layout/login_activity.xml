@@ -48,10 +48,10 @@
         android:id="@+id/loginCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        app:cardBackgroundColor="@android:color/transparent"
-        app:cardCornerRadius="32dp"
-        app:cardElevation="12dp"
+        android:layout_margin="40dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="16dp"
+        android:outlineAmbientShadowColor="@color/green"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,12 +62,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!-- BLUR ONLY BACKGROUND -->
-            <eightbitlab.com.blurview.BlurView
-                android:id="@+id/blurView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
 
             <!-- CONTENT ABOVE BLUR -->
 
@@ -75,6 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:background="@color/white"
                 android:padding="24dp">
 
 
@@ -187,11 +182,13 @@
 
 
                     <ImageView
+                        android:id="@+id/loginWithGmail"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:src="@drawable/google_icon"/>
 
                     <ImageView
+                        android:id="@+id/loginWithFacebook"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_marginStart="16dp"
