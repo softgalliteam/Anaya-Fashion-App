@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF">
@@ -11,8 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:elevation="4dp"
+        android:background="@color/Alice_Blue"
         app:navigationIcon="@drawable/arrow_back"
-        app:titleTextColor="@android:color/black"/>
+        app:titleTextColor="@android:color/black"
+        tools:ignore="MissingConstraints" />
 
     <ScrollView
         android:id="@+id/detailsLL"

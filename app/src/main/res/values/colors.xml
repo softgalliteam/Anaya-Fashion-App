@@ -10,6 +10,10 @@
     <color name="shefron">#F43F06</color>
     <color name="gray">#3E3C3C</color>
     <color name="lightgray">#A9A7A7</color>
-    <color name="lightblue">#BBC6DB</color>
+    <color name="lightblue">#191A1D</color>
     <color name="blue">#E6DFFD</color>
+    <color name="graylight">#BED0F2</color>
+    <color name="Alice_Blue">#DCEBFF</color>
+    #E4E4E4
+    <color name="Platinum">#E4E4E4</color>
 </resources>

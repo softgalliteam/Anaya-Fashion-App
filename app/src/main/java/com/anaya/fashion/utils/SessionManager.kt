@@ -24,7 +24,7 @@ object SessionManager {
         )
     }
 
-    fun logout() {
+    fun logout(requireContext: Context) {
         preferences.edit()
             .clear()
             .apply()

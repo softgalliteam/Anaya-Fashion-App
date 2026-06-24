@@ -13,7 +13,8 @@
         android:layout_height="56dp"
         android:background="@color/white"
         android:elevation="4dp"
-        android:gravity="center_vertical"
+        android:gravity="center_horizontal"
+        android:paddingTop="15dp"
         android:paddingStart="@dimen/margin_16dp"
         android:paddingEnd="@dimen/margin_16dp"
         android:text="@string/my_cart"
@@ -28,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_16dp"
         android:layout_marginEnd="@dimen/margin_16dp"
-        android:background="@color/white"
+        android:background="@color/Platinum"
         android:gravity="center_vertical"
         android:orientation="vertical"
         app:layout_constraintEnd_toStartOf="@+id/changeAddressBtn"
@@ -41,7 +42,9 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Deliver To: NA" />
+            android:text="Deliver To: NA"
+           android:layout_marginTop="5dp"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/addressTv"
@@ -49,7 +52,8 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="NA" />
+            android:text="NA"
+            android:textColor="@color/black"/>
     </LinearLayout>
 
     <Button
@@ -57,6 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/change"
+        android:backgroundTint="@color/yellow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/addressLl"
         app:layout_constraintTop_toTopOf="@id/addressLl" />

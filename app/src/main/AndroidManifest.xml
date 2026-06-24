@@ -39,6 +39,7 @@
         <activity android:name="com.anaya.fashion.view.CartActivity" />
         <activity android:name="com.anaya.fashion.view.OffersActivity" />
         <activity android:name="com.anaya.fashion.view.BuyActivity" />
+        >
 
     </application>
 

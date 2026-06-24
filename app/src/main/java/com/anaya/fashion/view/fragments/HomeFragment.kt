@@ -34,7 +34,6 @@ class HomeFragment : Fragment() {
             //    startActivity(Intent(this, LahangaListActivity::class.java))
         }
 
-
     }
 
     override fun onDestroyView() {

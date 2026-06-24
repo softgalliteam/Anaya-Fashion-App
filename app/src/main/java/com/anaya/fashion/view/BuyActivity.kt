@@ -18,7 +18,7 @@ class BuyActivity : BaseActivity() {
         mBinding = BuyActivityBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
-        setupToolbar("Buy Now")
+//        setupToolbar("Buy Now")
 
         // Get Intent Data
         val productId = intent.getStringExtra("id") ?: "0"

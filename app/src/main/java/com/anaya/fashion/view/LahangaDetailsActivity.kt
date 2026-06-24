@@ -30,7 +30,7 @@ class LahangaDetailsActivity : BaseActivity() {
 
 
         // Toolbar back arrow activate here
-        setupToolbar("Lehenga Details")
+        setupToolbar("")
 
         productId = intent.getIntExtra("id", 0)
         apiCallViewModel.getLahangaDetails(productId)

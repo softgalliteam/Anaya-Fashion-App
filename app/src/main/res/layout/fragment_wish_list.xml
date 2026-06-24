@@ -15,9 +15,10 @@
         android:layout_height="56dp"
         android:background="@color/white"
         android:elevation="4dp"
-        app:navigationIcon="@drawable/arrow_back"
-        app:title="Order Summary"
-        app:titleTextColor="@android:color/black"/>
+        android:layout_marginStart="10dp"
+        app:title="My Wishlist"
+        app:titleTextColor="@android:color/black"
+        tools:ignore="MissingConstraints" />
     <!--List of data-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/wishListRV"
