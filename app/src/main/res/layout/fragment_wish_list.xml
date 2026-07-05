@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:backgroundTint="@color/yellow"
+        android:backgroundTint="@color/black"
         android:clickable="true"
         android:focusable="true"
         android:padding="12dp"
