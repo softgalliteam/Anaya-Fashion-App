@@ -457,10 +457,16 @@ object LahangaDataProvider {
         //productId = "1,2,3,4"
         val productIds = productId.split(",")
         productIds.forEach {
-            if (it.isNotEmpty()) {
-                val details = getLahangaDetailsById(it.toInt())
-                println("Product ID: ${details?.id}, Description: ${details?.description}")
-                list.add(details!!)
+            val trimmedId = it.trim()
+            if (trimmedId.isNotEmpty()) {
+                val id = trimmedId.toIntOrNull()
+                if (id != null) {
+                    val details = getLahangaDetailsById(id)
+                    println("Product ID: ${details?.id}, Description: ${details?.description}")
+                    details?.let { item ->
+                        list.add(item)
+                    }
+                }
             }
         }
 
