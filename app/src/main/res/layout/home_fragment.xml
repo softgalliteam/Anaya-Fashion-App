@@ -115,7 +115,7 @@
                     android:layout_gravity="end|top"
                     android:layout_marginEnd="-20dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/image_first"
+                    android:src="@drawable/lehanga"
                     tools:ignore="ContentDescription" />
 
             </FrameLayout>
@@ -173,7 +173,7 @@
                     android:layout_gravity="end|top"
                     android:layout_marginEnd="-20dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/image_sec"
+                    android:src="@drawable/sherwani"
                     android:translationY="10dp"
                     tools:ignore="ContentDescription" />
 
@@ -277,7 +277,7 @@
                     android:layout_width="220dp"
                     android:layout_height="220dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/image_third"
+                    android:src="@drawable/lehanga_sherwani_offer"
                     android:translationX="-40dp"
                     android:translationY="17dp"
                     tools:ignore="ContentDescription" />
