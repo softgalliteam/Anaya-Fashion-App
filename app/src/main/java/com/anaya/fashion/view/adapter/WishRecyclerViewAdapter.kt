@@ -46,7 +46,7 @@ class WishRecyclerViewAdapter(
         holder.priceTv.text = "₹ $sellingPrice"
         holder.actualPriceTv.text = "₹ $actualPrice"
         holder.discountTv.text = "$discountPercentage% off"
-        holder.saveTv.text = "You save ₹ $discount"
+//        holder.saveTv.text = "You save ₹ $discount"
 
 
 
@@ -93,7 +93,7 @@ class WishRecyclerViewAdapter(
         val actualPriceTv = itemView.findViewById<TextView>(R.id.actualPriceTv)
         val discountTv = itemView.findViewById<TextView>(R.id.discountTv)
         val delete = itemView.findViewById<TextView>(R.id.deleteTv)
-        val saveTv = itemView.findViewById<TextView>(R.id.save)
+//        val saveTv = itemView.findViewById<TextView>(R.id.save)
 
     }
 

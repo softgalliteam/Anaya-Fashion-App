@@ -33,7 +33,7 @@
             android:layout_width="65dp"
             android:layout_height="40dp"
             android:text="Logout"
-            android:textColor="@color/black"
+            android:textColor="@color/red"
             android:textSize="15sp"
             android:textStyle="bold"
             android:padding="9dp"/>

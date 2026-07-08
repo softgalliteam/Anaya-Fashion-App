@@ -89,17 +89,6 @@
 
             </LinearLayout>
 
-            <!-- Save Amount -->
-            <TextView
-                android:id="@+id/save"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:text="You save ₹5000"
-                android:textColor="#00A651"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
             <!-- Return Policy -->
             <TextView
                 android:layout_width="wrap_content"
