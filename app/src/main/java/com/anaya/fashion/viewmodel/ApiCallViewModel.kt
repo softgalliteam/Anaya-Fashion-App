@@ -44,7 +44,7 @@ class ApiCallViewModel(
     val detailScreenState: MutableLiveData<ApiCallState?>
         get() = _detailScreenState
 
-    fun getLahangaList() {
+    fun getLahangaList(fromWhichScreen: String) {
         viewModelScope.launch(Dispatchers.IO) {
             _screenState.postValue(ApiCallState.Loading)
             try {
@@ -52,7 +52,7 @@ class ApiCallViewModel(
                 //val response = repository.getComputerListFromRetrofit()
 
                 // Use Local Room DB
-                val lahangaList = cartRepository.getLahangaListFromRoomDb()
+                val lahangaList = cartRepository.getLahangaListFromRoomDb(fromWhichScreen)
 
                 Log.d(Constants.TAG, "Response from repository: $lahangaList")
                 if (lahangaList.isEmpty()) {
@@ -111,11 +111,11 @@ class ApiCallViewModel(
         }
     }
 
-    fun searchLahangaList(searchText: String) {
+    fun searchLahangaList(fromWhichScreen: String, searchText: String) {
         viewModelScope.launch(Dispatchers.IO) {
             _screenState.postValue(ApiCallState.Loading)
             try {
-                val filteredList = cartRepository.searchLahangaList(searchText)
+                val filteredList = cartRepository.searchLahangaList(fromWhichScreen, searchText)
                 if (filteredList.isEmpty()) {
                     _screenState.postValue(ApiCallState.Error("No results found for \"$searchText\""))
                 } else {

@@ -174,7 +174,7 @@
                     android:paddingBottom="80dp"
                     android:layout_marginEnd="-48dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/boy_sherwani"
+                    android:src="@drawable/sherwani"
                     android:translationY="10dp"
                     tools:ignore="ContentDescription" />
 

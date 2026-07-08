@@ -26,14 +26,26 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mBinding.lehengaFL.setOnClickListener {
-            startActivity(Intent(requireActivity(), LahangaListActivity::class.java))
-
+            openProductListScreen("LEHANGA")
         }
 
         mBinding.sherwaniFl.setOnClickListener {
-            //    startActivity(Intent(this, LahangaListActivity::class.java))
+            openProductListScreen("SHERWANI")
         }
 
+        mBinding.knowMoreText.setOnClickListener {
+            openProductListScreen("OFFERS")
+        }
+
+    }
+
+    private fun openProductListScreen(forWhichScreen: String) {
+        startActivity(
+            Intent(
+                requireActivity(),
+                LahangaListActivity::class.java
+            ).putExtra("forWhichScreen", forWhichScreen)
+        )
     }
 
     override fun onDestroyView() {

@@ -26,25 +26,14 @@ class LahangaListActivity : AppCompatActivity() {
     private lateinit var mBinding: LahangaListActivityBinding
     private val apiCallViewModel: ApiCallViewModel by viewModels()
 
+    private lateinit var fromWhichScreen: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         mBinding = LahangaListActivityBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
-
-//        mBinding.cartIcon.setOnClickListener {
-//
-//            startActivity(
-//                Intent(
-//                    this@LahangaListActivity,
-//                    CartActvity::class
-//                )
-//            )
-//
-//        }
-
-        // arrow clicklistener
         mBinding.arrow.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
@@ -56,7 +45,8 @@ class LahangaListActivity : AppCompatActivity() {
         searchView.clearFocus()
         hideKeyboard()
 
-        apiCallViewModel.getLahangaList()
+         fromWhichScreen = intent.getStringExtra("forWhichScreen") ?: "LEHANGA"
+        apiCallViewModel.getLahangaList(fromWhichScreen)
 
 
         val recyclerView = mBinding.computerRV
@@ -128,7 +118,7 @@ class LahangaListActivity : AppCompatActivity() {
             // Triggered in real-time every time a character is typed or deleted
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (!newText.isNullOrBlank() && newText.length >= 3) {
-                    apiCallViewModel.searchLahangaList(newText)
+                    apiCallViewModel.searchLahangaList(fromWhichScreen, newText)
                 }
                 return true
             }

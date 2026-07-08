@@ -27,7 +27,7 @@ class ApiCalRepository(
         return DatabaseHelperImpl(cartDb)
     }
 
-    suspend fun getComputerListFromRetrofit(): ArrayList<LahangaResponseDataItem> {
+    suspend fun getComputerListFromRetrofit(fromWhichScreen: String): ArrayList<LahangaResponseDataItem> {
 
         // Retrofit to make network request
         val retrofit = Retrofit.Builder()
@@ -41,16 +41,16 @@ class ApiCalRepository(
     }
 
     // Local DB Room
-    suspend fun getLahangaListFromRoomDb(): ArrayList<LahangaResponseDataItem> {
+    suspend fun getLahangaListFromRoomDb(fromWhichScreen: String): ArrayList<LahangaResponseDataItem> {
         // Use Local Room DB Here
 
-        return LahangaDataProvider.getLahangaList()
+        return LahangaDataProvider.getLahangaList(fromWhichScreen)
     }
 
-    suspend fun searchLahangaList(searchText: String): ArrayList<LahangaResponseDataItem> {
+    suspend fun searchLahangaList(fromWhichScreen: String, searchText: String): ArrayList<LahangaResponseDataItem> {
         // Use Local Room DB Here
 
-        return LahangaDataProvider.searchProduct(searchText)
+        return LahangaDataProvider.searchProduct(fromWhichScreen, searchText)
     }
 
     // Local DB Room

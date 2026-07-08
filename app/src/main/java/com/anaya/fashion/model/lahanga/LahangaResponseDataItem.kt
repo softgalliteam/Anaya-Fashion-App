@@ -11,6 +11,7 @@ data class LahangaResponseDataItem(
     val sellingPrice: Int,
     val actualPrice:Int,
     val isBestSeller: Boolean,
+    val isLehanga: Boolean = true,
     val color: String = "",
     val colors: List<Int>
 )

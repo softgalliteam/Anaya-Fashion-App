@@ -7,7 +7,34 @@ import com.anaya.fashion.model.lahanga.LahangaResponseDataItem
 object LahangaDataProvider {
 
 
-    fun getLahangaList() = arrayListOf(
+    fun getLahangaList(fromWhichScreen: String?): ArrayList<LahangaResponseDataItem> {
+        val resultList = arrayListOf<LahangaResponseDataItem>()
+        when (fromWhichScreen) {
+            "LEHANGA" -> {
+                resultList.addAll(allProductList.filter { it.isLehanga })
+            }
+
+            "SHERWANI" -> {
+                resultList.addAll(allProductList.filter { !it.isLehanga })
+            }
+
+            "OFFERS" -> {
+                resultList.addAll(allProductList.filter {
+                    // return if offer percentage is greater than 30%
+                    val offerPercentage =
+                        ((it.actualPrice - it.sellingPrice).toDouble() / it.actualPrice) * 100
+                    offerPercentage >= 30
+                })
+            }
+
+            else -> {
+                resultList.addAll(allProductList)
+            }
+        }
+        return resultList
+    }
+
+    private val allProductList = arrayListOf(
         LahangaResponseDataItem(
             id = 1,
             name = "Pink Embroided lehanga",
@@ -184,7 +211,27 @@ object LahangaDataProvider {
             actualPrice = 9000,
             isBestSeller = false,
             colors = listOf(R.color.red, R.color.black, R.color.purple, R.color.yellow),
-            ),
+        ),
+        LahangaResponseDataItem(
+            id = 18,
+            name = "My Dummy Sherwani",
+            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
+            sellingPrice = 7000,
+            actualPrice = 9000,
+            isBestSeller = false,
+            isLehanga = false,
+            colors = listOf(R.color.red, R.color.black, R.color.purple, R.color.yellow),
+        ),
+        LahangaResponseDataItem(
+            id = 18,
+            name = "My Dummy Sherwani 2",
+            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
+            sellingPrice = 7000,
+            actualPrice = 9000,
+            isBestSeller = false,
+            isLehanga = false,
+            colors = listOf(R.color.red, R.color.black, R.color.purple, R.color.yellow),
+        ),
 
 
         )
@@ -474,9 +521,10 @@ object LahangaDataProvider {
     }
 
 
-    fun searchProduct(search: String): ArrayList<LahangaResponseDataItem> {
+    fun searchProduct(fromWhichScreen: String, search: String): ArrayList<LahangaResponseDataItem> {
+        //TODO Use fromWhichScreen to filter the list based on the screen from which the search is initiated
         val searchList = arrayListOf<LahangaResponseDataItem>()
-        val list = getLahangaList()
+        val list = getLahangaList(fromWhichScreen)
         list.forEach {
             if (it.name.contains(search, ignoreCase = true)) {
                 searchList.add(it)
@@ -485,8 +533,11 @@ object LahangaDataProvider {
         return searchList
     }
 
-    fun searchProduct2(search: String): ArrayList<LahangaResponseDataItem> {
-        val list = getLahangaList().filter {
+    fun searchProduct2(
+        fromWhichScreen: String,
+        search: String
+    ): ArrayList<LahangaResponseDataItem> {
+        val list = getLahangaList(fromWhichScreen).filter {
             it.name.contains(search, ignoreCase = true)
         } as ArrayList<LahangaResponseDataItem>
         return list
