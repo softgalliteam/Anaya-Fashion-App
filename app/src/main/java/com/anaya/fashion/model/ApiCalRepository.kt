@@ -73,6 +73,12 @@ class ApiCalRepository(
         return dbHelper.deleteFromCart(item)
     }
 
+    suspend fun isAlreadyAddedInWishList(item: LahangaDetails) : Boolean {
+        // Use Local Room DB Here to add item to cart
+        val wishList = dbHelper.getWishList()
+        return wishList.any { it.id == item.id }
+    }
+
     suspend fun addToWish(item: LahangaDetails) {
         // Use Local Room DB Here to add item to cart
         dbHelper.addToWish(item)

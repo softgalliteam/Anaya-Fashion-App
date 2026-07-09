@@ -44,6 +44,10 @@ class ApiCallViewModel(
     val detailScreenState: MutableLiveData<ApiCallState?>
         get() = _detailScreenState
 
+    private val _wishListState = MutableLiveData<Boolean>()
+    val wishListStateState: MutableLiveData<Boolean>
+        get() = _wishListState
+
     fun getLahangaList(fromWhichScreen: String) {
         viewModelScope.launch(Dispatchers.IO) {
             _screenState.postValue(ApiCallState.Loading)
@@ -74,6 +78,7 @@ class ApiCallViewModel(
                 // Use Local Room DB
                 productDetails = cartRepository.getLahangaDetails(id)
 
+                handleWishListIcon()
                 Log.d(Constants.TAG, "Response from repository: $productDetails")
                 if (productDetails == null) {
                     _detailScreenState.postValue(DetailsApiCallState.Error("No data found for Lahanga with ID: $id"))
@@ -99,16 +104,38 @@ class ApiCallViewModel(
         }
     }
 
-    fun addToWish() {
+    fun handleWishList() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                wishRepository.addToWish(productDetails!!)
-                Log.d(Constants.TAG, "Item added to wish list: $productDetails")
-                _detailScreenState.postValue(DetailsApiCallState.SuccessWithMessage("Item added to wish list successfully"))
+                if (isToAddInWishlist()) {
+                    wishRepository.deleteWishListItem(productDetails!!)
+                    Log.d(Constants.TAG, "Item is removed from wish list: $productDetails")
+                    _wishListState.postValue(false)
+                } else {
+                    wishRepository.addToWish(productDetails!!)
+                    Log.d(Constants.TAG, "Item added to wish list: $productDetails")
+                    _wishListState.postValue(true)
+                }
             } catch (e: Exception) {
                 Log.e(Constants.TAG, "Error adding item to wish list: ${e.message}")
             }
         }
+    }
+
+    suspend fun handleWishListIcon() {
+        try {
+            if (isToAddInWishlist()) {
+                _wishListState.postValue(true)
+            } else {
+                _wishListState.postValue(false)
+            }
+        } catch (e: Exception) {
+            Log.e(Constants.TAG, "Error adding item to wish list: ${e.message}")
+        }
+    }
+
+    private suspend fun isToAddInWishlist(): Boolean {
+        return wishRepository.isAlreadyAddedInWishList(productDetails!!)
     }
 
     fun searchLahangaList(fromWhichScreen: String, searchText: String) {

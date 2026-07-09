@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:fitsSystemWindows="true">
 
     <!-- TOP BACK ARROW TOOLBAR -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/commonToolbar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:elevation="4dp"
         android:background="@color/Alice_Blue"
+        android:elevation="4dp"
         app:navigationIcon="@drawable/arrow_back"
         app:titleTextColor="@android:color/black"
         tools:ignore="MissingConstraints" />
@@ -61,8 +62,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:background="@color/white"
+                android:orientation="vertical"
                 android:padding="16dp">
 
                 <!-- BRAND -->
@@ -92,8 +93,8 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
                     android:layout_marginTop="1dp"
+                    android:background="@color/white"
                     app:cardCornerRadius="12dp">
 
                     <TextView
@@ -153,8 +154,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Available Sizes"
-                        android:textSize="16sp"
                         android:textColor="@color/black"
+                        android:textSize="16sp"
                         android:textStyle="bold"
 
                         />
@@ -165,8 +166,8 @@
                         android:layout_marginStart="20dp"
                         android:background="@drawable/size_bg"
                         android:padding="8dp"
-                        android:textColor="@color/black"
-                        android:text="32" />
+                        android:text="32"
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -174,8 +175,8 @@
                         android:layout_marginStart="8dp"
                         android:background="@drawable/size_bg"
                         android:padding="8dp"
-                        android:textColor="@color/black"
-                        android:text="34" />
+                        android:text="34"
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -183,8 +184,8 @@
                         android:layout_marginStart="8dp"
                         android:background="@drawable/size_bg"
                         android:padding="8dp"
-                        android:textColor="@color/black"
-                        android:text="36" />
+                        android:text="36"
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -192,8 +193,8 @@
                         android:layout_marginStart="8dp"
                         android:background="@drawable/size_bg"
                         android:padding="8dp"
-                        android:textColor="@color/black"
-                        android:text="38" />
+                        android:text="38"
+                        android:textColor="@color/black" />
 
                 </LinearLayout>
 
@@ -210,8 +211,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Available Colors"
-                        android:textSize="16sp"
                         android:textColor="@color/black"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <View
@@ -250,29 +251,29 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:background="@drawable/gradiant_color"
+                        android:orientation="vertical"
                         android:padding="16dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-                            android:text="🚚 Free Delivery" />
+                            android:text="🚚 Free Delivery"
+                            android:textColor="@color/black" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:textColor="@color/black"
-                            android:text="↩ Easy Returns" />
+                            android:text="↩ Easy Returns"
+                            android:textColor="@color/black" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:textColor="@color/black"
-                            android:text="💳 Cash On Delivery Available" />
+                            android:text="💳 Cash On Delivery Available"
+                            android:textColor="@color/black" />
 
                     </LinearLayout>
 
@@ -285,33 +286,33 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
                     android:text="Highlights"
-                    android:textSize="18sp"
                     android:textColor="@color/black"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:text="• Premium Fabric" />
+                    android:text="• Premium Fabric"
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:text="• Embroidered Design" />
+                    android:text="• Embroidered Design"
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:text="• Wedding Collection" />
+                    android:text="• Wedding Collection"
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:text="• Lightweight Material" />
+                    android:text="• Lightweight Material"
+                    android:textColor="@color/black" />
 
                 <!-- DETAILS -->
 
@@ -319,8 +320,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
-                    android:textColor="@color/black"
                     android:text="Details"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -346,8 +347,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textColor="@color/black"
                         android:text="Similar Products"
+                        android:textColor="@color/black"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -392,8 +393,8 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:padding="8dp"
                                 android:background="@color/white"
+                                android:padding="8dp"
                                 android:text="Premium Lehanga"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
@@ -401,8 +402,8 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:paddingStart="8dp"
                                 android:background="@color/white"
+                                android:paddingStart="8dp"
                                 android:paddingBottom="8dp"
                                 android:text="₹4,999"
                                 android:textColor="#6A5AE0" />
