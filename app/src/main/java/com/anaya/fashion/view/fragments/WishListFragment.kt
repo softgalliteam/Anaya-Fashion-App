@@ -22,9 +22,7 @@ import com.anaya.fashion.viewmodel.Status
 import com.google.android.material.snackbar.Snackbar
 
 class WishListFragment : Fragment() {
-
     val apiCallViewModel: CartAndWishListViewModel by viewModels()
-
     private var _binding: FragmentWishListBinding? = null
     private val mBinding get() = _binding!!
     private var wishList: List<LahangaDetails> = emptyList()

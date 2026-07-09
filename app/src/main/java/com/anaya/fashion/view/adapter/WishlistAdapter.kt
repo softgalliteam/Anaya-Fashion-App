@@ -24,8 +24,6 @@ class WishlistAdapter(
 
         val image: ImageView =
             view.findViewById(R.id.wishImage)
-
-
         val name: TextView =
             view.findViewById(R.id.wishName)
 

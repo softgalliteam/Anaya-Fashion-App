@@ -4,8 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
+import android.widget.Toast
 import androidx.activity.viewModels
+import com.anaya.fashion.R
 import com.anaya.fashion.databinding.LahangaDetailsActivityBinding
+import com.anaya.fashion.model.dataprovider.LahangaDataProvider
+import com.anaya.fashion.model.dataprovider.WishlistManager
 import com.anaya.fashion.model.lahanga.LahangaDetails
 import com.anaya.fashion.viewmodel.ApiCallViewModel
 import com.anaya.fashion.viewmodel.DetailsApiCallState
@@ -22,6 +26,12 @@ class LahangaDetailsActivity : BaseActivity() {
 
     private lateinit var mBinding: LahangaDetailsActivityBinding
     private var productId: Int = 0
+
+
+
+
+    private lateinit var currentProduct: LahangaDetails
+    private var isWishListed = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,12 +91,32 @@ class LahangaDetailsActivity : BaseActivity() {
         }
     }
 
+
     fun updateUI(lahangaDetails: LahangaDetails) {
+
+        currentProduct = lahangaDetails
+
         mBinding.priceTv.text = lahangaDetails.price.toString()
         mBinding.titleTv.text = lahangaDetails.name
         mBinding.descriptionTv.text = lahangaDetails.description
-    }
 
+        isWishListed = LahangaDataProvider.getWishlist()
+            .any { it.id == currentProduct.id }
+
+        if (isWishListed) {
+            mBinding.wishListBtn.setImageResource(R.drawable.heart_fill_icon)
+        } else {
+            mBinding.wishListBtn.setImageResource(R.drawable.heart_icon)
+        }
+
+        isWishListed = WishlistManager.isWishListed(this, currentProduct.id)
+
+        if (isWishListed) {
+            mBinding.wishListBtn.setImageResource(R.drawable.heart_fill_icon)
+        } else {
+            mBinding.wishListBtn.setImageResource(R.drawable.heart_icon)
+        }
+    }
 
     private fun handleButtonClicks() {
 
@@ -94,9 +124,26 @@ class LahangaDetailsActivity : BaseActivity() {
             apiCallViewModel.addToCart()
         }
 
+        mBinding.wishListBtn.setOnClickListener {
+
+            LahangaDataProvider.addToWishlist(currentProduct)
+
+            Toast.makeText(this, "Added to Wishlist", Toast.LENGTH_SHORT).show()
+        }
 
         mBinding.wishListBtn.setOnClickListener {
-            apiCallViewModel.addToWish()
+
+            if (WishlistManager.isWishListed(this, currentProduct.id)) {
+                WishlistManager.removeFromWishlist(this, currentProduct.id)
+                mBinding.wishListBtn.setImageResource(R.drawable.heart_icon)
+                Toast.makeText(this, "Removed from Wishlist", Toast.LENGTH_SHORT).show()
+
+            } else {
+
+                WishlistManager.addToWishlist(this, currentProduct.id)
+                mBinding.wishListBtn.setImageResource(R.drawable.heart_fill_icon)
+                Toast.makeText(this, "Added to Wishlist", Toast.LENGTH_SHORT).show()
+            }
         }
 
         mBinding.buyNowBtn.setOnClickListener {

@@ -542,4 +542,21 @@ object LahangaDataProvider {
         } as ArrayList<LahangaResponseDataItem>
         return list
     }
+
+
+    private val wishlist = arrayListOf<LahangaDetails>()
+
+    fun addToWishlist(item: LahangaDetails) {
+        if (!wishlist.any { it.id == item.id }) {
+            wishlist.add(item)
+        }
+    }
+
+    fun getWishlist(): ArrayList<LahangaDetails> {
+        return ArrayList(wishlist)
+    }
+
+    fun removeFromWishlist(item: LahangaDetails) {
+        wishlist.removeAll { it.id == item.id }
+    }
 }
