@@ -11,12 +11,11 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/commonToolbar"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="@color/Alice_Blue"
+        android:layout_height="30dp"
         android:elevation="4dp"
         app:navigationIcon="@drawable/arrow_back"
         app:titleTextColor="@android:color/black"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"/>
 
     <ScrollView
         android:id="@+id/detailsLL"
@@ -36,7 +35,8 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="400dp">
+                android:layout_height="400dp"
+                app:navigationIcon="@drawable/arrow_back">
 
                 <com.denzcoskun.imageslider.ImageSlider
                     android:id="@+id/imageSlider"

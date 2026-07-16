@@ -6,33 +6,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/bg_image"
     tools:ignore="ContentDescription">
-
-
-    <!-- Top Background -->
-    <ImageView
-        android:id="@+id/topBg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:src="@drawable/bg_top"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-
-    <!-- Bottom Background -->
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:src="@drawable/bg_bottom"
-        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 
     <!-- Logo -->
     <ImageView
+        android:id="@+id/logo"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_margin="24dp"
@@ -40,8 +21,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
+    <TextView
+        android:id="@+id/appName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="ANAYA"
+        android:textColor="#111111"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:fontFamily="serif"
+        app:layout_constraintTop_toBottomOf="@id/logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-
+    <TextView
+        android:id="@+id/appSubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="FASHION"
+        android:textColor="#777777"
+        android:textSize="12sp"
+        android:letterSpacing="0.35"
+        app:layout_constraintTop_toBottomOf="@id/appName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- LOGIN CARD -->
     <com.google.android.material.card.MaterialCardView
@@ -111,9 +116,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="16dp"
-                    android:backgroundTint="@color/yellow"
+                    android:backgroundTint="@color/black"
                     android:text="@string/send_otp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textStyle="bold"/>
 
                 <com.google.android.material.textfield.TextInputLayout
