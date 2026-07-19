@@ -3,14 +3,17 @@ package com.anaya.fashion.view
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.postDelayed
 import androidx.credentials.ClearCredentialStateRequest
 import androidx.credentials.CredentialManager
 import androidx.credentials.GetCredentialRequest
 import androidx.credentials.exceptions.GetCredentialException
+import androidx.lifecycle.lifecycleScope
 import com.anaya.fashion.R
 import com.anaya.fashion.databinding.LoginActivityBinding
 import com.anaya.fashion.utils.SessionManager
@@ -24,8 +27,18 @@ import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import okhttp3.internal.http2.Http2Reader
 import java.util.concurrent.TimeUnit
+import android.os.Handler
+import androidx.work.Constraints
+import androidx.work.NetworkType
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.async
 
 class LoginActivity : AppCompatActivity() {
 
@@ -47,7 +60,8 @@ class LoginActivity : AppCompatActivity() {
 
         binding = LoginActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        //performBackgroundTask()
+        workManagerExample()
         firebaseAuth = FirebaseAuth.getInstance()
         // Initialize Firebase Auth and Credential Manager
         //firebaseAuth = Firebase.auth
@@ -385,5 +399,65 @@ class LoginActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             credentialManager.clearCredentialState(ClearCredentialStateRequest())
         }
+    }
+
+
+    var i = 0
+
+    /*
+    Just for learning - Work Manager and Coroutines
+    */
+    fun performBackgroundTask() {
+        // Coroutine to perform a long-running task in the background also
+        // we can define the thread to run the task using Dispatchers.IO for I/O operations
+        //Scopes: 1. GlobalScope, 2. ViewModelScope, 3. LifecycleScope, 4. CoroutineScope
+        // GlobalScope is not recommended for long-running tasks as it is not tied to the lifecycle of any component and can lead to memory leaks.
+        // viewModelScope is tied to the lifecycle of a ViewModel and is suitable for tasks that should be canceled when the ViewModel is cleared.
+        // lifecycleScope is tied to the lifecycle of a component (like an Activity or Fragment) and is suitable for tasks that should be canceled when the component is destroyed.
+        // CoroutineScope can be used to create a custom scope for coroutines, allowing you to manage their lifecycle manually.
+
+        /*val job: Job = lifecycleScope.launch(Dispatchers.IO) {
+            // Simulate a long-running task
+            while (i < 1000) {
+                delay(1 * 1000) // 1 Sec
+                Log.d(TAG, "Download completed: $i %")
+                i++
+            }
+        }*/
+
+        val job: Deferred<String> = lifecycleScope.async(Dispatchers.IO) {
+            // Simulate a long-running task
+            while (i < 10) {
+                delay(1 * 1000) // 1 Sec
+                Log.d(TAG, "Download completed: $i %")
+                i++
+            }
+            "Download completed successfully"
+        }
+
+// cancel after 20 seconds using Handler postdelay
+        Handler(Looper.getMainLooper()).postDelayed({
+            // Your delayed code executes here on the Main Thread
+            Log.d(TAG, job.getCompleted() ?: "Job not completed yet")
+        }, 20 * 1000)
+
+    }
+
+
+    fun workManagerExample() {
+        // WorkManager is an API that makes it easy to schedule task, asynchronous tasks that are expected to run even if the app exits or the device restarts.
+        // It is suitable for tasks that require guaranteed execution, such as uploading logs or syncing data with a server.
+        // WorkManager is part of Android Jetpack and provides a unified way to manage background work across different Android versions.
+
+        val workRequest = OneTimeWorkRequestBuilder<MyWorker>()
+            .setInitialDelay(10, TimeUnit.SECONDS) // Delay before starting the work
+            .addTag("MyWorkManager")
+            .build()
+
+        WorkManager.getInstance(this).enqueue(workRequest)
+        // Use getWorkInfosByTagLiveData or getWorkInfoByIdLiveData to observe the status of the work request and update the UI accordingly.
+        // Implement it in the future if needed
+
+
     }
 }

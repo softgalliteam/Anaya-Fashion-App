@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import com.anaya.fashion.R
 import com.anaya.fashion.databinding.LahangaDetailsActivityBinding
 import com.anaya.fashion.model.lahanga.LahangaDetails
+import com.anaya.fashion.utils.Utilz
 import com.anaya.fashion.viewmodel.ApiCallViewModel
 import com.anaya.fashion.viewmodel.DetailsApiCallState
 import com.denzcoskun.imageslider.constants.ScaleTypes
@@ -112,6 +113,22 @@ class LahangaDetailsActivity : BaseActivity() {
 
         mBinding.wishListBtn.setOnClickListener {
             apiCallViewModel.handleWishList()
+        }
+
+        mBinding.shareBtn.setOnClickListener {
+            val imageUrl = currentProduct.imageUrl
+            val shareTitle =
+                "Check out this product: ${currentProduct.name} at ${currentProduct.price}"
+            //share product details name price and image
+            /*val shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.type = "text/plain"
+            shareIntent.putExtra(
+                Intent.EXTRA_TEXT,
+               shareTitle
+            )
+            startActivity(Intent.createChooser(shareIntent, "Share via"))*/
+
+            Utilz.shareProductDetails(this, imageUrl, shareTitle)
         }
 
         mBinding.buyNowBtn.setOnClickListener {

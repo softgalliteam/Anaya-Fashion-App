@@ -41,7 +41,7 @@ android {
             jvmTarget.set(JvmTarget.JVM_1_8)
         }
     }
-    
+
     buildFeatures {
         viewBinding = true
     }
@@ -56,7 +56,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.recyclerview:recyclerview:1.4.0")
     implementation("com.google.android.ads:mediation-test-suite:3.0.0")
-    
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
@@ -97,5 +97,8 @@ dependencies {
     implementation("androidx.credentials:credentials:1.3.0")
     implementation("androidx.credentials:credentials-play-services-auth:1.3.0")
     implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
+
+    // Work Manager
+    implementation("androidx.work:work-runtime-ktx:2.10.0")
 }
 
