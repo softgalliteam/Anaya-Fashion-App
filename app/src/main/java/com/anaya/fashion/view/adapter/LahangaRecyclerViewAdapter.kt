@@ -13,10 +13,13 @@ import com.squareup.picasso.Picasso
 
 
 class LahangaRecyclerViewAdapter(
-    private var list: ArrayList<LahangaResponseDataItem>, private val onClickListener: (Int) -> Unit
+    private var list: ArrayList<LahangaResponseDataItem>,
+    private val onClickListener: (Int) -> Unit,
+    private val wishClick: (Int) -> Unit
 ) : RecyclerView.Adapter<LahangaRecyclerViewAdapter.ViewHolder>() {
     // copy of complete data for search
     private var originalList = ArrayList<LahangaResponseDataItem>(list)
+    private val wishListIds = HashSet<Int>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
@@ -63,20 +66,31 @@ class LahangaRecyclerViewAdapter(
             )
         }
 
-        holder.favBtn.setOnClickListener {
-            val isFav = holder.favBtn.tag as? Boolean ?: false
-            if (isFav) {
-                holder.favBtn.setImageResource(
-                    R.drawable.heart_icon
-                )
-                holder.favBtn.tag = false
-            } else {
-                holder.favBtn.setImageResource(
-                    R.drawable.red_heart
-                )
-                holder.favBtn.tag = true
-            }
+        if (wishListIds.contains(lahanga.id)) {
+            holder.favBtn.setImageResource(R.drawable.red_heart)
+        } else {
+            holder.favBtn.setImageResource(R.drawable.heart_icon)
         }
+
+        holder.favBtn.setOnClickListener {
+
+            wishClick(lahanga.id)
+
+            if (wishListIds.contains(lahanga.id)) {
+                wishListIds.remove(lahanga.id)
+            } else {
+                wishListIds.add(lahanga.id)
+            }
+
+            notifyItemChanged(position)
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateWishList(ids: List<Int>) {
+        wishListIds.clear()
+        wishListIds.addAll(ids)
+        notifyDataSetChanged()
     }
 
     fun calculateDiscountPercentage(actualPrice: Double, sellingPrice: Double): Int {

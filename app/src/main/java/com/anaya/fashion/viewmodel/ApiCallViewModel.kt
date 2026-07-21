@@ -48,12 +48,17 @@ class ApiCallViewModel(
     val wishListStateState: MutableLiveData<Boolean>
         get() = _wishListState
 
+    private val _wishListIds = MutableLiveData<List<Int>>()
+    val wishListIds: MutableLiveData<List<Int>>
+        get() = _wishListIds
+
     fun getLahangaList(fromWhichScreen: String) {
         viewModelScope.launch(Dispatchers.IO) {
             _screenState.postValue(ApiCallState.Loading)
             try {
-                // Remote API
-                //val response = repository.getComputerListFromRetrofit()
+                // Fetch wish list ids first or concurrently to show fav icons correctly
+                val wishList = wishRepository.getWishList()
+                _wishListIds.postValue(wishList.map { it.id })
 
                 // Use Local Room DB
                 val lahangaList = cartRepository.getLahangaListFromRoomDb(fromWhichScreen)
@@ -105,20 +110,38 @@ class ApiCallViewModel(
     }
 
     fun handleWishList() {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                if (isToAddInWishlist()) {
-                    wishRepository.deleteWishListItem(productDetails!!)
-                    Log.d(Constants.TAG, "Item is removed from wish list: $productDetails")
-                    _wishListState.postValue(false)
-                } else {
-                    wishRepository.addToWish(productDetails!!)
-                    Log.d(Constants.TAG, "Item added to wish list: $productDetails")
-                    _wishListState.postValue(true)
-                }
-            } catch (e: Exception) {
-                Log.e(Constants.TAG, "Error adding item to wish list: ${e.message}")
+        productDetails?.let {
+            viewModelScope.launch(Dispatchers.IO) {
+                toggleWishList(it)
             }
+        }
+    }
+
+    fun toggleWishListById(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val details = cartRepository.getLahangaDetails(id)
+            details?.let {
+                toggleWishList(it)
+            }
+        }
+    }
+
+    private suspend fun toggleWishList(details: LahangaDetails) {
+        try {
+            if (wishRepository.isAlreadyAddedInWishList(details)) {
+                wishRepository.deleteWishListItem(details)
+                Log.d(Constants.TAG, "Item is removed from wish list: $details")
+                _wishListState.postValue(false)
+            } else {
+                wishRepository.addToWish(details)
+                Log.d(Constants.TAG, "Item added to wish list: $details")
+                _wishListState.postValue(true)
+            }
+            // Update the full wish list ids as well
+            val wishList = wishRepository.getWishList()
+            _wishListIds.postValue(wishList.map { it.id })
+        } catch (e: Exception) {
+            Log.e(Constants.TAG, "Error handling wish list: ${e.message}")
         }
     }
 

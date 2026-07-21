@@ -54,20 +54,26 @@ class LahangaListActivity : AppCompatActivity() {
         recyclerView.layoutManager = GridLayoutManager(this, 2)
 
 
-        val adapter = LahangaRecyclerViewAdapter(arrayListOf()) {
+        val adapter = LahangaRecyclerViewAdapter(
+            arrayListOf(),
+            { id ->
+                startActivity(
+                    Intent(this, LahangaDetailsActivity::class.java)
+                        .putExtra("id", id)
+                )
+            },
 
-            startActivity(
-                Intent(
-                    this,
-                    LahangaDetailsActivity::class.java
-                ).putExtra("id", it)
-            )
-
-        }
+            { productId ->
+                apiCallViewModel.toggleWishListById(productId)
+            }
+        )
 
 
         recyclerView.adapter = adapter
 
+        apiCallViewModel.wishListIds.observe(this) { ids ->
+            adapter.updateWishList(ids)
+        }
 
         apiCallViewModel.screenState.observe(this) { state ->
             when (state) {
