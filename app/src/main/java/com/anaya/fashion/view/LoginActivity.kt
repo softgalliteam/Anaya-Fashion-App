@@ -87,16 +87,16 @@ class LoginActivity : AppCompatActivity() {
         binding.sendOtpBtn.setOnClickListener {
 
             val phoneNumber =
-                binding.phoneNumberEt.text.toString().trim()
+                binding.etMobileNumber.text.toString().trim()
 
             when {
                 phoneNumber.isEmpty() -> {
-                    binding.phoneNumberEt.error =
+                    binding.etMobileNumber.error =
                         "Enter mobile number"
                 }
 
                 phoneNumber.length != 10 -> {
-                    binding.phoneNumberEt.error =
+                    binding.etMobileNumber.error =
                         "Enter valid 10 digit number"
                 }
 
@@ -110,16 +110,16 @@ class LoginActivity : AppCompatActivity() {
         binding.verifyOtpBtn.setOnClickListener {
 
             val otp =
-                binding.verifyOtpEt.text.toString().trim()
+                binding.verifyOtpBtn.text.toString().trim()
 
             when {
                 otp.isEmpty() -> {
-                    binding.verifyOtpEt.error =
+                    binding.tvVerifyNumber.error =
                         "Enter OTP"
                 }
 
                 otp.length != 6 -> {
-                    binding.verifyOtpEt.error =
+                    binding.tvVerifyNumber.error =
                         "Enter valid OTP"
                 }
 
@@ -132,7 +132,7 @@ class LoginActivity : AppCompatActivity() {
         binding.resendOtpBtn.setOnClickListener {
 
             val phoneNumber =
-                binding.phoneNumberEt.text.toString().trim()
+                binding.etMobileNumber.text.toString().trim()
 
             if (phoneNumber.length == 10) {
                 sendOtp("+91$phoneNumber")
@@ -192,7 +192,7 @@ class LoginActivity : AppCompatActivity() {
 
                 binding.sendOtpBtn.isEnabled = true
 
-                binding.verifyOtpTil.visibility =
+                binding.otpInputContainer.visibility =
                     View.VISIBLE
 
                 binding.verifyOtpBtn.visibility =
@@ -207,6 +207,57 @@ class LoginActivity : AppCompatActivity() {
                 ).show()
             }
         }
+
+//MOVE TO VERIFY OTP SCREEN
+
+//    private fun setupOtpAutoMove() {
+//
+//        val otpFields = listOf(
+//            binding.otp1,
+//            binding.otp2,
+//            binding.otp3,
+//            binding.otp4,
+//            binding.otp5,
+//            binding.otp6
+//        )
+//
+//        otpFields.forEachIndexed { index, editText ->
+//
+//            editText.addTextChangedListener(
+//                object : TextWatcher {
+//
+//                    override fun beforeTextChanged(
+//                        s: CharSequence?,
+//                        start: Int,
+//                        count: Int,
+//                        after: Int
+//                    ) {
+//                    }
+//
+//                    override fun onTextChanged(
+//                        s: CharSequence?,
+//                        start: Int,
+//                        before: Int,
+//                        count: Int
+//                    ) {
+//                    }
+//
+//                    override fun afterTextChanged(
+//                        s: Editable?
+//                    ) {
+//
+//                        if (s?.length == 1 &&
+//                            index < otpFields.size - 1
+//                        ) {
+//
+//                            // Move cursor to next OTP box
+//                            otpFields[index + 1].requestFocus()
+//                        }
+//                    }
+//                }
+//            )
+//        }
+//    }
 
     private fun sendOtp(phoneNumber: String) {
 
@@ -461,3 +512,4 @@ class LoginActivity : AppCompatActivity() {
 
     }
 }
+

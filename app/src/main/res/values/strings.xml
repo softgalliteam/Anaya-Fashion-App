@@ -53,6 +53,8 @@
     <string name="default_web_client_id">1030712514687-ug2dapkq8e5gimmgghm1bhdakfc7shdd.apps.googleusercontent.com</string>
     <string name="Logout">Logout</string>
     <string name="logout">Logout</string>
-    <string name="total_0">Total : ₹0</string>">
+    <string name="total_0">Total : ₹0</string>
+    <string name="Anaya" />
+    <string name="ANAYA">ANAYA</string>">
 
 </resources>
