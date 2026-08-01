@@ -16,4 +16,7 @@
     <color name="Alice_Blue">#DCEBFF</color>
     <color name="Platinum">#E4E4E4</color>
     <color name="Grayish_tones">#F7F3EA</color>
+    <color name="color_grey">#333333</color>
+    <color name="color_dark_grey">#151515</color>
+    <color name="color_light_grey">#DDDDDD</color>
 </resources>

@@ -6,4 +6,5 @@
     <dimen name="margin_50dp">50dp</dimen>
     <dimen name="margin_8dp">8dp</dimen>
     <dimen name="grid_radius">8dp</dimen>
+    <dimen name="button_text_size">16sp</dimen>
 </resources>

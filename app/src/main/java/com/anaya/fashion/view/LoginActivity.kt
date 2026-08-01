@@ -3,17 +3,19 @@ package com.anaya.fashion.view
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.postDelayed
 import androidx.credentials.ClearCredentialStateRequest
 import androidx.credentials.CredentialManager
 import androidx.credentials.GetCredentialRequest
 import androidx.credentials.exceptions.GetCredentialException
 import androidx.lifecycle.lifecycleScope
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.anaya.fashion.R
 import com.anaya.fashion.databinding.LoginActivityBinding
 import com.anaya.fashion.utils.SessionManager
@@ -26,19 +28,12 @@ import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import okhttp3.internal.http2.Http2Reader
 import java.util.concurrent.TimeUnit
-import android.os.Handler
-import androidx.work.Constraints
-import androidx.work.NetworkType
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.async
 
 class LoginActivity : AppCompatActivity() {
 
@@ -109,8 +104,11 @@ class LoginActivity : AppCompatActivity() {
 
         binding.verifyOtpBtn.setOnClickListener {
 
-            val otp =
-                binding.verifyOtpBtn.text.toString().trim()
+            val otp = "${binding.otp1.text.toString().trim()}${
+                binding.otp2.text.toString().trim()
+            }${binding.otp3.text.toString().trim()}${binding.otp4.text.toString().trim()}${
+                binding.otp5.text.toString().trim()
+            }${binding.otp6.text.toString().trim()}"
 
             when {
                 otp.isEmpty() -> {
@@ -192,11 +190,8 @@ class LoginActivity : AppCompatActivity() {
 
                 binding.sendOtpBtn.isEnabled = true
 
-                binding.otpInputContainer.visibility =
-                    View.VISIBLE
-
-                binding.verifyOtpBtn.visibility =
-                    View.VISIBLE
+                binding.sendOtpContainer.visibility = View.GONE
+                binding.verifyOtpContainer.visibility = View.VISIBLE
 
                 startOtpTimer()
 
@@ -431,7 +426,8 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     val user = firebaseAuth.currentUser
-                    Toast.makeText(this, "Welcome ${user?.displayName}!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Welcome ${user?.displayName}!", Toast.LENGTH_SHORT)
+                        .show()
                     SessionManager.saveLogin()
                     startActivity(Intent(this, DashboardActivity::class.java))
                     finish()

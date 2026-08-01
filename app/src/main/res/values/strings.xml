@@ -55,6 +55,11 @@
     <string name="logout">Logout</string>
     <string name="total_0">Total : ₹0</string>
     <string name="Anaya" />
-    <string name="ANAYA">ANAYA</string>">
+    <string name="ANAYA">ANAYA</string>
+    <string name="welcome_to_anaya">Welcome to Anaya</string>
+    <string name="discover_your_perfect_look_made_for_you">Discover your perfect look, made for you.</string>
+    <string name="plus_91">+91</string>
+    <string name="country_code_india">🇮🇳</string>
+    ">
 
 </resources>
