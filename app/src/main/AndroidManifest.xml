@@ -41,6 +41,13 @@
         <activity android:name="com.anaya.fashion.view.BuyActivity" />
 
 
+        <activity android:name="com.anaya.fashion.view.ActivityA"
+            android:launchMode="singleInstance"/>
+        <activity android:name="com.anaya.fashion.view.ActivityB" />
+        <activity android:name="com.anaya.fashion.view.ActivityC" />
+        <activity android:name="com.anaya.fashion.view.ActivityD" />
+
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
