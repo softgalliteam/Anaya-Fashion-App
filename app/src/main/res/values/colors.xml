@@ -19,4 +19,5 @@
     <color name="color_grey">#333333</color>
     <color name="color_dark_grey">#151515</color>
     <color name="color_light_grey">#DDDDDD</color>
+    <color name="cream">#FFFDF8</color>
 </resources>
