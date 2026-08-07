@@ -10,11 +10,13 @@ import android.location.Geocoder
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
 import java.util.Locale
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.RequiresPermission
 import androidx.fragment.app.Fragment
 import com.anaya.fashion.databinding.FragmentProfileBinding
@@ -43,16 +45,7 @@ class ProfileFragment : Fragment() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
-    private val requestLocationPermission =
-        registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) { granted ->
-            if (granted) {
-                fetchLocation()
-            } else {
-                showSnackbar("Location permission is required to fetch address")
-            }
-        }
+    private lateinit var requestLocationPermission: ActivityResultLauncher<String>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -80,6 +73,23 @@ class ProfileFragment : Fragment() {
     private fun initializeViews() {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+
+        // Register the permission launcher here (lifecycle-safe)
+        requestLocationPermission = registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { granted ->
+            if (granted) {
+                // Double-check permission before calling to satisfy lint
+                if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+                    fetchLocation()
+                } else {
+                    showSnackbar("Location permission is required to fetch address")
+                }
+            } else {
+                showSnackbar("Location permission is required to fetch address")
+            }
+        }
 
         mBinding.nameET.setText(
             UserProfileManager.userName ?: ""
@@ -218,20 +228,39 @@ class ProfileFragment : Fragment() {
 
     @RequiresPermission(allOf = [Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION])
     private fun fetchLocation() {
+        // Double-check permission at runtime to satisfy lint and avoid SecurityException
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED) {
+            showSnackbar("Location permission is required to fetch address")
+            return
+        }
         try {
             fusedLocationClient.lastLocation
                 .addOnSuccessListener { location ->
                     if (location != null) {
-                        val geocoder = Geocoder(requireContext(), Locale.getDefault())
-                        val addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1)
-                        if (!addresses.isNullOrEmpty()) {
-                            val addressLine = addresses[0].getAddressLine(0)
-                            mBinding.addressET.setText(addressLine)
-                        } else {
-                            showSnackbar("Unable to get address from location")
-                        }
+                        // We have a last known location
+                        reverseGeocodeAndFill(location.latitude, location.longitude)
                     } else {
-                        showSnackbar("Unable to fetch current location")
+                        // lastLocation is null on some devices (common on fresh boot or when location is off)
+                        // Try to get a current location fix as a fallback
+                        try {
+                            fusedLocationClient.getCurrentLocation(
+                                Priority.PRIORITY_HIGH_ACCURACY,
+                                null
+                            ).addOnSuccessListener { currentLoc ->
+                                if (currentLoc != null) {
+                                    reverseGeocodeAndFill(currentLoc.latitude, currentLoc.longitude)
+                                } else {
+                                    showSnackbar("Unable to fetch current location")
+                                }
+                            }.addOnFailureListener { ex ->
+                                ex.printStackTrace()
+                                showSnackbar("Failed to get current location: ${ex.message}")
+                            }
+                        } catch (ex: Exception) {
+                            ex.printStackTrace()
+                            showSnackbar("Unable to fetch current location")
+                        }
                     }
                 }
                 .addOnFailureListener { ex ->
@@ -241,6 +270,22 @@ class ProfileFragment : Fragment() {
         } catch (e: Exception) {
             e.printStackTrace()
             showSnackbar("Error fetching location")
+        }
+    }
+
+    private fun reverseGeocodeAndFill(lat: Double, lon: Double) {
+        try {
+            val geocoder = Geocoder(requireContext(), Locale.getDefault())
+            val addresses = geocoder.getFromLocation(lat, lon, 1)
+            if (!addresses.isNullOrEmpty()) {
+                val addressLine = addresses[0].getAddressLine(0)
+                mBinding.addressET.setText(addressLine)
+            } else {
+                showSnackbar("Unable to get address from location")
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            showSnackbar("Error resolving address")
         }
     }
 
