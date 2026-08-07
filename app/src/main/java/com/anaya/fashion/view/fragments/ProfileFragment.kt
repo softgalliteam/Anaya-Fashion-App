@@ -4,10 +4,18 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.Manifest
+import android.content.pm.PackageManager
+import android.location.Geocoder
+import androidx.core.content.ContextCompat
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import java.util.Locale
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresPermission
 import androidx.fragment.app.Fragment
 import com.anaya.fashion.databinding.FragmentProfileBinding
 import com.anaya.fashion.utils.SessionManager
@@ -30,6 +38,19 @@ class ProfileFragment : Fragment() {
             if (uri != null) {
                 mBinding.profileImageView.setImageURI(uri)
                 saveProfileImage(uri)
+            }
+        }
+
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
+    private val requestLocationPermission =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { granted ->
+            if (granted) {
+                fetchLocation()
+            } else {
+                showSnackbar("Location permission is required to fetch address")
             }
         }
 
@@ -58,6 +79,8 @@ class ProfileFragment : Fragment() {
 
     private fun initializeViews() {
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+
         mBinding.nameET.setText(
             UserProfileManager.userName ?: ""
         )
@@ -82,6 +105,21 @@ class ProfileFragment : Fragment() {
 
         mBinding.profileImageView.setOnClickListener {
             pickImage.launch("image/*")
+        }
+
+        mBinding.fetchLocationIv.setOnClickListener {
+            // Check permission
+            val permissionCheck = ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            )
+
+            if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
+                fetchLocation()
+            } else {
+                // Request permission
+                requestLocationPermission.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            }
         }
 
         loadProfileImage()
@@ -175,6 +213,34 @@ class ProfileFragment : Fragment() {
                     Uri.fromFile(file)
                 )
             }
+        }
+    }
+
+    @RequiresPermission(allOf = [Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION])
+    private fun fetchLocation() {
+        try {
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location ->
+                    if (location != null) {
+                        val geocoder = Geocoder(requireContext(), Locale.getDefault())
+                        val addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1)
+                        if (!addresses.isNullOrEmpty()) {
+                            val addressLine = addresses[0].getAddressLine(0)
+                            mBinding.addressET.setText(addressLine)
+                        } else {
+                            showSnackbar("Unable to get address from location")
+                        }
+                    } else {
+                        showSnackbar("Unable to fetch current location")
+                    }
+                }
+                .addOnFailureListener { ex ->
+                    ex.printStackTrace()
+                    showSnackbar("Failed to get location: ${ex.message}")
+                }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            showSnackbar("Error fetching location")
         }
     }
 

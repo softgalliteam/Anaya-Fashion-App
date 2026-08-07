@@ -93,6 +93,9 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth")
 
+    // Location services (FusedLocationProvider)
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+
     // Firebase Gmail Login
     implementation("androidx.credentials:credentials:1.3.0")
     implementation("androidx.credentials:credentials-play-services-auth:1.3.0")
