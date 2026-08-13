@@ -61,6 +61,19 @@
     <string name="discover_your_perfect_look_made_for_you">Discover your perfect look, made for you.</string>
     <string name="plus_91">+91</string>
     <string name="country_code_india">🇮🇳</string>
-    ">
-
+    <string name="google">Google</string>
+    <string name="text_google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="fasbook">Fasbook</string>
+    <string name="by_continuing_you_agree_to_our_terms_amp_privacy_policy"><![CDATA[By continuing, you agree to our Terms & Privacy Policy.]]></string>
+    <string name="verify_your_number">Verify your number</string>
+    <string name="otp_sent_to_91_xxxxxxxx">OTP sent to +91 XXXXXXXX</string>
+    <string name="verify_amp_continue"><![CDATA[Verify & Continue]]></string>
+    <string name="resend_otp_in_00_28">Resend OTP in 00:28</string>
+    <string name="_60_sec">60 sec</string>
+    <string name="change_phone_number">Change phone number</string>
+    <string name="or">OR</string>
+    <string name="anaya_logo">ANAYA</string>
+    <string name="fashion_logo">FASHION</string>
+    <string name="timeless_elegance_wedding_party_wear">Timeless Elegance • Wedding • Party Wear</string>
 </resources>

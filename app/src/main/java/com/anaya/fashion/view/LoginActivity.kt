@@ -55,8 +55,6 @@ class LoginActivity : AppCompatActivity() {
 
         binding = LoginActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //performBackgroundTask()
-        workManagerExample()
         firebaseAuth = FirebaseAuth.getInstance()
         // Initialize Firebase Auth and Credential Manager
         //firebaseAuth = Firebase.auth
@@ -447,65 +445,6 @@ class LoginActivity : AppCompatActivity() {
             credentialManager.clearCredentialState(ClearCredentialStateRequest())
         }
     }
-
-
-    var i = 0
-
-    /*
-    Just for learning - Work Manager and Coroutines
-    */
-    fun performBackgroundTask() {
-        // Coroutine to perform a long-running task in the background also
-        // we can define the thread to run the task using Dispatchers.IO for I/O operations
-        //Scopes: 1. GlobalScope, 2. ViewModelScope, 3. LifecycleScope, 4. CoroutineScope
-        // GlobalScope is not recommended for long-running tasks as it is not tied to the lifecycle of any component and can lead to memory leaks.
-        // viewModelScope is tied to the lifecycle of a ViewModel and is suitable for tasks that should be canceled when the ViewModel is cleared.
-        // lifecycleScope is tied to the lifecycle of a component (like an Activity or Fragment) and is suitable for tasks that should be canceled when the component is destroyed.
-        // CoroutineScope can be used to create a custom scope for coroutines, allowing you to manage their lifecycle manually.
-
-        /*val job: Job = lifecycleScope.launch(Dispatchers.IO) {
-            // Simulate a long-running task
-            while (i < 1000) {
-                delay(1 * 1000) // 1 Sec
-                Log.d(TAG, "Download completed: $i %")
-                i++
-            }
-        }*/
-
-        val job: Deferred<String> = lifecycleScope.async(Dispatchers.IO) {
-            // Simulate a long-running task
-            while (i < 10) {
-                delay(1 * 1000) // 1 Sec
-                Log.d(TAG, "Download completed: $i %")
-                i++
-            }
-            "Download completed successfully"
-        }
-
-// cancel after 20 seconds using Handler postdelay
-        Handler(Looper.getMainLooper()).postDelayed({
-            // Your delayed code executes here on the Main Thread
-            Log.d(TAG, job.getCompleted() ?: "Job not completed yet")
-        }, 20 * 1000)
-
-    }
-
-
-    fun workManagerExample() {
-        // WorkManager is an API that makes it easy to schedule task, asynchronous tasks that are expected to run even if the app exits or the device restarts.
-        // It is suitable for tasks that require guaranteed execution, such as uploading logs or syncing data with a server.
-        // WorkManager is part of Android Jetpack and provides a unified way to manage background work across different Android versions.
-
-        val workRequest = OneTimeWorkRequestBuilder<MyWorker>()
-            .setInitialDelay(10, TimeUnit.SECONDS) // Delay before starting the work
-            .addTag("MyWorkManager")
-            .build()
-
-        WorkManager.getInstance(this).enqueue(workRequest)
-        // Use getWorkInfosByTagLiveData or getWorkInfoByIdLiveData to observe the status of the work request and update the UI accordingly.
-        // Implement it in the future if needed
-
-
-    }
 }
+
 

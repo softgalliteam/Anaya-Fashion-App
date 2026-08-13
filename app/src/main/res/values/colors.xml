@@ -20,4 +20,12 @@
     <color name="color_dark_grey">#151515</color>
     <color name="color_light_grey">#DDDDDD</color>
     <color name="cream">#FFFDF8</color>
+    <color name="cream_light">#C9545252</color>
+    <color name="Matte_Black">#171717</color>
+    <color name="dark_gray_brown">#55504B</color>
+    <color name="dusty_lavender_gray">#A9A4AC</color>
+    <color name="Polar_Fleece">#D8D0C5</color>
+    <color name="Nero">#222222</color>
+    <color name="Chinese_Silver">#C9C4C8</color>
+    <color name="Granite_Gray">#69635D</color>
 </resources>
