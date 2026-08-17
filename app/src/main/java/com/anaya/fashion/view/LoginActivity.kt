@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
 import android.os.Looper
+import android.text.Editable
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -34,6 +35,8 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
+import android.text.TextWatcher
+import android.view.KeyEvent
 
 class LoginActivity : AppCompatActivity() {
 
@@ -41,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
         private const val TAG = "LoginActivity"
     }
 
-    private lateinit var binding: LoginActivityBinding
+    lateinit var binding: LoginActivityBinding
     private lateinit var firebaseAuth: FirebaseAuth
 
     private var storedVerificationId: String? = null
@@ -73,6 +76,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         setupClickListeners()
+        setupOtpAutoMove()
     }
 
     private fun setupClickListeners() {
@@ -191,6 +195,8 @@ class LoginActivity : AppCompatActivity() {
                 binding.sendOtpContainer.visibility = View.GONE
                 binding.verifyOtpContainer.visibility = View.VISIBLE
 
+                binding.otp1.requestFocus()
+
                 startOtpTimer()
 
                 Toast.makeText(
@@ -202,55 +208,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
 //MOVE TO VERIFY OTP SCREEN
-
-//    private fun setupOtpAutoMove() {
-//
-//        val otpFields = listOf(
-//            binding.otp1,
-//            binding.otp2,
-//            binding.otp3,
-//            binding.otp4,
-//            binding.otp5,
-//            binding.otp6
-//        )
-//
-//        otpFields.forEachIndexed { index, editText ->
-//
-//            editText.addTextChangedListener(
-//                object : TextWatcher {
-//
-//                    override fun beforeTextChanged(
-//                        s: CharSequence?,
-//                        start: Int,
-//                        count: Int,
-//                        after: Int
-//                    ) {
-//                    }
-//
-//                    override fun onTextChanged(
-//                        s: CharSequence?,
-//                        start: Int,
-//                        before: Int,
-//                        count: Int
-//                    ) {
-//                    }
-//
-//                    override fun afterTextChanged(
-//                        s: Editable?
-//                    ) {
-//
-//                        if (s?.length == 1 &&
-//                            index < otpFields.size - 1
-//                        ) {
-//
-//                            // Move cursor to next OTP box
-//                            otpFields[index + 1].requestFocus()
-//                        }
-//                    }
-//                }
-//            )
-//        }
-//    }
 
     private fun sendOtp(phoneNumber: String) {
 
@@ -442,9 +399,84 @@ class LoginActivity : AppCompatActivity() {
 
         // Clear credential cache from the device
         CoroutineScope(Dispatchers.Main).launch {
-            credentialManager.clearCredentialState(ClearCredentialStateRequest())
+            credentialManager.clearCredentialState(ClearCredentialStateRequest()
+            )
         }
     }
+
+    // OTP AUTO MOVE
+    private fun setupOtpAutoMove() {
+
+        val otpFields = listOf(
+            binding.otp1,
+            binding.otp2,
+            binding.otp3,
+            binding.otp4,
+            binding.otp5,
+            binding.otp6
+        )
+
+        otpFields.forEachIndexed { index, editText ->
+
+            editText.addTextChangedListener(
+                object : TextWatcher {
+
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+                    }
+
+                    override fun afterTextChanged(
+                        s: Editable?
+                    ) {
+
+                        // If user enters one digit
+                        if (s?.length == 1 &&
+                            index < otpFields.size - 1
+                        ) {
+
+                            // Move to next OTP box
+                            otpFields[index + 1].requestFocus()
+                        }
+                    }
+                }
+            )
+
+            editText.setOnKeyListener { _, keyCode, event ->
+
+                // Backspace
+                if (
+                    keyCode == KeyEvent.KEYCODE_DEL &&
+                    event.action == KeyEvent.ACTION_DOWN
+                ) {
+
+                    // If current box is empty,
+                    // move to previous box
+                    if (
+                        editText.text?.isEmpty() == true &&
+                        index > 0
+                    ) {
+
+                        otpFields[index - 1].requestFocus()
+                    }
+                }
+
+                false
+            }
+        }
+    }
+
 }
 
 

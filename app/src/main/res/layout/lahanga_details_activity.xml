@@ -11,7 +11,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/commonToolbar"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="20dp"
         android:elevation="4dp"
         app:navigationIcon="@drawable/arrow_back"
         app:titleTextColor="@android:color/black"
@@ -35,13 +35,13 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="wrap_content"
                 app:navigationIcon="@drawable/arrow_back">
 
                 <com.denzcoskun.imageslider.ImageSlider
                     android:id="@+id/imageSlider"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="480dp"
                     android:scaleType="centerCrop"
                     app:iss_auto_cycle="false" />
 

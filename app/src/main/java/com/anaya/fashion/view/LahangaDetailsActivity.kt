@@ -41,8 +41,6 @@ class LahangaDetailsActivity : BaseActivity() {
         productId = intent.getIntExtra("id", 0)
         apiCallViewModel.getLahangaDetails(productId)
 
-        handleSliderView()
-
         handleButtonClicks()
 
         apiCallViewModel.wishListStateState.observe(this) { isWishListed ->
@@ -96,14 +94,6 @@ class LahangaDetailsActivity : BaseActivity() {
     }
 
 
-    fun updateUI(lahangaDetails: LahangaDetails) {
-
-        currentProduct = lahangaDetails
-
-        mBinding.priceTv.text = lahangaDetails.price.toString()
-        mBinding.titleTv.text = lahangaDetails.name
-        mBinding.descriptionTv.text = lahangaDetails.description
-    }
 
     private fun handleButtonClicks() {
 
@@ -151,35 +141,28 @@ class LahangaDetailsActivity : BaseActivity() {
         }
     }
 
-    private fun handleSliderView() {
-        val imageSlider = mBinding.imageSlider
+    fun updateUI(lahangaDetails: LahangaDetails) {
+
+        currentProduct = lahangaDetails
+
+        mBinding.priceTv.text = lahangaDetails.price.toString()
+        mBinding.titleTv.text = lahangaDetails.name
+        mBinding.descriptionTv.text = lahangaDetails.description
+
+        // Set product images dynamically
         val imageList = ArrayList<SlideModel>()
 
-        imageList.add(
-            SlideModel(
-                imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
-
+        lahangaDetails.imageList.forEach { imageUrl ->
+            imageList.add(
+                SlideModel(
+                    imageUrl = imageUrl
                 )
-        )
-        imageList.add(
-            SlideModel(
-                imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
+            )
+        }
 
-                )
+        mBinding.imageSlider.setImageList(
+            imageList,
+            ScaleTypes.FIT
         )
-        imageList.add(
-            SlideModel(
-                imageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpl2oVGj-WU14UHxKPxkM2KAj3g6cB55uO3Q&s",
-
-                )
-        )
-        imageList.add(
-            SlideModel(
-                imageUrl = "https://www.papadontpreach.com/cdn/shop/files/Website-resized-kinjal-1.jpg?v=1750320811&width=823",
-
-                )
-        )
-
-        imageSlider.setImageList(imageList, ScaleTypes.FIT)
     }
 }

@@ -38,11 +38,15 @@ class BuyRecyclerViewAdapter(
         holder.priceTv.text = "₹ ${cartItem.price}"
 
 
-        Picasso.get()
-            .load(cartItem.imageUrl)
-            .placeholder(R.drawable.loading_spinner)
-            .error(R.drawable.transparent_logo)
-            .into(holder.productIv)
+        if (cartItem.imageUrl.isNotEmpty()) {
+            Picasso.get()
+                .load(cartItem.imageUrl)
+                .placeholder(R.drawable.loading_spinner)
+                .error(R.drawable.transparent_logo)
+                .into(holder.productIv)
+        } else {
+            holder.productIv.setImageResource(R.drawable.transparent_logo)
+        }
 
 
         holder.itemView.setOnClickListener {

@@ -50,15 +50,19 @@ class LahangaRecyclerViewAdapter(
         holder.badgeTv.text =
             if (lahanga.isBestSeller) "BEST SELLER" else "$discountPercentage% off"
 
-        Picasso.get()
-            .load(lahanga.imageUrl)
-            .placeholder(
-                R.drawable.loading_spinner
-            )
-            .error(
-                R.drawable.transparent_logo
-            )
-            .into(holder.compIamge)
+        if (lahanga.imageUrl.isNotEmpty()) {
+            Picasso.get()
+                .load(lahanga.imageUrl)
+                .placeholder(
+                    R.drawable.loading_spinner
+                )
+                .error(
+                    R.drawable.transparent_logo
+                )
+                .into(holder.compIamge)
+        } else {
+            holder.compIamge.setImageResource(R.drawable.transparent_logo)
+        }
 
         holder.compIamge.setOnClickListener {
             onClickListener(

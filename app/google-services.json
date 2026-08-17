@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "1030712514687-3paomuq9b2m0egqlo9fpagqb2g59u44j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anaya.fashion",
+            "certificate_hash": "a2fc01fec362218534893a50c8edcb58b9c6dcfa"
+          }
+        },
+        {
+          "client_id": "1030712514687-6i8g5suh5h6id27d9bbf5d6d930ahgj6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anaya.fashion",
+            "certificate_hash": "94469d99ee225a19fdb30c0d5f64a0840bd80d3e"
+          }
+        },
+        {
           "client_id": "1030712514687-n88mvrjdpgrhlq1o8h3f8cp3vc8muhap.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
