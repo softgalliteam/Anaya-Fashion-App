@@ -38,11 +38,15 @@ class CartRecyclerViewAdapter(
         holder.actualPriceTv.text = "₹ $actualPrice"
         holder.discountTv.text = "$discountPercentage% off"
 
-        Picasso.get()
-            .load(item.imageUrl)
-            .placeholder(R.drawable.loading_spinner)
-            .error(R.drawable.transparent_logo)
-            .into(holder.compImage)
+        if (item.imageUrl.isNotEmpty()) {
+            Picasso.get()
+                .load(item.imageUrl)
+                .placeholder(R.drawable.loading_spinner)
+                .error(R.drawable.transparent_logo)
+                .into(holder.compImage)
+        } else {
+            holder.compImage.setImageResource(R.drawable.transparent_logo)
+        }
 
         holder.compImage.setOnClickListener {
             onItemClick(item.id)

@@ -39,11 +39,15 @@ class WishRecyclerViewAdapter(
         holder.actualPriceTv.text = "₹ $actualPrice"
         holder.discountTv.text = "$discountPercentage% off"
 
-        Picasso.get()
-            .load(lahanga.imageUrl)
-            .placeholder(R.drawable.loading_spinner)
-            .error(R.drawable.transparent_logo)
-            .into(holder.compIamge)
+        if (lahanga.imageUrl.isNotEmpty()) {
+            Picasso.get()
+                .load(lahanga.imageUrl)
+                .placeholder(R.drawable.loading_spinner)
+                .error(R.drawable.transparent_logo)
+                .into(holder.compIamge)
+        } else {
+            holder.compIamge.setImageResource(R.drawable.transparent_logo)
+        }
 
         holder.compIamge.setOnClickListener {
             onClickListener(lahanga.id)
