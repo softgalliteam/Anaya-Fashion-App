@@ -22,7 +22,7 @@
             android:value="ca-app-pub-3940256099942544~3347511713" />
 
         <activity
-            android:name="com.anaya.fashion.view.SplashActivity"
+            android:name=".view.navcontroller.NavActivity"
             android:exported="true">
 
             <intent-filter>

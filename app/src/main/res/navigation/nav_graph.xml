@@ -3,48 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/callFragment">
+    app:startDestination="@id/homeFragment"> <!-- Defines the launch screen -->
 
+    <!-- Home Fragment Destination -->
     <fragment
-        android:id="@+id/callFragment"
-        android:name="com.learning.exp.fragments.SharedPrefFragment"
-        tools:layout="@layout/call_fragment">
+        android:id="@+id/homeFragment"
+        android:name="com.anaya.fashion.view.navcontroller.DashboardFragment"
+        android:label="Home"
+        tools:layout="@layout/dashboard_fragment">
 
+        <!-- Action to navigate to Detail Fragment -->
         <action
-            android:id="@+id/action_call_to_status"
-            app:destination="@id/statusFragment" />
-
-        <action
-            android:id="@+id/action_call_to_chat"
-            app:destination="@id/chatFragment" />
+            android:id="@+id/action_homeFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
 
+    <!-- Detail Fragment Destination -->
     <fragment
-        android:id="@+id/chatFragment"
-        android:name="com.learning.exp.fragments.RoomDbFragment"
-        tools:layout="@layout/chat_fragment">
-
-        <action
-            android:id="@+id/action_chat_to_call"
-            app:destination="@id/callFragment" />
-
-        <action
-            android:id="@+id/action_chat_to_status"
-            app:destination="@id/statusFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/statusFragment"
-        android:name="com.learning.exp.fragments.FileStorageFragment"
-        tools:layout="@layout/status_fragment">
-
-        <action
-            android:id="@+id/action_status_to_call"
-            app:destination="@id/callFragment" />
-
-        <action
-            android:id="@+id/action_status_to_chat"
-            app:destination="@id/chatFragment" />
-    </fragment>
-
+        android:id="@+id/detailFragment"
+        android:name="com.anaya.fashion.view.navcontroller.DetailsFragment"
+        android:label="Details"
+        tools:layout="@layout/details_fragment" />
 </navigation>
