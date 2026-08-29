@@ -235,9 +235,9 @@ object LahangaDataProvider {
 
         LahangaResponseDataItem(
             id = 21,
-            name = "Printed Semi Stitched Lehenga Choli",
-            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
-            sellingPrice = 7000,
+            name = "Off White Sherwani with Collar and Sleeve Embroidered",
+            imageUrl = "https://ihtifal.in/cdn/shop/files/ETERNALSHERWANIFORGROOM1.webp?v=1747227369&width=1206",
+            sellingPrice = 12000,
             actualPrice = 9000,
             isBestSeller = false,
             isLehanga = false,
@@ -246,8 +246,19 @@ object LahangaDataProvider {
 
         LahangaResponseDataItem(
             id = 22,
-            name = "Printed Semi Stitched Lehenga Choli",
-            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
+            name = "Off White Sherwani with Collar and Sleeve Embroidered",
+            imageUrl = "https://ihtifal.in/cdn/shop/files/OffWhiteSherwaniwithCollarandSleeveEmbroidered1.webp?v=1749552360&width=1206",
+            sellingPrice = 11000,
+            actualPrice = 9000,
+            isBestSeller = false,
+            isLehanga = false,
+            colors = listOf(R.color.red, R.color.black, R.color.purple, R.color.yellow),
+        ),
+
+        LahangaResponseDataItem(
+            id = 23,
+            name = "Cream Silk Sherwani with Zardoshi, Resham & Kasab Work",
+            imageUrl = "https://shreeman.in/cdn/shop/files/1J8A1337.jpg?v=1768565237&width=1400",
             sellingPrice = 7000,
             actualPrice = 9000,
             isBestSeller = false,
@@ -256,9 +267,20 @@ object LahangaDataProvider {
         ),
 
         LahangaResponseDataItem(
-            id = 21,
-            name = "Printed Semi Stitched Lehenga Choli",
-            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
+            id = 24,
+            name = "Off White Silk Sherwani",
+            imageUrl = "https://shreeman.in/cdn/shop/files/1J8A0750.jpg?v=1740806984&width=1400",
+            sellingPrice = 6000,
+            actualPrice = 9000,
+            isBestSeller = false,
+            isLehanga = false,
+            colors = listOf(R.color.red, R.color.black, R.color.purple, R.color.yellow),
+        ),
+
+        LahangaResponseDataItem(
+            id = 25,
+            name = "Ice Blue Silk Indo Western ",
+            imageUrl = "https://shreeman.in/cdn/shop/files/1J8A1050.jpg?v=1740463593&width=1400",
             sellingPrice = 7000,
             actualPrice = 9000,
             isBestSeller = false,
@@ -267,9 +289,9 @@ object LahangaDataProvider {
         ),
 
         LahangaResponseDataItem(
-            id = 21,
-            name = "Printed Semi Stitched Lehenga Choli",
-            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
+            id = 26,
+            name = "Black Silk Indo Western Sherwani",
+            imageUrl = "https://shreeman.in/cdn/shop/files/1J8A0996.jpg?v=1740462841&width=1400",
             sellingPrice = 7000,
             actualPrice = 9000,
             isBestSeller = false,
@@ -278,9 +300,30 @@ object LahangaDataProvider {
         ),
 
         LahangaResponseDataItem(
-            id = 21,
-            name = "Printed Semi Stitched Lehenga Choli",
-            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
+            id = 27,
+            name = "Ivory Raw Silk Sherwani ",
+            imageUrl = "https://shreeman.in/cdn/shop/files/1J8A4220.jpg?v=1728558147&width=1400",
+            sellingPrice = 8000,
+            actualPrice = 9000,
+            isBestSeller = false,
+            isLehanga = false,
+            colors = listOf(R.color.red, R.color.black, R.color.purple, R.color.yellow),
+        ),
+
+        LahangaResponseDataItem(
+            id = 28,
+            name = "Ivory Raw Silk Sherwani with Thread and Bead Cutdana Work",
+            imageUrl = "https://shreeman.in/cdn/shop/files/1J8A4560.jpg?v=1733317904&width=1400",
+            sellingPrice = 10000,
+            actualPrice = 9000,
+            isBestSeller = false,
+            isLehanga = false,
+            colors = listOf(R.color.red, R.color.black, R.color.purple, R.color.yellow),
+        ),
+        LahangaResponseDataItem(
+            id = 29,
+            name = "Ivory Silk Indo Western with Jungle-Themed Thread Work",
+            imageUrl = "https://shreeman.in/cdn/shop/files/1J8A4456.jpg?v=1728561297&width=1400",
             sellingPrice = 7000,
             actualPrice = 9000,
             isBestSeller = false,
@@ -289,52 +332,9 @@ object LahangaDataProvider {
         ),
 
         LahangaResponseDataItem(
-            id = 21,
-            name = "Printed Semi Stitched Lehenga Choli",
-            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
-            sellingPrice = 7000,
-            actualPrice = 9000,
-            isBestSeller = false,
-            isLehanga = false,
-            colors = listOf(R.color.red, R.color.black, R.color.purple, R.color.yellow),
-        ),
-
-        LahangaResponseDataItem(
-            id = 21,
-            name = "Printed Semi Stitched Lehenga Choli",
-            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
-            sellingPrice = 7000,
-            actualPrice = 9000,
-            isBestSeller = false,
-            isLehanga = false,
-            colors = listOf(R.color.red, R.color.black, R.color.purple, R.color.yellow),
-        ),
-
-        LahangaResponseDataItem(
-            id = 21,
-            name = "Printed Semi Stitched Lehenga Choli",
-            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
-            sellingPrice = 7000,
-            actualPrice = 9000,
-            isBestSeller = false,
-            isLehanga = false,
-            colors = listOf(R.color.red, R.color.black, R.color.purple, R.color.yellow),
-        ),
-        LahangaResponseDataItem(
-            id = 21,
-            name = "Printed Semi Stitched Lehenga Choli",
-            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
-            sellingPrice = 7000,
-            actualPrice = 9000,
-            isBestSeller = false,
-            isLehanga = false,
-            colors = listOf(R.color.red, R.color.black, R.color.purple, R.color.yellow),
-        ),
-
-        LahangaResponseDataItem(
-            id = 21,
-            name = "Printed Semi Stitched Lehenga Choli",
-            imageUrl = "https://www.royalexport.in/product-img/heavy-faux-georgette-lehenga-c-1685429071.jpg",
+            id = 30,
+            name = "Golden Silk Tissue Sherwani with Resham Work",
+            imageUrl = "https://shreeman.in/cdn/shop/files/1J8A3260.jpg?v=1769776211&width=1400",
             sellingPrice = 7000,
             actualPrice = 9000,
             isBestSeller = false,
@@ -634,22 +634,165 @@ object LahangaDataProvider {
 
                 )
 
+//            FOR SHERWANI //
+
             21 -> LahangaDetails(
-                id = 20,
-                name = "Bridal Lehenga",
+                id = 21,
+                name = "Off White Sherwani with Collar and Sleeve Embroidered",
                 description = "Perfect for bridal events, grand weddings, receptions, engagement ceremonies, luxury parties, and other important celebrations.",
-                imageUrl = "https://rukminim2.flixcart.com/image/2940/2940/xif0q/lehenga-choli/n/h/w/free-sleeveless-sirat-purvaja-original-imah4ju5hcmsy9zf.jpeg?q=90",
+                imageUrl = "https://ihtifal.in/cdn/shop/files/ETERNALSHERWANIFORGROOM1.webp?v=1747227369&width=1206",
                 imageList = listOf(
-                    "https://rukminim2.flixcart.com/image/2940/2940/xif0q/lehenga-choli/n/h/w/free-sleeveless-sirat-purvaja-original-imah4ju5hcmsy9zf.jpeg?q=90",
-                    "https://rukminim2.flixcart.com/image/2940/2940/xif0q/lehenga-choli/c/e/0/free-sleeveless-sirat-purvaja-original-imah4ju5knhrsukq.jpeg?q=90",
-                    "https://rukminim2.flixcart.com/image/2940/2940/xif0q/lehenga-choli/p/x/i/free-sleeveless-sirat-purvaja-original-imah4ju5fp2wrcgh.jpeg?q=90",
-                    "https://rukminim2.flixcart.com/image/2940/2940/xif0q/lehenga-choli/7/t/z/free-sleeveless-sirat-purvaja-original-imah4ju53e6wq4rt.jpeg?q=90"
+                    "https://ihtifal.in/cdn/shop/files/ETERNALSHERWANIFORGROOM1.webp?v=1747227369&width=1206",
+                    "https://ihtifal.in/cdn/shop/files/ETERNALSHERWANIFORGROOM2.webp?v=1747227369&width=1206",
+                    "https://ihtifal.in/cdn/shop/files/ETERNALSHERWANIFORGROOM3.webp?v=1747227369&width=1206",
+                    "https://ihtifal.in/cdn/shop/files/ETERNALSHERWANIFORGROOM1.webp?v=1747227369&width=12060"
+
+                ),
+                price = 12000,
+
+                )
+
+            22 -> LahangaDetails(
+                id = 22,
+                name = "Off White Sherwani with Collar and Sleeve Embroidered",
+                description = "Perfect for bridal events, grand weddings, receptions, engagement ceremonies, luxury parties, and other important celebrations.",
+                imageUrl = "https://ihtifal.in/cdn/shop/files/OffWhiteSherwaniwithCollarandSleeveEmbroidered1.webp?v=1749552360&width=1206",
+                imageList = listOf(
+                    "https://ihtifal.in/cdn/shop/files/OffWhiteSherwaniwithCollarandSleeveEmbroidered1.webp?v=1749552360&width=1206",
+                    "https://ihtifal.in/cdn/shop/files/OffWhiteSherwaniwithCollarandSleeveEmbroidered2.webp?v=1749552360&width=1206",
+                    "https://ihtifal.in/cdn/shop/files/OffWhiteSherwaniwithCollarandSleeveEmbroidered3.webp?v=1749552360&width=1206",
+                    "https://ihtifal.in/cdn/shop/files/OffWhiteSherwaniwithCollarandSleeveEmbroidered3.webp?v=1749552360&width=1206"
+
+                ),
+                price = 11000,
+
+                )
+
+            23 -> LahangaDetails(
+                id = 23,
+                name = "Cream Silk Sherwani with Zardoshi, Resham & Kasab Work",
+                description = "Perfect for bridal events, grand weddings, receptions, engagement ceremonies, luxury parties, and other important celebrations.",
+                imageUrl = "https://shreeman.in/cdn/shop/files/1J8A1337.jpg?v=1768565237&width=1400",
+                imageList = listOf(
+                    "https://shreeman.in/cdn/shop/files/1J8A1337.jpg?v=1768565237&width=1400",
+                    "https://shreeman.in/cdn/shop/files/1J8A1333.jpg?v=1768565237&width=1400",
+                    "https://shreeman.in/cdn/shop/files/1J8A1347.jpg?v=1768565219&width=1400",
+                    "https://shreeman.in/cdn/shop/files/1J8A1349.jpg?v=1768565219&width=1400"
 
                 ),
                 price = 7000,
 
                 )
 
+            24 -> LahangaDetails(
+                id = 24,
+                name = "Groom Sherwani For Man Wedding",
+                description = "Off White Silk Sherwani with Resham, Aari & Sequence Work",
+                imageUrl = "https://shreeman.in/cdn/shop/files/1J8A0750.jpg?v=1740806984&width=1400",
+                imageList = listOf(
+                    "https://shreeman.in/cdn/shop/files/1J8A0750.jpg?v=1740806984&width=1400aja-original-imah4ju5hcmsy9zf.jpeg?q=90",
+                    "https://shreeman.in/cdn/shop/files/1J8A0746.jpg?v=1740806984&width=1400riginal-imah4ju5knhrsukq.jpeg?q=90",
+                    "https://shreeman.in/cdn/shop/files/1J8A0755.jpg?v=1740806983&width=1400",
+                    "https://shreeman.in/cdn/shop/files/1J8A0776.jpg?v=1740806983&width=1400"
+
+                ),
+                price = 6000,
+
+                )
+
+            25 -> LahangaDetails(
+                id = 25,
+                name = "Ice Blue Silk Indo Western ",
+                description = "Ice Blue Silk Indo Western with Silver Thread Aari Work",
+                imageUrl = "https://shreeman.in/cdn/shop/files/1J8A1050.jpg?v=1740463593&width=1400",
+                imageList = listOf(
+                    "https://shreeman.in/cdn/shop/files/1J8A1046.jpg?v=1740463593&width=1400inal-imah4ju5hcmsy9zf.jpeg?q=90",
+                    "https://shreeman.in/cdn/shop/files/1J8A1052.jpg?v=1740463310&width=1400",
+                    "https://shreeman.in/cdn/shop/files/1J8A1055.jpg?v=1740463310&width=1400",
+                    "https://shreeman.in/cdn/shop/files/1J8A1065.jpg?v=1740463310&width=1400"
+
+                ),
+                price = 7000,
+
+                )
+
+            26 -> LahangaDetails(
+                id = 26,
+                name = "Black Silk Indo Western Sherwani",
+                description = "Perfect for Groom events, grand weddings, receptions, engagement ceremonies, luxury parties, and other important celebrations.",
+                imageUrl = "https://shreeman.in/cdn/shop/files/1J8A0996.jpg?v=1740462841&width=1400",
+                imageList = listOf(
+                    "https://shreeman.in/cdn/shop/files/1J8A0996.jpg?v=1740462841&width=1400",
+                    "https://shreeman.in/cdn/shop/files/1J8A1023.jpg?v=1740462841&width=1400",
+                    "https://shreeman.in/cdn/shop/files/1J8A1038.jpg?v=1740462841&width=1400",
+                    "https://shreeman.in/cdn/shop/files/1J8A1042.jpg?v=1740462841&width=1400"
+
+                ),
+                price = 7000,
+
+                )
+
+            27 -> LahangaDetails(
+                id = 27,
+                name = "Ivory Raw Silk Sherwani ",
+                description = "Perfect for Groom Ivory Raw Silk Sherwani with Thread, Bead Work events, grand weddings, receptions, engagement  celebrations.",
+                imageUrl = "https://shreeman.in/cdn/shop/files/1J8A4220.jpg?v=1728558147&width=1400",
+                imageList = listOf(
+                    "https://shreeman.in/cdn/shop/files/1J8A4220.jpg?v=1728558147&width=1400",
+                    "https://shreeman.in/cdn/shop/files/1J8A4239.jpg?v=1728558147&width=1400",
+                    "https://shreeman.in/cdn/shop/files/1J8A4242.jpg?v=1728558147&width=1400",
+                    "https://shreeman.in/cdn/shop/files/1J8A4249.jpg?v=1728558147&width=1400"
+
+                ),
+                price = 8000,
+
+                )
+
+            28 -> LahangaDetails(
+                id = 28,
+                name = "Ivory Raw Silk Sherwani with Thread and Bead Cutdana Work",
+                description = " Groom events, grand weddings, receptions, engagement ceremonies, luxury parties, and other important celebrations.",
+                imageUrl = "https://shreeman.in/cdn/shop/files/1J8A4560.jpg?v=1733317904&width=1400",
+                imageList = listOf(
+                    "https://shreeman.in/cdn/shop/files/1J8A4560.jpg?v=1733317904&width=1400",
+                    "https://shreeman.in/cdn/shop/files/1J8A4556_24dfd671-8abb-4695-8d81-7c634bb70f1e.jpg?v=1733317904&width=1400",
+                    "https://shreeman.in/cdn/shop/files/1J8A4569.jpg?v=1733317904&width=1400",
+                    "https://shreeman.in/cdn/shop/files/1J8A4574.jpg?v=1733317904&width=1400"
+
+                ),
+                price = 10000,
+
+                )
+
+            29 -> LahangaDetails(
+                id = 29,
+                name = "Ivory Silk Indo Western with Jungle-Themed Thread Work",
+                description = "The lightweight construction allows comfortable movement while maintaining a beautiful traditional look.",
+                imageUrl = "https://shreeman.in/cdn/shop/files/1J8A4456.jpg?v=1728561297&width=1400",
+                imageList = listOf(
+                    "https://shreeman.in/cdn/shop/files/1J8A4456.jpg?v=1728561297&width=1400",
+                    "https://shreeman.in/cdn/shop/files/1J8A4445.jpg?v=1728561297&width=1400",
+                    "https://shreeman.in/cdn/shop/files/1J8A4461.jpg?v=1728561297&width=1400",
+                    "https://shreeman.in/cdn/shop/files/1J8A4484.jpg?v=1728561297&width=1400"
+                ),
+                price = 7000,
+
+                )
+
+            30 -> LahangaDetails(
+                id = 30,
+                name = "Golden Silk Tissue Sherwani with Resham Work",
+                description = "A man's wedding day calls for a wardrobe that speaks of heritage and modern charisma. This shimmering Sherwani for Men serves as a beacon of style.",
+                imageUrl = "https://shreeman.in/cdn/shop/files/1J8A3260.jpg?v=1769776211&width=1400",
+                imageList = listOf(
+                    "https://shreeman.in/cdn/shop/files/1J8A3260.jpg?v=1769776211&width=1400",
+                    "https://shreeman.in/cdn/shop/files/1J8A3263.jpg?v=1769776211&width=1400",
+                    "https://shreeman.in/cdn/shop/files/1J8A3273.jpg?v=1769776211&width=1400",
+                    "https://shreeman.in/cdn/shop/files/1J8A3276.jpg?v=1769776211&width=1400"
+                ),
+                price = 7000,
+
+                )
             else -> null
         }
     }
