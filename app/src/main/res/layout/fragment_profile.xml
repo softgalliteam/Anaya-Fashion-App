@@ -32,7 +32,7 @@
             android:layout_width="98dp"
             android:layout_height="145dp"
             android:padding="9dp"
-           android:src="@drawable/logout"
+           android:src="@drawable/logout_icon"
             android:textColor="@color/red"
             android:textSize="15sp"
             android:textStyle="bold" />
